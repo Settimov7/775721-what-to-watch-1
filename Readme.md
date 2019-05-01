@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть» [![Build status][travis-image]][travis-url]
 
 * Студент: [Никита Прытков](https://up.htmlacademy.ru/react/1/user/775721).
-* Наставник: `Неизвестно`.
+* Наставник: [Сергей Рубец](https://github.com/sergeyamator).
 
 ---
 
