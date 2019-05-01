@@ -1,16 +1,13 @@
 /* eslint-disable */
 const path = require(`path`);
-
 module.exports = {
-  entry: `./src/index.js`,
+  entry: `./src/index.jsx`,
   output: {
     filename: `bundle.js`,
     path: path.join(__dirname, `public`)
   },
-  devServer: {
-    contentBase: path.join(__dirname, `public`),
-    compress: false,
-    port: 1337,
+  resolve: {
+    extensions: ['*', '.js', '.jsx']
   },
   module: {
     rules: [
@@ -22,6 +19,11 @@ module.exports = {
         },
       }
     ],
+  },
+  devServer: {
+    contentBase: path.join(__dirname, `public`),
+    compress: false,
+    port: 8000,
   },
   devtool: `source-map`
 };
