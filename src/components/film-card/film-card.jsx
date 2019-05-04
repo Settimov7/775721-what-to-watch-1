@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
 export const FilmCard = (props) => {
-  const {title} = props;
+  const {title, onClick} = props;
 
   return (
     <article
@@ -28,6 +28,7 @@ export const FilmCard = (props) => {
         <a
           className="small-movie-card__link"
           href="movie-page.html"
+          onClick={onClick}
         >
           {title}
         </a>
@@ -38,4 +39,5 @@ export const FilmCard = (props) => {
 
 FilmCard.propTypes = {
   title: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
 };
