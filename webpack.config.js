@@ -1,7 +1,7 @@
 /* eslint-disable */
 const path = require(`path`);
 module.exports = {
-  entry: `./src/index.jsx`,
+  entry: `./src/index.js`,
   output: {
     filename: `bundle.js`,
     path: path.join(__dirname, `public`)
