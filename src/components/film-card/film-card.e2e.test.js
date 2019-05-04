@@ -1,10 +1,7 @@
 import * as React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import {shallow} from 'enzyme';
 
 import {FilmCard} from "./film-card";
-
-Enzyme.configure({adapter: new Adapter()});
 
 it(`Film title correctly triggered click event `, () => {
   const props = {
