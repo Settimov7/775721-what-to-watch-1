@@ -3,9 +3,17 @@ import renderer from 'react-test-renderer';
 
 import {FilmCard} from "./film-card";
 
+const mock = {
+  film: {
+    id: 2,
+    title: `Bohemian Rhapsody`,
+    posterSrc: `poster.jpg`,
+  },
+};
+
 it(`Film card correctly renders`, () => {
   const props = {
-    title: `Film title`
+    film: mock.film,
   };
 
   const tree = renderer.create(<FilmCard {...props}/>).toJSON();

@@ -2,22 +2,29 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
 export const FilmCard = (props) => {
-  const {title, onClick} = props;
+  const {film, onPlayClick, onClick, onMouseEnter} = props;
+  const {id, title, posterSrc} = film;
 
   return (
     <article
       className="small-movie-card catalog__movies-card"
+      onMouseEnter={(evt) => {
+        evt.preventDefault();
+
+        onMouseEnter(id);
+      }}
     >
       <button
         className="small-movie-card__play-btn"
         type="button"
+        onClick={onPlayClick}
       >
         Play
       </button>
 
       <div className="small-movie-card__image">
         <img
-          src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+          src={posterSrc}
           alt={title}
           width="280"
           height="175"
@@ -38,6 +45,12 @@ export const FilmCard = (props) => {
 };
 
 FilmCard.propTypes = {
-  title: PropTypes.string.isRequired,
+  film: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    posterSrc: PropTypes.string.isRequired,
+  }),
+  onPlayClick: PropTypes.func,
   onClick: PropTypes.func,
+  onMouseEnter: PropTypes.func,
 };

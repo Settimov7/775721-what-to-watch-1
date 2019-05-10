@@ -3,9 +3,39 @@ import renderer from 'react-test-renderer';
 
 import {MainPage} from "./main-page";
 
+const mock = {
+  films: [
+    {
+      id: 1,
+      title: `Fantastic Beasts: The Crimes of Grindelwald`,
+      posterSrc: `poster.jpg`,
+    },
+    {
+      id: 2,
+      title: `Bohemian Rhapsody`,
+      posterSrc: `poster.jpg`,
+    },
+    {
+      id: 3,
+      title: `Macbeth`,
+      posterSrc: `poster.jpg`,
+    },
+    {
+      id: 4,
+      title: `Aviator`,
+      posterSrc: `poster.jpg`,
+    },
+    {
+      id: 5,
+      title: `We need to talk about Kevin`,
+      posterSrc: `poster.jpg`,
+    },
+  ],
+};
+
 it(`Main page correctly renders`, () => {
   const props = {
-    filmNames: [`Fantastic Beasts: The Crimes of Grindelwald`, `Bohemian Rhapsody`, `Macbeth`, `Aviator`],
+    films: mock.films,
   };
 
   const tree = renderer.create(<MainPage {...props}/>).toJSON();
