@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {render} from 'react-dom';
 
-import {App} from "./components/app/app";
+import {App} from './components/app/app';
+import {films} from './mocks/films';
 
-render(<App />, document.getElementById(`root`));
+render(<App films={films}/>, document.getElementById(`root`));

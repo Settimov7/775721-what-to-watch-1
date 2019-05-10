@@ -3,6 +3,7 @@
 exports[`Film card correctly renders 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
+  onMouseEnter={[Function]}
 >
   <button
     className="small-movie-card__play-btn"
@@ -14,9 +15,9 @@ exports[`Film card correctly renders 1`] = `
     className="small-movie-card__image"
   >
     <img
-      alt="Film title"
+      alt="Bohemian Rhapsody"
       height="175"
-      src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+      src="poster.jpg"
       width="280"
     />
   </div>
@@ -27,7 +28,7 @@ exports[`Film card correctly renders 1`] = `
       className="small-movie-card__link"
       href="movie-page.html"
     >
-      Film title
+      Bohemian Rhapsody
     </a>
   </h3>
 </article>

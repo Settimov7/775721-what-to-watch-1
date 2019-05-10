@@ -1,12 +1,18 @@
 import * as React from 'react';
+import * as PropTypes from 'prop-types';
 
 import {MainPage} from "../main-page/main-page";
 
-const filmNames = [`Fantastic Beasts: The Crimes of Grindelwald`, `Bohemian Rhapsody`, `Macbeth`, `Aviator`];
-
-export const App = () => {
+export const App = ({films}) => {
   return (
-    <MainPage filmNames={filmNames}/>
+    <MainPage films={films}/>
   );
+};
+
+App.propTypes = {
+  films: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    posterSrc: PropTypes.string,
+  })).isRequired,
 };
 

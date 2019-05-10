@@ -1,10 +1,9 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-
-import {FilmCard} from "../film-card/film-card";
+import {FilmsList} from "../films-list/films-list";
 
 export const MainPage = (props) => {
-  const {filmNames} = props;
+  const {films} = props;
 
   return (
     <React.Fragment>
@@ -91,13 +90,13 @@ export const MainPage = (props) => {
               <div className="movie-card__buttons">
                 <button className="btn btn--play movie-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
+                    <use xlinkHref="#play-s"/>
                   </svg>
                   <span>Play</span>
                 </button>
                 <button className="btn btn--list movie-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
+                    <use xlinkHref="#add"/>
                   </svg>
                   <span>My list</span>
                 </button>
@@ -144,9 +143,7 @@ export const MainPage = (props) => {
             </li>
           </ul>
 
-          <div className="catalog__movies-list">
-            {filmNames.map((filmName) => <FilmCard key={filmName} title={filmName}/>)}
-          </div>
+          <FilmsList films={films}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -172,5 +169,9 @@ export const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  filmNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+  films: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    posterSrc: PropTypes.string,
+  })).isRequired,
 };
