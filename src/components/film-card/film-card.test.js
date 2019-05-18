@@ -8,6 +8,7 @@ const mock = {
     id: 2,
     title: `Bohemian Rhapsody`,
     posterSrc: `poster.jpg`,
+    videoSrc: `video.mp4`,
   },
 };
 

@@ -3,34 +3,20 @@ import * as PropTypes from 'prop-types';
 
 import {FilmCard} from "../film-card/film-card";
 
-export class FilmsList extends React.PureComponent {
-  constructor(props) {
-    super(props);
+export const FilmsList = (props) => {
+  const {films} = props;
 
-    this.state = {
-      activeFilmId: null,
-    };
-  }
-
-  render() {
-    const {films} = this.props;
-
-    return (
-      <div
-        className="catalog__movies-list"
-      >
-        {films.map((film) => <FilmCard
-          key={film.id}
-          film={film}
-          onPlayClick={() => this.state.activeFilmId}
-          onMouseEnter={(id) => this.setState({
-            activeFilmId: id,
-          })}
-        />)}
-      </div>
-    );
-  }
-}
+  return (
+    <div
+      className="catalog__movies-list"
+    >
+      {films.map((film) => <FilmCard
+        key={film.id}
+        film={film}
+      />)}
+    </div>
+  );
+};
 
 FilmsList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({

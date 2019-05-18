@@ -8,14 +8,15 @@ const mock = {
     id: 2,
     title: `Bohemian Rhapsody`,
     posterSrc: `poster.jpg`,
+    videoSrc: `video.mp4`,
   },
 };
 
 it(`Film title correctly triggered click event `, () => {
-  const onClick = jest.fn();
+  const onTitleClick = jest.fn();
   const props = {
     film: mock.film,
-    onClick,
+    onTitleClick,
   };
 
   const card = shallow(<FilmCard {...props}/>);
@@ -23,35 +24,19 @@ it(`Film title correctly triggered click event `, () => {
   const title = card.find(`.small-movie-card__link`);
   title.simulate(`click`, {preventDefault() {}});
 
-  expect(onClick).toHaveBeenCalledTimes(1);
+  expect(onTitleClick).toHaveBeenCalledTimes(1);
 });
 
-it(`Film card play button correctly triggered click event`, () => {
-  const onPlayClick = jest.fn(() => mock.film.id);
-  const props = {
-    film: mock.film,
-    onPlayClick,
-  };
-
-  const card = shallow(<FilmCard {...props}/>);
-
-  const button = card.find(`.small-movie-card__play-btn`);
-  button.simulate(`click`, {preventDefault() {}});
-
-  expect(onPlayClick).toHaveReturnedWith(mock.film.id);
-});
-
-it(`On mouse enter on film card correctly triggered mouse enter event`, () => {
+it(`On mouse enter on film card correctly triggered mouse enter handler`, () => {
   const onMouseEnter = jest.fn();
   const props = {
     film: mock.film,
-    onMouseEnter,
   };
 
+  FilmCard.prototype._mouseEnterHandler = onMouseEnter;
+
   const card = shallow(<FilmCard {...props}/>);
-  const cardElement = card.find(`article`);
 
-  cardElement.simulate(`mouseEnter`, {preventDefault() {}});
-
+  card.simulate(`mouseEnter`, {preventDefault() {}});
   expect(onMouseEnter).toHaveBeenCalledTimes(1);
 });
