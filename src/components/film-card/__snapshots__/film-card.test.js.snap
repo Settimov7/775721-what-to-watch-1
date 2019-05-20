@@ -4,21 +4,18 @@ exports[`Film card correctly renders 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
   onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
 >
-  <button
-    className="small-movie-card__play-btn"
-    type="button"
-  >
-    Play
-  </button>
   <div
     className="small-movie-card__image"
   >
-    <img
-      alt="Bohemian Rhapsody"
-      height="175"
-      src="poster.jpg"
-      width="280"
+    <video
+      height={175}
+      loop={true}
+      muted={true}
+      poster="poster.jpg"
+      src="video.mp4"
+      width={280}
     />
   </div>
   <h3

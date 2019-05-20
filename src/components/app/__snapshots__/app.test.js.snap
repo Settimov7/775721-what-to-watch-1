@@ -379,22 +379,18 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <button
-            className="small-movie-card__play-btn"
-            onClick={[Function]}
-            type="button"
-          >
-            Play
-          </button>
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="Fantastic Beasts: The Crimes of Grindelwald"
-              height="175"
-              src="poster.jpg"
-              width="280"
+            <video
+              height={175}
+              loop={true}
+              muted={true}
+              poster="poster.jpg"
+              src="video.mp4"
+              width={280}
             />
           </div>
           <h3
@@ -411,22 +407,18 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <button
-            className="small-movie-card__play-btn"
-            onClick={[Function]}
-            type="button"
-          >
-            Play
-          </button>
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="Bohemian Rhapsody"
-              height="175"
-              src="poster.jpg"
-              width="280"
+            <video
+              height={175}
+              loop={true}
+              muted={true}
+              poster="poster.jpg"
+              src="video.mp4"
+              width={280}
             />
           </div>
           <h3
@@ -443,22 +435,18 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <button
-            className="small-movie-card__play-btn"
-            onClick={[Function]}
-            type="button"
-          >
-            Play
-          </button>
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="Macbeth"
-              height="175"
-              src="poster.jpg"
-              width="280"
+            <video
+              height={175}
+              loop={true}
+              muted={true}
+              poster="poster.jpg"
+              src="video.mp4"
+              width={280}
             />
           </div>
           <h3
@@ -475,22 +463,18 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <button
-            className="small-movie-card__play-btn"
-            onClick={[Function]}
-            type="button"
-          >
-            Play
-          </button>
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="Aviator"
-              height="175"
-              src="poster.jpg"
-              width="280"
+            <video
+              height={175}
+              loop={true}
+              muted={true}
+              poster="poster.jpg"
+              src="video.mp4"
+              width={280}
             />
           </div>
           <h3
@@ -507,22 +491,18 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <button
-            className="small-movie-card__play-btn"
-            onClick={[Function]}
-            type="button"
-          >
-            Play
-          </button>
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="We need to talk about Kevin"
-              height="175"
-              src="poster.jpg"
-              width="280"
+            <video
+              height={175}
+              loop={true}
+              muted={true}
+              poster="poster.jpg"
+              src="video.mp4"
+              width={280}
             />
           </div>
           <h3
