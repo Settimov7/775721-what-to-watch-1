@@ -4,6 +4,7 @@ import * as PropTypes from 'prop-types';
 export class VideoPlayer extends React.PureComponent {
   constructor(props) {
     super(props);
+
     this._videoRef = React.createRef();
 
     this.state = {

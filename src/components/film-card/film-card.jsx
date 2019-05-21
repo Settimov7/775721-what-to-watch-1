@@ -24,10 +24,10 @@ export class FilmCard extends React.PureComponent {
   }
 
   render() {
-    const {film, onTitleClick} = this.props;
+    const {film, sizes = SIZES, onTitleClick} = this.props;
     const {title, posterSrc, videoSrc} = film;
     const {isPreviewPlaying} = this.state;
-    const {width, height} = SIZES;
+    const {width, height} = sizes;
 
     return (
       <article
@@ -64,7 +64,7 @@ export class FilmCard extends React.PureComponent {
   }
 
   _mouseEnterHandler() {
-    const timerId = setInterval(() => {
+    const timerId = setTimeout(() => {
       this.setState({
         isPreviewPlaying: true,
       });
@@ -76,7 +76,7 @@ export class FilmCard extends React.PureComponent {
   }
 
   _mouseLeaveHandler() {
-    clearInterval(this.state.timerId);
+    clearTimeout(this.state.timerId);
 
     this.setState({
       isPreviewPlaying: false,
@@ -91,7 +91,9 @@ FilmCard.propTypes = {
     title: PropTypes.string.isRequired,
     posterSrc: PropTypes.string.isRequired,
   }),
-  onPlayClick: PropTypes.func,
+  sizes: PropTypes.shape({
+    width: PropTypes.number,
+    height: PropTypes.number,
+  }),
   onTitleClick: PropTypes.func,
-  onMouseEnter: PropTypes.func,
 };
