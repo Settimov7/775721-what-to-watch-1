@@ -1,8 +1,5 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import {connect} from "react-redux";
-
-import {actionCreator} from "../../reducer";
 
 const GenreToFilterTitle = {
   all: `All genres`,
@@ -44,19 +41,6 @@ export const FilterList = (props) => {
     </ul>
   );
 };
-
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  properties: state.films.map((film) => film.genre),
-  currentFilter: state.currentFilterByFilmGenre,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  changeCurrentFilter: (genre) => {
-    dispatch(actionCreator.changeCurrentFilterByFilmGenre(genre));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(FilterList);
 
 FilterList.propTypes = {
   properties: PropTypes.arrayOf(PropTypes.string).isRequired,
