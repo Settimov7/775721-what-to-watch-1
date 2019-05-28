@@ -10,7 +10,10 @@ import {films} from './mocks/films';
 
 
 const initApp = () => {
-  const appStore = createStore(reducer);
+  const appStore = createStore(
+      reducer,
+      window[`__REDUX_DEVTOOLS_EXTENSION__`] && window[`__REDUX_DEVTOOLS_EXTENSION__`]()
+  );
 
   appStore.dispatch(actionCreator.loadFilms(films));
 

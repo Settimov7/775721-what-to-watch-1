@@ -1,7 +1,10 @@
 import * as React from 'react';
 
-import FilterList from "../filter-list/filter-list";
+import {FilterList} from "../filter-list/filter-list";
 import FilmsList from "../films-list/films-list";
+import withActiveItem from "../../hocs/with-active-item/with-active-item";
+
+const WrappedFilterList = withActiveItem(FilterList);
 
 export const MainPage = () => {
   return (
@@ -109,7 +112,7 @@ export const MainPage = () => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <FilterList />
+          <WrappedFilterList />
 
           <FilmsList />
 
