@@ -3,7 +3,9 @@ import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
 
-import {actionCreator} from '../../reducer';
+import {ActionCreator} from "../../reducer/filter/filter";
+import {getFilmsGenres} from "../../reducer/films/selectors";
+import {getCurrentFilter} from "../../reducer/filter/selectors";
 
 export const withActiveItem = (Component, defaultActiveItem) => {
   class WithActiveItem extends React.PureComponent {
@@ -44,13 +46,13 @@ export const withActiveItem = (Component, defaultActiveItem) => {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  properties: state.films.map((film) => film.genre),
-  currentFilter: state.currentFilterByFilmGenre,
+  properties: getFilmsGenres(state),
+  currentFilter: getCurrentFilter(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeCurrentFilter: (genre) => {
-    dispatch(actionCreator.changeCurrentFilterByFilmGenre(genre));
+    dispatch(ActionCreator.changeCurrentFilterByFilmGenre(genre));
   },
 });
 

@@ -34,7 +34,7 @@ exports[`Filters list correctly renders 1`] = `
       href="#"
       onClick={[Function]}
     >
-      Fantastic
+      Fantasy
     </a>
   </li>
   <li

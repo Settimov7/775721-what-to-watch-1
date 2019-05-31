@@ -4,8 +4,8 @@ import {FilterList} from "./filter-list";
 
 it(`Filters list correctly renders`, () => {
   const props = {
-    properties: [`drama`, `fantastic`, `comedy`],
-    currentFilter: `drama`,
+    properties: [`Drama`, `Fantasy`, `Comedy`],
+    currentFilter: `Drama`,
     changeCurrentFilter: jest.fn(),
   };
 

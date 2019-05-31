@@ -6,9 +6,9 @@ import {FilmCard} from "./film-card";
 const mock = {
   film: {
     id: 2,
-    title: `Bohemian Rhapsody`,
+    name: `Bohemian Rhapsody`,
     genre: `drama`,
-    posterSrc: `poster.jpg`,
+    previewImageSrc: `poster.jpg`,
     videoSrc: `video.mp4`,
   },
 };
