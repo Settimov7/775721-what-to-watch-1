@@ -291,7 +291,7 @@ Array [
             href="#"
             onClick={[Function]}
           >
-            Fantastic
+            Fantasy
           </a>
         </li>
         <li
@@ -313,7 +313,7 @@ Array [
             href="#"
             onClick={[Function]}
           >
-            Comedies
+            Crime
           </a>
         </li>
       </ul>

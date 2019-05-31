@@ -25,7 +25,7 @@ export class FilmCard extends React.PureComponent {
 
   render() {
     const {film, sizes = SIZES, onTitleClick} = this.props;
-    const {title, posterSrc, videoSrc} = film;
+    const {name, previewImageSrc, videoSrc} = film;
     const {isPreviewPlaying} = this.state;
     const {width, height} = sizes;
 
@@ -39,7 +39,7 @@ export class FilmCard extends React.PureComponent {
         <div className="small-movie-card__image">
           <VideoPlayer
             videoSrc={videoSrc}
-            posterSrc={posterSrc}
+            posterSrc={previewImageSrc}
             options={
               {
                 width,
@@ -56,7 +56,7 @@ export class FilmCard extends React.PureComponent {
             href="movie-page.html"
             onClick={onTitleClick}
           >
-            {title}
+            {name}
           </a>
         </h3>
       </article>
@@ -88,8 +88,22 @@ export class FilmCard extends React.PureComponent {
 FilmCard.propTypes = {
   film: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    posterSrc: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    posterImageSrc: PropTypes.string,
+    previewImageSrc: PropTypes.string,
+    backgroundImageSrc: PropTypes.string,
+    backgroundColor: PropTypes.string,
+    description: PropTypes.string,
+    rating: PropTypes.number,
+    scores: PropTypes.number,
+    director: PropTypes.string,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    runTime: PropTypes.number,
+    genre: PropTypes.string,
+    releasedYear: PropTypes.number,
+    isFavorite: PropTypes.bool,
+    videoSrc: PropTypes.string,
+    previewVideoSrc: PropTypes.string,
   }),
   sizes: PropTypes.shape({
     width: PropTypes.number,

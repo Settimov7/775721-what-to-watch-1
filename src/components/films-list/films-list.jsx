@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types';
 import {connect} from "react-redux";
 
 import {FilmCard} from "../film-card/film-card";
+import {getFilteredFilms} from "../../reducer/films/selectors";
 
 export const FilmsList = (props) => {
   const {films} = props;
@@ -19,18 +20,8 @@ export const FilmsList = (props) => {
   );
 };
 
-const filterFilms = (state) => {
-  const {films, currentFilterByFilmGenre} = state;
-
-  if (currentFilterByFilmGenre === `all`) {
-    return films;
-  }
-
-  return films.filter(({genre}) => genre === currentFilterByFilmGenre);
-};
-
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  films: filterFilms(state),
+  films: getFilteredFilms(state),
 });
 
 export default connect(mapStateToProps)(FilmsList);
@@ -38,9 +29,21 @@ export default connect(mapStateToProps)(FilmsList);
 FilmsList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    posterImageSrc: PropTypes.string,
+    previewImageSrc: PropTypes.string,
+    backgroundImageSrc: PropTypes.string,
+    backgroundColor: PropTypes.string,
+    description: PropTypes.string,
+    rating: PropTypes.number,
+    scores: PropTypes.number,
+    director: PropTypes.string,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    runTime: PropTypes.number,
     genre: PropTypes.string,
-    posterSrc: PropTypes.string,
+    releasedYear: PropTypes.number,
+    isFavorite: PropTypes.bool,
     videoSrc: PropTypes.string,
+    previewVideoSrc: PropTypes.string,
   })).isRequired,
 };

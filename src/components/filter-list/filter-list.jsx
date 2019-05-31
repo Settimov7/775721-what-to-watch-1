@@ -3,9 +3,13 @@ import * as PropTypes from 'prop-types';
 
 const GenreToFilterTitle = {
   all: `All genres`,
-  drama: `Drama`,
-  fantastic: `Fantastic`,
-  comedy: `Comedies`,
+  Crime: `Crime`,
+  Action: `Action`,
+  Drama: `Drama`,
+  Comedy: `Comedies`,
+  Adventure: `Adventure`,
+  Fantasy: `Fantasy`,
+  Thriller: `Thriller`,
 };
 
 export const FilterList = (props) => {

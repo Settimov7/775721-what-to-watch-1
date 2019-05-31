@@ -7,44 +7,48 @@ import {App} from './app';
 
 it(`App correctly renders`, () => {
   const initialMockState = {
-    currentFilterByFilmGenre: `all`,
-    films: [
-      {
-        id: 1,
-        title: `Fantastic Beasts: The Crimes of Grindelwald`,
-        genre: `fantastic`,
-        posterSrc: `poster.jpg`,
-        videoSrc: `video.mp4`,
-      },
-      {
-        id: 2,
-        title: `Bohemian Rhapsody`,
-        genre: `drama`,
-        posterSrc: `poster.jpg`,
-        videoSrc: `video.mp4`,
-      },
-      {
-        id: 3,
-        title: `Macbeth`,
-        genre: `drama`,
-        posterSrc: `poster.jpg`,
-        videoSrc: `video.mp4`,
-      },
-      {
-        id: 4,
-        title: `Aviator`,
-        genre: `drama`,
-        posterSrc: `poster.jpg`,
-        videoSrc: `video.mp4`,
-      },
-      {
-        id: 5,
-        title: `We need to talk about Kevin`,
-        genre: `comedy`,
-        posterSrc: `poster.jpg`,
-        videoSrc: `video.mp4`,
-      },
-    ],
+    FILTER: {
+      currentFilterByFilmGenre: `all`,
+    },
+    FILMS: {
+      films: [
+        {
+          id: 1,
+          name: `Fantastic Beasts: The Crimes of Grindelwald`,
+          genre: `Fantasy`,
+          previewImageSrc: `poster.jpg`,
+          videoSrc: `video.mp4`,
+        },
+        {
+          id: 2,
+          name: `Bohemian Rhapsody`,
+          genre: `Drama`,
+          previewImageSrc: `poster.jpg`,
+          videoSrc: `video.mp4`,
+        },
+        {
+          id: 3,
+          name: `Macbeth`,
+          genre: `Drama`,
+          previewImageSrc: `poster.jpg`,
+          videoSrc: `video.mp4`,
+        },
+        {
+          id: 4,
+          name: `Aviator`,
+          genre: `Drama`,
+          previewImageSrc: `poster.jpg`,
+          videoSrc: `video.mp4`,
+        },
+        {
+          id: 5,
+          name: `We need to talk about Kevin`,
+          genre: `Crime`,
+          previewImageSrc: `poster.jpg`,
+          videoSrc: `video.mp4`,
+        },
+      ],
+    },
   };
   const mockStore = configureStore();
 
