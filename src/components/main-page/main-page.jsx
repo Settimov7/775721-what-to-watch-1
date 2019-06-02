@@ -1,12 +1,18 @@
 import * as React from 'react';
+import {connect} from "react-redux";
+import PropTypes from "prop-types";
 
 import {FilterList} from "../filter-list/filter-list";
 import FilmsList from "../films-list/films-list";
 import withActiveItem from "../../hocs/with-active-item/with-active-item";
+import {getIsAuthorizationRequired, getUserAvatarSrc} from "../../reducer/user/selectors";
+import {ActionCreator} from "../../reducer/user/user";
 
 const WrappedFilterList = withActiveItem(FilterList);
 
-export const MainPage = () => {
+export const MainPage = (props) => {
+  const {isAuthorizationRequired, openSignInPage, userAvatarSrc} = props;
+
   return (
     <React.Fragment>
       <div className="visually-hidden">
@@ -69,9 +75,17 @@ export const MainPage = () => {
           </div>
 
           <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-            </div>
+            {isAuthorizationRequired ? (
+              <a
+                className="logo__link"
+                href={`#`}
+                onClick={() => openSignInPage()}
+              >Sign in</a>
+            ) : (
+              <div className="user-block__avatar">
+                <img src={userAvatarSrc} alt="User avatar" width="63" height="63"/>
+              </div>
+            )}
           </div>
         </header>
 
@@ -138,3 +152,20 @@ export const MainPage = () => {
     </React.Fragment>
   );
 };
+
+MainPage.propTypes = {
+  isAuthorizationRequired: PropTypes.bool.isRequired,
+  userAvatarSrc: PropTypes.string,
+  openSignInPage: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthorizationRequired: getIsAuthorizationRequired(state),
+  userAvatarSrc: getUserAvatarSrc(state),
+});
+
+const mapDispatchToProps = {
+  openSignInPage: ActionCreator.openSignInPage,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
