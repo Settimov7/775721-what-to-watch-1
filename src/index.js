@@ -8,7 +8,7 @@ import thunk from "redux-thunk";
 import {createAPI} from "./api";
 import {reducer} from "./reducer";
 import {Operation} from "./reducer/films/films";
-import {App} from './components/app/app';
+import App from './components/app/app';
 
 const initApp = () => {
   const api = createAPI((...args) => appStore.dispatch(...args));

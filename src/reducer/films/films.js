@@ -9,14 +9,14 @@ export const ActionType = {
 export const ActionCreator = {
   loadFilms: (films) => ({
     type: ActionType.LOAD_FILMS,
-    payload: films,
+    payload: transformFilms(films),
   }),
 };
 
 export const Operation = {
   loadFilms: () => (dispatch, _getState, api) =>
     api.get(`/films`)
-      .then((response) => dispatch(ActionCreator.loadFilms(transformFilms(response.data)))),
+      .then((response) => dispatch(ActionCreator.loadFilms(response.data))),
 };
 
 export const reducer = (appState = initialAppState, action) => {
