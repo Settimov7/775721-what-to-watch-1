@@ -1,31 +1,24 @@
 import * as React from 'react';
-import {connect} from "react-redux";
-import PropTypes from "prop-types";
+import {Switch, Route} from 'react-router-dom';
 
 import MainPage from "../main-page/main-page";
-import {getIsSignInPage} from "../../reducer/user/selectors";
 import SignIn from "../sign-in/sign-in";
+// import PrivateRoute from "../../hocs/with-route-guard/with-route-guard";
+import {Favorites} from "../favorites/favorites";
+import {withRouteGuard} from "../../hocs/with-route-guard/with-route-guard";
 
-export const App = (props) => {
-  const {isSignInPage} = props;
+const PrivateRoute = withRouteGuard(Route);
 
-  if (isSignInPage) {
-    return <SignIn />;
-  }
-
+export const App = () => {
   return (
-    <MainPage />
+    <Switch>
+      <Route path="/" exact component={MainPage}/>
+
+      <Route path="/login" component={SignIn}/>
+
+      <PrivateRoute path={`/favorites`} component={Favorites} />
+    </Switch>
   );
 };
-
-App.propTypes = {
-  isSignInPage: PropTypes.bool,
-};
-
-const mapStateToProps = (state) => ({
-  isSignInPage: getIsSignInPage(state),
-});
-
-export default connect(mapStateToProps)(App);
 
 

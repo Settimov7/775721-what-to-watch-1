@@ -24,6 +24,7 @@ module.exports = {
     contentBase: path.join(__dirname, `public`),
     compress: false,
     port: 8000,
+    historyApiFallback: true,
   },
   devtool: `source-map`
 };
