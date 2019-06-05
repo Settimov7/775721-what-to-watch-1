@@ -6,7 +6,11 @@ import {SignIn} from "./sign-in";
 it(`Sign in screen correctly renders`, () => {
   const props = {
     login: jest.fn(),
-    closeSignInPage: jest.fn()
+    location: {
+      state: {
+        from: `/some-url`,
+      }
+    },
   };
   const signIn = renderer.create(<SignIn {...props} />).toJSON();
 

@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {connect} from "react-redux";
-import {ActionCreator, Operation} from "../../reducer/user/user";
+import {Operation} from "../../reducer/user/user";
 import PropTypes from "prop-types";
+import {Redirect} from "react-router-dom";
 
 export class SignIn extends React.PureComponent {
   constructor(props) {
@@ -10,6 +11,7 @@ export class SignIn extends React.PureComponent {
     this.state = {
       email: ``,
       password: ``,
+      isRedirectBack: false,
     };
 
     this._inputChangeHandle = this._inputChangeHandle.bind(this);
@@ -17,7 +19,12 @@ export class SignIn extends React.PureComponent {
   }
 
   render() {
-    const {email, password} = this.state;
+    const {email, password, isRedirectBack} = this.state;
+    const {location} = this.props;
+
+    if (isRedirectBack) {
+      return <Redirect push to={location.state.from} />;
+    }
 
     return (
       <React.Fragment>
@@ -126,21 +133,25 @@ export class SignIn extends React.PureComponent {
     evt.preventDefault();
 
     const {email, password} = this.state;
-    const {login, closeSignInPage} = this.props;
+    const {login} = this.props;
 
-    login(email, password);
-    closeSignInPage();
+    login(email, password).then(()=> {
+      this.setState({isRedirectBack: true});
+    });
   }
 }
 
 SignIn.propTypes = {
   login: PropTypes.func.isRequired,
-  closeSignInPage: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      from: PropTypes.string.isRequired,
+    }).isRequired,
+  }),
 };
 
 const mapDispatchToProps = {
   login: Operation.login,
-  closeSignInPage: ActionCreator.closeSignInPage,
 };
 
 export default connect(null, mapDispatchToProps)(SignIn);

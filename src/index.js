@@ -4,14 +4,16 @@ import {createStore, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
 import {compose} from "recompose";
 import thunk from "redux-thunk";
+import {BrowserRouter} from "react-router-dom";
 
 import {createAPI} from "./api";
 import {reducer} from "./reducer";
 import {Operation} from "./reducer/films/films";
-import App from './components/app/app';
+import {App} from './components/app/app';
 
 const initApp = () => {
-  const api = createAPI((...args) => appStore.dispatch(...args));
+  const onLoginFail = () => history.pushState(null, null, `/login`);
+  const api = createAPI(onLoginFail);
   const appStore = createStore(
       reducer,
       compose(
@@ -24,7 +26,9 @@ const initApp = () => {
 
   render((
     <Provider store={appStore}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
   ), document.getElementById(`root`));
 };
