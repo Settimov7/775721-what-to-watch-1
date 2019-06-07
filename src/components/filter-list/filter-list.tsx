@@ -1,5 +1,9 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+
+import {ActionCreator} from "../../reducer/filter/filter";
+import {getFilmsGenres} from "../../reducer/films/selectors";
+import {getCurrentFilter} from "../../reducer/filter/selectors";
 
 const GenreToFilterTitle = {
   all: `All genres`,
@@ -12,7 +16,13 @@ const GenreToFilterTitle = {
   Thriller: `Thriller`,
 };
 
-export const FilterList = (props) => {
+interface Props {
+  properties: string[],
+  currentFilter: string,
+  changeCurrentFilter: (g: string) => void,
+}
+
+export const FilterList = (props: Props) => {
   const {properties, currentFilter, changeCurrentFilter} = props;
   const filters = [`all`, ...new Set(properties)];
 
@@ -46,9 +56,16 @@ export const FilterList = (props) => {
   );
 };
 
-FilterList.propTypes = {
-  properties: PropTypes.arrayOf(PropTypes.string).isRequired,
-  currentFilter: PropTypes.string.isRequired,
-  changeCurrentFilter: PropTypes.func.isRequired,
-};
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  properties: getFilmsGenres(state),
+  currentFilter: getCurrentFilter(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  changeCurrentFilter: (genre: string): void => {
+    dispatch(ActionCreator.changeCurrentFilterByFilmGenre(genre));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterList);
 

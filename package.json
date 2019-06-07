@@ -9,11 +9,6 @@
     "build": "webpack --mode development",
     "start": "webpack-dev-server"
   },
-  "jest": {
-    "setupFiles": [
-      "<rootDir>/src/setupTests.js"
-    ]
-  },
   "engines": {
     "node": "10"
   },
@@ -21,6 +16,9 @@
     "@babel/core": "7.4.4",
     "@babel/preset-env": "7.4.4",
     "@babel/preset-react": "7.0.0",
+    "@types/history": "4.7.2",
+    "@types/jest": "24.0.13",
+    "@types/react": "16.8.19",
     "axios-mock-adapter": "1.16.0",
     "babel-jest": "24.7.1",
     "babel-loader": "8.0.5",
@@ -32,6 +30,10 @@
     "jest": "24.7.1",
     "react-test-renderer": "16.8.6",
     "redux-mock-store": "1.5.3",
+    "ts-jest": "24.0.2",
+    "ts-loader": "6.0.2",
+    "typescript": "3.5.1",
+    "utility-types": "3.7.0",
     "webpack": "4.30.0",
     "webpack-cli": "3.3.1",
     "webpack-dev-server": "3.3.1"

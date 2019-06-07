@@ -1,17 +1,16 @@
 import * as React from 'react';
 import {shallow} from 'enzyme';
+import {createMemoryHistory} from "history";
 
 import {SignIn} from "./sign-in";
+
+const mockHistory = createMemoryHistory();
 
 it(`On input name change correctly change state`, () => {
   const login = jest.fn();
   const props = {
     login,
-    location: {
-      state: {
-        from: `/some-url`,
-      }
-    },
+    location: mockHistory.location,
   };
   const signIn = shallow(<SignIn {...props} />);
   const nameInput = signIn.find(`input[name="email"]`);
@@ -36,11 +35,7 @@ it(`On input password change correctly change state`, () => {
   const login = jest.fn();
   const props = {
     login,
-    location: {
-      state: {
-        from: `/some-url`,
-      }
-    },
+    location: mockHistory.location,
   };
   const signIn = shallow(<SignIn {...props} />);
   const nameInput = signIn.find(`input[name="password"]`);

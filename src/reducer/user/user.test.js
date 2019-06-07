@@ -27,18 +27,6 @@ describe(`Action creators work correctly`, () => {
       },
     });
   });
-
-  it(`Action creator for open sign in page returns correct action`, () => {
-    expect(ActionCreator.openSignInPage()).toEqual({
-      type: ActionType.OPEN_SIGN_IN_PAGE,
-    });
-  });
-
-  it(`Action creator for close sign in page returns correct action`, () => {
-    expect(ActionCreator.closeSignInPage()).toEqual({
-      type: ActionType.CLOSE_SIGN_IN_PAGE,
-    });
-  });
 });
 
 describe(`Reducer works correctly`, () => {
@@ -48,7 +36,6 @@ describe(`Reducer works correctly`, () => {
       name: null,
       email: null,
       avatarSrc: null,
-      isSignInPage: false,
       isAuthorizationRequired: true
     });
   });
@@ -92,26 +79,6 @@ describe(`Reducer works correctly`, () => {
       email: `email@mail.com`,
       avatarSrc: `img/avatar.jpg`,
       isAuthorizationRequired: false,
-    });
-  });
-
-  it(`Reducer should isSignInPage to true`, () => {
-    expect(reducer({
-      isSignInPage: false,
-    }, {
-      type: ActionType.OPEN_SIGN_IN_PAGE,
-    })).toEqual({
-      isSignInPage: true,
-    });
-  });
-
-  it(`Reducer should isSignInPage to false`, () => {
-    expect(reducer({
-      isSignInPage: true,
-    }, {
-      type: ActionType.CLOSE_SIGN_IN_PAGE,
-    })).toEqual({
-      isSignInPage: false,
     });
   });
 });

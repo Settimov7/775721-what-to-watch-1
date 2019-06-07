@@ -1,10 +1,21 @@
 import * as React from 'react';
 import {connect} from "react-redux";
 import {Operation} from "../../reducer/user/user";
-import PropTypes from "prop-types";
-import {Redirect} from "react-router-dom";
+import {Redirect, Link} from "react-router-dom";
+import {Location} from "history";
 
-export class SignIn extends React.PureComponent {
+interface Props {
+  location: Location,
+  login: Function
+}
+
+interface State {
+  email: string,
+  password: string,
+  isRedirectBack: boolean,
+}
+
+export class SignIn extends React.PureComponent<Props, State> {
   constructor(props) {
     super(props);
 
@@ -21,9 +32,10 @@ export class SignIn extends React.PureComponent {
   render() {
     const {email, password, isRedirectBack} = this.state;
     const {location} = this.props;
+    const pathFrom = location.state && location.state.from;
 
     if (isRedirectBack) {
-      return <Redirect push to={location.state.from} />;
+      return <Redirect to={pathFrom || '/'} />;
     }
 
     return (
@@ -57,11 +69,11 @@ export class SignIn extends React.PureComponent {
         <div className="user-page">
           <header className="page-header user-page__head">
             <div className="logo">
-              <a href="main.html" className="logo__link">
+              <Link to="/" className="logo__link">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
-              </a>
+              </Link>
             </div>
 
             <h1 className="page-title user-page__title">Sign in</h1>
@@ -105,11 +117,11 @@ export class SignIn extends React.PureComponent {
 
           <footer className="page-footer">
             <div className="logo">
-              <a href="main.html" className="logo__link logo__link--light">
+              <Link to="/" className="logo__link logo__link--light">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
-              </a>
+              </Link>
             </div>
 
             <div className="copyright">
@@ -121,34 +133,29 @@ export class SignIn extends React.PureComponent {
     );
   }
 
-  _inputChangeHandle(evt) {
+  _inputChangeHandle(evt: React.ChangeEvent<HTMLInputElement>) {
     const {value, name} = evt.target;
 
-    this.setState({
+    this.setState((state: State): State => ({
+      ...state,
       [name]: value,
-    });
+    }));
   }
 
-  _submitHandle(evt) {
+  _submitHandle(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
 
     const {email, password} = this.state;
     const {login} = this.props;
 
     login(email, password).then(()=> {
-      this.setState({isRedirectBack: true});
+      this.setState((state: State): State => ({
+        ...state,
+        isRedirectBack: true
+      }));
     });
   }
 }
-
-SignIn.propTypes = {
-  login: PropTypes.func.isRequired,
-  location: PropTypes.shape({
-    state: PropTypes.shape({
-      from: PropTypes.string.isRequired,
-    }).isRequired,
-  }),
-};
 
 const mapDispatchToProps = {
   login: Operation.login,

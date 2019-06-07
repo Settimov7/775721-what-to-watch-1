@@ -3,7 +3,6 @@ const initialState = {
   name: null,
   email: null,
   avatarSrc: null,
-  isSignInPage: false,
   isAuthorizationRequired: true,
 };
 
@@ -11,8 +10,6 @@ const initialState = {
 export const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   LOGIN: `LOGIN`,
-  OPEN_SIGN_IN_PAGE: `OPEN_SIGN_IN_PAGE`,
-  CLOSE_SIGN_IN_PAGE: `CLOSE_SIGN_IN_PAGE`,
 };
 
 export const ActionCreator = {
@@ -27,18 +24,6 @@ export const ActionCreator = {
     return {
       type: ActionType.LOGIN,
       payload: userData,
-    };
-  },
-
-  openSignInPage: () => {
-    return {
-      type: ActionType.OPEN_SIGN_IN_PAGE,
-    };
-  },
-
-  closeSignInPage: () => {
-    return {
-      type: ActionType.CLOSE_SIGN_IN_PAGE,
     };
   },
 };
@@ -69,16 +54,6 @@ export const reducer = (state = initialState, action) => {
         email: action.payload.email,
         avatarSrc: action.payload[`avatar_url`],
         isAuthorizationRequired: false,
-      });
-
-    case ActionType.OPEN_SIGN_IN_PAGE:
-      return Object.assign({}, state, {
-        isSignInPage: true,
-      });
-
-    case ActionType.CLOSE_SIGN_IN_PAGE:
-      return Object.assign({}, state, {
-        isSignInPage: false,
       });
   }
 

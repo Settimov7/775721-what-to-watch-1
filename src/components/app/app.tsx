@@ -3,7 +3,6 @@ import {Switch, Route} from 'react-router-dom';
 
 import MainPage from "../main-page/main-page";
 import SignIn from "../sign-in/sign-in";
-// import PrivateRoute from "../../hocs/with-route-guard/with-route-guard";
 import {Favorites} from "../favorites/favorites";
 import {withRouteGuard} from "../../hocs/with-route-guard/with-route-guard";
 

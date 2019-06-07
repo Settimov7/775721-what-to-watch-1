@@ -1,18 +1,26 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 
 import {VideoPlayer} from "../video-player/video-player";
+import {Film, FilmCardSize} from '../../types';
 
-const SIZES = {
+const DEFAULT_CARD_SIZE: FilmCardSize = {
   width: 280,
   height: 175
 };
 
-export class FilmCard extends React.PureComponent {
+interface Props {
+  film: Film,
+  sizes?: FilmCardSize,
+}
+
+interface State {
+  timerId: number,
+  isPreviewPlaying: boolean,
+}
+
+export class FilmCard extends React.PureComponent<Props, State> {
   constructor(props) {
     super(props);
-
-    this._filmCardRef = React.createRef();
 
     this.state = {
       timerId: null,
@@ -24,14 +32,13 @@ export class FilmCard extends React.PureComponent {
   }
 
   render() {
-    const {film, sizes = SIZES, onTitleClick} = this.props;
+    const {film, sizes = DEFAULT_CARD_SIZE} = this.props;
     const {name, previewImageSrc, videoSrc} = film;
     const {isPreviewPlaying} = this.state;
     const {width, height} = sizes;
 
     return (
       <article
-        ref={this._filmCardRef}
         className="small-movie-card catalog__movies-card"
         onMouseEnter={this._mouseEnterHandler}
         onMouseLeave={this._mouseLeaveHandler}
@@ -54,7 +61,6 @@ export class FilmCard extends React.PureComponent {
           <a
             className="small-movie-card__link"
             href="movie-page.html"
-            onClick={onTitleClick}
           >
             {name}
           </a>
@@ -64,15 +70,16 @@ export class FilmCard extends React.PureComponent {
   }
 
   _mouseEnterHandler() {
-    const timerId = setTimeout(() => {
+    const timerId = window.setTimeout(() => {
       this.setState({
         isPreviewPlaying: true,
       });
     }, 1000);
 
-    this.setState({
+    this.setState((state: State): State => ({
+      ...state,
       timerId
-    });
+    }));
   }
 
   _mouseLeaveHandler() {
@@ -84,30 +91,3 @@ export class FilmCard extends React.PureComponent {
     });
   }
 }
-
-FilmCard.propTypes = {
-  film: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    posterImageSrc: PropTypes.string,
-    previewImageSrc: PropTypes.string,
-    backgroundImageSrc: PropTypes.string,
-    backgroundColor: PropTypes.string,
-    description: PropTypes.string,
-    rating: PropTypes.number,
-    scores: PropTypes.number,
-    director: PropTypes.string,
-    starring: PropTypes.arrayOf(PropTypes.string),
-    runTime: PropTypes.number,
-    genre: PropTypes.string,
-    releasedYear: PropTypes.number,
-    isFavorite: PropTypes.bool,
-    videoSrc: PropTypes.string,
-    previewVideoSrc: PropTypes.string,
-  }),
-  sizes: PropTypes.shape({
-    width: PropTypes.number,
-    height: PropTypes.number,
-  }),
-  onTitleClick: PropTypes.func,
-};
