@@ -1,5 +1,6 @@
 import * as React from 'react';
-import renderer from 'react-test-renderer';
+import * as renderer from 'react-test-renderer';
+
 import {FilterList} from "./filter-list";
 
 it(`Filters list correctly renders`, () => {

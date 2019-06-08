@@ -1,12 +1,13 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
 
 import {getIsAuthorizationRequired} from '../../reducer/user/selectors';
 
 export const withRouteGuard = (Route) => {
-  const WithRouteGuard = (props) => {
+  type Props = React.ComponentProps<typeof Route>;
+
+  const WithRouteGuard = (props: Props) => {
     const {isAuthorizationRequired, location} = props;
 
     if (isAuthorizationRequired) {
@@ -19,13 +20,6 @@ export const withRouteGuard = (Route) => {
     }
 
     return <Route {...props}/>;
-  };
-
-  WithRouteGuard.propTypes = {
-    isAuthorizationRequired: PropTypes.bool.isRequired,
-    location: PropTypes.shape({
-      pathname: PropTypes.string.isRequired,
-    }).isRequired,
   };
 
   const mapStateToProps = (state) => ({

@@ -145,6 +145,8 @@ Array [
       >
         <a
           className="logo__link"
+          href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"
@@ -290,31 +292,7 @@ Array [
             className="catalog__genres-link"
             href="#"
             onClick={[Function]}
-          >
-            Fantasy
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item false"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Drama
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item false"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Crime
-          </a>
+          />
         </li>
       </ul>
       <div
@@ -332,7 +310,7 @@ Array [
               height={175}
               loop={true}
               muted={true}
-              poster="poster.jpg"
+              poster="/image.jpg"
               src="video.mp4"
               width={280}
             />
@@ -344,7 +322,7 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              Fantastic Beasts: The Crimes of Grindelwald
+              Film-1
             </a>
           </h3>
         </article>
@@ -360,7 +338,7 @@ Array [
               height={175}
               loop={true}
               muted={true}
-              poster="poster.jpg"
+              poster="/image.jpg"
               src="video.mp4"
               width={280}
             />
@@ -372,7 +350,7 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              Bohemian Rhapsody
+              Film-2
             </a>
           </h3>
         </article>
@@ -388,7 +366,7 @@ Array [
               height={175}
               loop={true}
               muted={true}
-              poster="poster.jpg"
+              poster="/image.jpg"
               src="video.mp4"
               width={280}
             />
@@ -400,7 +378,7 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              Macbeth
+              Film-3
             </a>
           </h3>
         </article>
@@ -416,7 +394,7 @@ Array [
               height={175}
               loop={true}
               muted={true}
-              poster="poster.jpg"
+              poster="/image.jpg"
               src="video.mp4"
               width={280}
             />
@@ -428,7 +406,7 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              Aviator
+              Film-4
             </a>
           </h3>
         </article>
@@ -444,7 +422,7 @@ Array [
               height={175}
               loop={true}
               muted={true}
-              poster="poster.jpg"
+              poster="/image.jpg"
               src="video.mp4"
               width={280}
             />
@@ -456,7 +434,7 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              We need to talk about Kevin
+              Film-5
             </a>
           </h3>
         </article>
@@ -480,6 +458,8 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
+          href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"
@@ -655,6 +635,8 @@ Array [
       >
         <a
           className="logo__link"
+          href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"
@@ -678,7 +660,7 @@ Array [
       >
         <a
           className="logo__link"
-          href="#"
+          href="/login"
           onClick={[Function]}
         >
           Sign in
@@ -797,31 +779,7 @@ Array [
             className="catalog__genres-link"
             href="#"
             onClick={[Function]}
-          >
-            Fantasy
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item false"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Drama
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item false"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Crime
-          </a>
+          />
         </li>
       </ul>
       <div
@@ -839,7 +797,7 @@ Array [
               height={175}
               loop={true}
               muted={true}
-              poster="poster.jpg"
+              poster="/image.jpg"
               src="video.mp4"
               width={280}
             />
@@ -851,7 +809,7 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              Fantastic Beasts: The Crimes of Grindelwald
+              Film-1
             </a>
           </h3>
         </article>
@@ -867,7 +825,7 @@ Array [
               height={175}
               loop={true}
               muted={true}
-              poster="poster.jpg"
+              poster="/image.jpg"
               src="video.mp4"
               width={280}
             />
@@ -879,7 +837,7 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              Bohemian Rhapsody
+              Film-2
             </a>
           </h3>
         </article>
@@ -895,7 +853,7 @@ Array [
               height={175}
               loop={true}
               muted={true}
-              poster="poster.jpg"
+              poster="/image.jpg"
               src="video.mp4"
               width={280}
             />
@@ -907,7 +865,7 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              Macbeth
+              Film-3
             </a>
           </h3>
         </article>
@@ -923,7 +881,7 @@ Array [
               height={175}
               loop={true}
               muted={true}
-              poster="poster.jpg"
+              poster="/image.jpg"
               src="video.mp4"
               width={280}
             />
@@ -935,7 +893,7 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              Aviator
+              Film-4
             </a>
           </h3>
         </article>
@@ -951,7 +909,7 @@ Array [
               height={175}
               loop={true}
               muted={true}
-              poster="poster.jpg"
+              poster="/image.jpg"
               src="video.mp4"
               width={280}
             />
@@ -963,7 +921,7 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              We need to talk about Kevin
+              Film-5
             </a>
           </h3>
         </article>
@@ -987,6 +945,8 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
+          href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"

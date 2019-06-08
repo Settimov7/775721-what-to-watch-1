@@ -1,17 +1,21 @@
 import * as React from 'react';
 import {connect} from "react-redux";
-import PropTypes from "prop-types";
+import {Link} from 'react-router-dom';
 
-import {FilterList} from "../filter-list/filter-list";
+import FilterList from "../filter-list/filter-list";
 import FilmsList from "../films-list/films-list";
-import withActiveItem from "../../hocs/with-active-item/with-active-item";
+import {withActiveItem} from "../../hocs/with-active-item/with-active-item";
 import {getIsAuthorizationRequired, getUserAvatarSrc} from "../../reducer/user/selectors";
-import {ActionCreator} from "../../reducer/user/user";
 
 const WrappedFilterList = withActiveItem(FilterList);
 
-export const MainPage = (props) => {
-  const {isAuthorizationRequired, openSignInPage, userAvatarSrc} = props;
+interface Props {
+  isAuthorizationRequired: boolean,
+  userAvatarSrc: string,
+}
+
+export const MainPage = (props: Props) => {
+  const {isAuthorizationRequired, userAvatarSrc} = props;
 
   return (
     <React.Fragment>
@@ -67,20 +71,16 @@ export const MainPage = (props) => {
 
         <header className="page-header movie-card__head">
           <div className="logo">
-            <a className="logo__link">
+            <Link to="/" className="logo__link">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <div className="user-block">
             {isAuthorizationRequired ? (
-              <a
-                className="logo__link"
-                href={`#`}
-                onClick={() => openSignInPage()}
-              >Sign in</a>
+              <Link to="/login" className="logo__link">Sign in</Link>
             ) : (
               <div className="user-block__avatar">
                 <img src={userAvatarSrc} alt="User avatar" width="63" height="63"/>
@@ -137,11 +137,11 @@ export const MainPage = (props) => {
 
         <footer className="page-footer">
           <div className="logo">
-            <a className="logo__link logo__link--light">
+            <Link to="/" className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <div className="copyright">
@@ -153,19 +153,9 @@ export const MainPage = (props) => {
   );
 };
 
-MainPage.propTypes = {
-  isAuthorizationRequired: PropTypes.bool.isRequired,
-  userAvatarSrc: PropTypes.string,
-  openSignInPage: PropTypes.func.isRequired,
-};
-
 const mapStateToProps = (state) => ({
   isAuthorizationRequired: getIsAuthorizationRequired(state),
   userAvatarSrc: getUserAvatarSrc(state),
 });
 
-const mapDispatchToProps = {
-  openSignInPage: ActionCreator.openSignInPage,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default connect(mapStateToProps)(MainPage);
