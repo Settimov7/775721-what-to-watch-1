@@ -8,6 +8,7 @@ exports[`Film card correctly renders 1`] = `
 >
   <div
     className="small-movie-card__image"
+    onClick={[Function]}
   >
     <video
       height={175}
@@ -23,7 +24,8 @@ exports[`Film card correctly renders 1`] = `
   >
     <a
       className="small-movie-card__link"
-      href="movie-page.html"
+      href="/film/1"
+      onClick={[Function]}
     >
       Film-1
     </a>

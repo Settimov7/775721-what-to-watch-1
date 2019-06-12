@@ -11,6 +11,7 @@ exports[`Films list correctly renders 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <video
         height={175}
@@ -26,7 +27,8 @@ exports[`Films list correctly renders 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/film/1"
+        onClick={[Function]}
       >
         Film-1
       </a>
@@ -39,6 +41,7 @@ exports[`Films list correctly renders 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <video
         height={175}
@@ -54,7 +57,8 @@ exports[`Films list correctly renders 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/film/2"
+        onClick={[Function]}
       >
         Film-2
       </a>
@@ -67,6 +71,7 @@ exports[`Films list correctly renders 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <video
         height={175}
@@ -82,7 +87,8 @@ exports[`Films list correctly renders 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/film/3"
+        onClick={[Function]}
       >
         Film-3
       </a>
@@ -95,6 +101,7 @@ exports[`Films list correctly renders 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <video
         height={175}
@@ -110,7 +117,8 @@ exports[`Films list correctly renders 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/film/4"
+        onClick={[Function]}
       >
         Film-4
       </a>
@@ -123,6 +131,7 @@ exports[`Films list correctly renders 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <video
         height={175}
@@ -138,7 +147,8 @@ exports[`Films list correctly renders 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/film/5"
+        onClick={[Function]}
       >
         Film-5
       </a>

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {shallow} from 'enzyme';
-import {createMemoryHistory} from "history";
+import {createMemoryHistory} from 'history';
 
-import {SignIn} from "./sign-in";
+import {SignIn} from './sign-in';
 
 const mockHistory = createMemoryHistory();
 

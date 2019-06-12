@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
 
-import {FilmCard} from "./film-card";
+import {FilmDetails} from './film-details';
 import {BrowserRouter} from 'react-router-dom';
 
 const mock = {
@@ -29,11 +29,13 @@ const mock = {
 it(`Film card correctly renders`, () => {
   const props = {
     film: mock.film,
+    isAuthorizationRequired: false,
+    userAvatarSrc: `img/avatar.jpg`,
   };
 
   const card = renderer.create(
     <BrowserRouter>
-      <FilmCard {...props}/>
+      <FilmDetails {...props}/>
     </BrowserRouter>
   ).toJSON();
 

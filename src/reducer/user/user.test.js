@@ -49,7 +49,6 @@ describe(`Reducer works correctly`, () => {
     })).toEqual({
       isAuthorizationRequired: true,
     });
-
     expect(reducer({
       isAuthorizationRequired: true,
     }, {
