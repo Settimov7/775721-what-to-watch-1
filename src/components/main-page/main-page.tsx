@@ -1,11 +1,11 @@
 import * as React from 'react';
-import {connect} from "react-redux";
+import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-import FilterList from "../filter-list/filter-list";
-import FilmsList from "../films-list/films-list";
-import {withActiveItem} from "../../hocs/with-active-item/with-active-item";
-import {getIsAuthorizationRequired, getUserAvatarSrc} from "../../reducer/user/selectors";
+import FilterList from '../filter-list/filter-list';
+import FilmsList from '../films-list/films-list';
+import {withActiveItem} from '../../hocs/with-active-item/with-active-item';
+import {getIsAuthorizationRequired, getUserAvatarSrc} from '../../reducer/user/selectors';
 
 const WrappedFilterList = withActiveItem(FilterList);
 

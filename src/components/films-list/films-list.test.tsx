@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as renderer from 'react-test-renderer';
 
 import {FilmsList} from "./films-list";
+import {BrowserRouter} from 'react-router-dom';
 
 const mock = {
   films: [
@@ -108,7 +109,11 @@ it(`Films list correctly renders`, () => {
     films: mock.films,
   };
 
-  const tree = renderer.create(<FilmsList {...props}/>).toJSON();
+  const tree = renderer.create(
+    <BrowserRouter>
+      <FilmsList {...props}/>
+    </BrowserRouter>
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

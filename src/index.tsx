@@ -1,24 +1,27 @@
 import * as React from 'react';
 import {render} from 'react-dom';
-import {createStore, applyMiddleware} from "redux";
-import {Provider} from "react-redux";
-import {compose} from "recompose";
-import thunk from "redux-thunk";
-import {BrowserRouter} from "react-router-dom";
+import {createStore, applyMiddleware} from 'redux';
+import {Provider} from 'react-redux';
+import {compose} from 'recompose';
+import thunk from 'redux-thunk';
+import {Router} from 'react-router-dom';
 
-import {createAPI} from "./api";
-import {reducer} from "./reducer";
-import {Operation} from "./reducer/films/films";
+import {createAPI} from './api';
+import {reducer} from './reducer/index';
+import {Operation} from './reducer/films/films';
 import {App} from './components/app/app';
+import {history} from './history';
+
+declare const __REDUX_DEVTOOLS_EXTENSION__: () => any;
 
 const initApp = () => {
-  const onLoginFail = () => history.pushState(null, null, `/login`);
+  const onLoginFail = () => history.push(`/login`);
   const api = createAPI(onLoginFail);
   const appStore = createStore(
       reducer,
       compose(
           applyMiddleware(thunk.withExtraArgument(api)),
-          window[`__REDUX_DEVTOOLS_EXTENSION__`] && window[`__REDUX_DEVTOOLS_EXTENSION__`]()
+        __REDUX_DEVTOOLS_EXTENSION__ && __REDUX_DEVTOOLS_EXTENSION__()
       )
   );
 
@@ -26,9 +29,9 @@ const initApp = () => {
 
   render((
     <Provider store={appStore}>
-      <BrowserRouter>
+      <Router history={history}>
         <App />
-      </BrowserRouter>
+      </Router>
     </Provider>
   ), document.getElementById(`root`));
 };

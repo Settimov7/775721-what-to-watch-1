@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {connect} from "react-redux";
+import {connect} from 'react-redux';
 
-import {FilmCard} from "../film-card/film-card";
-import {getFilteredFilms} from "../../reducer/films/selectors";
-import {Film} from "../../types";
+import {FilmCard} from '../film-card/film-card';
+import {getFilteredFilms} from '../../reducer/films/selectors';
+import {Film} from '../../types';
 
 interface Props {
   films: Film[],

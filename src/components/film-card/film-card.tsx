@@ -1,7 +1,9 @@
 import * as React from 'react';
+import {Link} from 'react-router-dom';
 
-import {VideoPlayer} from "../video-player/video-player";
+import {VideoPlayer} from '../video-player/video-player';
 import {Film, FilmCardSize} from '../../types';
+import {history} from '../../history';
 
 const DEFAULT_CARD_SIZE: FilmCardSize = {
   width: 280,
@@ -29,11 +31,16 @@ export class FilmCard extends React.PureComponent<Props, State> {
 
     this._mouseEnterHandler = this._mouseEnterHandler.bind(this);
     this._mouseLeaveHandler = this._mouseLeaveHandler.bind(this);
+    this._clickHandler = this._clickHandler.bind(this);
+  }
+
+  componentWillUnmount(): void {
+    clearTimeout(this.state.timerId);
   }
 
   render() {
     const {film, sizes = DEFAULT_CARD_SIZE} = this.props;
-    const {name, previewImageSrc, videoSrc} = film;
+    const {id, name, previewImageSrc, videoSrc} = film;
     const {isPreviewPlaying} = this.state;
     const {width, height} = sizes;
 
@@ -43,27 +50,24 @@ export class FilmCard extends React.PureComponent<Props, State> {
         onMouseEnter={this._mouseEnterHandler}
         onMouseLeave={this._mouseLeaveHandler}
       >
-        <div className="small-movie-card__image">
-          <VideoPlayer
-            videoSrc={videoSrc}
-            posterSrc={previewImageSrc}
-            options={
-              {
-                width,
-                height,
+        <div className="small-movie-card__image" onClick={this._clickHandler}>
+            <VideoPlayer
+              videoSrc={videoSrc}
+              posterSrc={previewImageSrc}
+              options={
+                {
+                  width,
+                  height,
+                }
               }
-            }
-            isPlaying={isPreviewPlaying}
-          />
+              isPlaying={isPreviewPlaying}
+            />
         </div>
 
         <h3 className="small-movie-card__title">
-          <a
-            className="small-movie-card__link"
-            href="movie-page.html"
-          >
+          <Link to={`/film/${id}`} className="small-movie-card__link">
             {name}
-          </a>
+          </Link>
         </h3>
       </article>
     );
@@ -89,5 +93,15 @@ export class FilmCard extends React.PureComponent<Props, State> {
       isPreviewPlaying: false,
       timerId: null,
     });
+  }
+
+  _clickHandler(evt) {
+    evt.preventDefault();
+
+    const {isPreviewPlaying} = this.state;
+
+    if(!isPreviewPlaying) {
+      history.push(`/film/${this.props.film.id}`);
+    }
   }
 }
