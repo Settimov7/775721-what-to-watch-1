@@ -1,10 +1,12 @@
 import * as React from 'react';
 
 interface State {
-  activeItem: string
+  activeItem: string | number
 }
 
-export const withActiveItem = (Component, defaultActiveItem?: string) => {
+type defaultActiveItem = string | number;
+
+export const withActiveItem = (Component, defaultActiveItem?: defaultActiveItem ) => {
   type P = React.ComponentProps<typeof Component>;
 
   class WithActiveItem extends React.PureComponent<P, State> {
@@ -12,7 +14,7 @@ export const withActiveItem = (Component, defaultActiveItem?: string) => {
       super(props);
 
       this.state = {
-        activeItem: this.props.currentFilter || defaultActiveItem,
+        activeItem: this.props.activeItem || defaultActiveItem,
       };
 
       this._setActiveItem = this._setActiveItem.bind(this);
@@ -23,13 +25,13 @@ export const withActiveItem = (Component, defaultActiveItem?: string) => {
 
       return <Component
         {...this.props}
-        currentFilter={activeItem}
-        changeCurrentFilter={this._setActiveItem}
+        activeItem={activeItem}
+        onChange={this._setActiveItem}
       />;
     }
 
     _setActiveItem(item) {
-      this.props.changeCurrentFilter(item);
+      this.props.onChange && this.props.onChange(item);
       this.setState({
         activeItem: item,
       });

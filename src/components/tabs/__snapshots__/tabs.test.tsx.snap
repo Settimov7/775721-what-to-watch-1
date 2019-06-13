@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tabs correctly renders 1`] = `
+Array [
+  <nav
+    className="movie-nav movie-card__nav"
+  >
+    <ul
+      className="movie-nav__list"
+    >
+      <nav
+        className="movie-nav movie-card__nav"
+      >
+        <ul
+          className="movie-nav__list"
+        >
+          <li
+            className="movie-nav__item movie-nav__item--active"
+          >
+            <a
+              className="movie-nav__link"
+              onClick={[Function]}
+            >
+              Tab 1
+            </a>
+          </li>
+          <li
+            className="movie-nav__item false"
+          >
+            <a
+              className="movie-nav__link"
+              onClick={[Function]}
+            >
+              Tab 2
+            </a>
+          </li>
+          <li
+            className="movie-nav__item false"
+          >
+            <a
+              className="movie-nav__link"
+              onClick={[Function]}
+            >
+              Tab 3
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </ul>
+  </nav>,
+  <div />,
+]
+`;
+
+exports[`Tabs correctly renders 1`] = `
+Array [
+  <nav
+    className="movie-nav movie-card__nav"
+  >
+    <ul
+      className="movie-nav__list"
+    >
+      <nav
+        className="movie-nav movie-card__nav"
+      >
+        <ul
+          className="movie-nav__list"
+        >
+          <li
+            className="movie-nav__item movie-nav__item--active"
+          >
+            <a
+              className="movie-nav__link"
+              onClick={[Function]}
+            >
+              Tab 1
+            </a>
+          </li>
+          <li
+            className="movie-nav__item false"
+          >
+            <a
+              className="movie-nav__link"
+              onClick={[Function]}
+            >
+              Tab 2
+            </a>
+          </li>
+          <li
+            className="movie-nav__item false"
+          >
+            <a
+              className="movie-nav__link"
+              onClick={[Function]}
+            >
+              Tab 3
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </ul>
+  </nav>,
+  <div />,
+]
+`;

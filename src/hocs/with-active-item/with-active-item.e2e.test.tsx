@@ -9,8 +9,8 @@ const WrappedMockComponentWithDefaultActiveItem = withActiveItem(MockComponent, 
 
 it(`Should have correctly default active item without params`, () => {
   const props = {
-    currentFilter: `item`,
-    changeCurrentFilter: jest.fn(),
+    activeItem: `item`,
+    onChange: jest.fn(),
   };
   const wrappedComponent = shallow(<WrappedMockComponent {...props}/>);
 
@@ -19,7 +19,7 @@ it(`Should have correctly default active item without params`, () => {
 
 it(`Should have correctly default active item from params`, () => {
   const props = {
-    changeCurrentFilter: jest.fn(),
+    onChange: jest.fn(),
   };
   const wrappedComponent = shallow(<WrappedMockComponentWithDefaultActiveItem {...props}/>);
 
@@ -28,8 +28,8 @@ it(`Should have correctly default active item from params`, () => {
 
 it(`Should change active item correctly`, () => {
   const props = {
-    currentFilter: `item`,
-    changeCurrentFilter: jest.fn(),
+    activeItem: `item`,
+    onChange: jest.fn(),
   };
   const wrappedComponent = shallow(<WrappedMockComponent {...props}/>);
 

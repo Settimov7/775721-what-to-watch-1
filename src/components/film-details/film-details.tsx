@@ -2,29 +2,65 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-import {getFilmById} from '../../reducer/films/selectors';
+import {getFilmById, getFilmsByGenre} from '../../reducer/films/selectors';
 import {getIsAuthorizationRequired, getUserAvatarSrc} from '../../reducer/user/selectors';
 import {Film} from '../../types';
+import {Tabs} from '../tabs/tabs';
+import {withActiveItem} from '../../hocs/with-active-item/with-active-item';
+import {Overview} from '../overview/overview';
+import {Details} from '../details/details';
+import {Reviews} from '../reviews/reviews';
+import {FilmsList} from '../films-list/films-list';
 
 interface Props {
   film: Film,
   isAuthorizationRequired: boolean,
   userAvatarSrc: string,
+  sameGenreFilms: Film[],
 }
 
+const WrappedTabs = withActiveItem(Tabs, 0);
+
 export const FilmDetails = (props: Props) => {
-  const {film, isAuthorizationRequired, userAvatarSrc} = props;
+  const {film, isAuthorizationRequired, userAvatarSrc, sameGenreFilms} = props;
   const {
     name,
     genre,
     releasedYear,
-    director,
-    starring,
-    runTime,
     backgroundImageSrc,
     posterImageSrc,
-    backgroundColor
+    backgroundColor,
+    rating,
+    director,
+    description,
+    starring,
+    runTime,
   } = film;
+  const TABS = [
+    {
+      title: `Overview`,
+      component: <Overview
+        rating={rating}
+        director={director}
+        description={description}
+        starring={starring}
+      />,
+    },
+    {
+      title: `Details`,
+      component: <Details
+        director={director}
+        starring={starring}
+        runTime={runTime}
+        genre={genre}
+        releasedYear={releasedYear}
+      />,
+    },
+    {
+      title: `Reviews`,
+      component: <Reviews />,
+    },
+  ];
 
   return (
     <React.Fragment>
@@ -134,60 +170,7 @@ export const FilmDetails = (props: Props) => {
             </div>
 
             <div className="movie-card__desc">
-              <nav className="movie-nav movie-card__nav">
-                <ul className="movie-nav__list">
-                  <li className="movie-nav__item movie-nav__item--active">
-                    <a href="#" className="movie-nav__link">Overview</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Details</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="movie-card__text movie-card__row">
-                <div className="movie-card__text-col">
-                  <p className="movie-card__details-item">
-                    <strong className="movie-card__details-name">Director</strong>
-                    <span className="movie-card__details-value">{director}</span>
-                  </p>
-                  <p className="movie-card__details-item">
-                    <strong className="movie-card__details-name">Starring</strong>
-
-                    {starring.map((actor, index) => {
-                      const isLastActor = index === starring.length -1;
-
-                      if(isLastActor) {
-                        return <span key={actor} className="movie-card__details-value">{actor}</span>;
-                      }
-
-                      return (
-                        <span key={actor} className="movie-card__details-value">
-                          {`${actor},`}<br />
-                        </span>
-                      )
-                    })}
-                  </p>
-                </div>
-
-                <div className="movie-card__text-col">
-                  <p className="movie-card__details-item">
-                    <strong className="movie-card__details-name">Run Time</strong>
-                    <span className="movie-card__details-value">{runTime}</span>
-                  </p>
-                  <p className="movie-card__details-item">
-                    <strong className="movie-card__details-name">Genre</strong>
-                    <span className="movie-card__details-value">{genre}</span>
-                  </p>
-                  <p className="movie-card__details-item">
-                    <strong className="movie-card__details-name">Released</strong>
-                    <span className="movie-card__details-value">{releasedYear}</span>
-                  </p>
-                </div>
-              </div>
+              <WrappedTabs tabs={TABS} />
             </div>
           </div>
         </div>
@@ -198,57 +181,17 @@ export const FilmDetails = (props: Props) => {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__movies-list">
-            <article className="small-movie-card catalog__movies-card">
-              <button className="small-movie-card__play-btn" type="button">Play</button>
-              <div className="small-movie-card__image">
-                <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-                     alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of
-                  Grindelwald</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <button className="small-movie-card__play-btn" type="button">Play</button>
-              <div className="small-movie-card__image">
-                <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <button className="small-movie-card__play-btn" type="button">Play</button>
-              <div className="small-movie-card__image">
-                <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <button className="small-movie-card__play-btn" type="button">Play</button>
-              <div className="small-movie-card__image">
-                <img src="img/aviator.jpg" alt="Aviator" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
-              </h3>
-            </article>
+            <FilmsList films={sameGenreFilms}/>
           </div>
         </section>
 
         <footer className="page-footer">
           <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
+            <Link to="/" className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <div className="copyright">
@@ -260,17 +203,22 @@ export const FilmDetails = (props: Props) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  film: getFilmById(state, parseInt(ownProps.match.params.id)),
-  isAuthorizationRequired: getIsAuthorizationRequired(state),
-  userAvatarSrc: getUserAvatarSrc(state),
-});
+const mapStateToProps = (state, ownProps) => {
+  const film = getFilmById(state, parseInt(ownProps.match.params.id));
+
+  return {
+    film,
+    sameGenreFilms: film ? getFilmsByGenre(state, film.genre) : [],
+    isAuthorizationRequired: getIsAuthorizationRequired(state),
+    userAvatarSrc: getUserAvatarSrc(state),
+  }
+};
 
 export default connect(mapStateToProps)((props) => {
   const {film} = props;
 
   if(!film) {
-    return null
+    return null;
   }
 
   return <FilmDetails {...props}/>

@@ -4,11 +4,11 @@ import {shallow} from 'enzyme';
 import {FilterList} from "./filter-list";
 
 it(`Filter list items correctly triggered click event`, () => {
-  const onClick = jest.fn();
+  const onChange = jest.fn();
   const props = {
     properties: [`drama`, `fantastic`, `comedy`],
-    currentFilter: `drama`,
-    changeCurrentFilter: onClick,
+    activeItem: `drama`,
+    onChange,
   };
 
   const filterList = shallow(<FilterList {...props}/>);
@@ -16,5 +16,5 @@ it(`Filter list items correctly triggered click event`, () => {
 
   filters.forEach((filter) => filter.simulate(`click`, {preventDefault() {}}));
 
-  expect(onClick).toHaveBeenCalledTimes(props.properties.length);
+  expect(onChange).toHaveBeenCalledTimes(props.properties.length);
 });

@@ -23,4 +23,7 @@ export const getFilteredFilms = createSelector(
 
 export const getFilmById = (state, id) => state[NAME_SPACE].films.find((film) => film.id === id);
 
+export const getFilmsByGenre = (state, genre) =>
+  state[NAME_SPACE].films.filter((film) => film.genre === genre);
+
 

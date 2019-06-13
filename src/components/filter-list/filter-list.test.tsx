@@ -6,8 +6,8 @@ import {FilterList} from "./filter-list";
 it(`Filters list correctly renders`, () => {
   const props = {
     properties: [`Drama`, `Fantasy`, `Comedy`],
-    currentFilter: `Drama`,
-    changeCurrentFilter: jest.fn(),
+    activeItem: `Drama`,
+    onChange: jest.fn(),
   };
 
   const tree = renderer.create(<FilterList {...props}/>).toJSON();
