@@ -18,18 +18,18 @@ const GenreToFilterTitle = {
 
 interface Props {
   properties: string[],
-  currentFilter: string,
-  changeCurrentFilter: (g: string) => void,
+  activeItem: string,
+  onChange: (g: string) => void,
 }
 
 export const FilterList = (props: Props) => {
-  const {properties, currentFilter, changeCurrentFilter} = props;
+  const {properties, activeItem, onChange} = props;
   const filters = [`all`, ...new Set(properties)];
 
   return (
     <ul className="catalog__genres-list">
       {filters.map((filter) => {
-        const isActive = filter === currentFilter;
+        const isActive = filter === activeItem;
 
         return (
           <li
@@ -43,7 +43,7 @@ export const FilterList = (props: Props) => {
                 evt.preventDefault();
 
                 if (!isActive) {
-                  changeCurrentFilter(filter);
+                  onChange(filter);
                 }
               }}
             >
@@ -58,11 +58,11 @@ export const FilterList = (props: Props) => {
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   properties: getFilmsGenres(state),
-  currentFilter: getCurrentFilter(state),
+  activeItem: getCurrentFilter(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCurrentFilter: (genre: string): void => {
+  onChange: (genre: string): void => {
     dispatch(ActionCreator.changeCurrentFilterByFilmGenre(genre));
   },
 });
