@@ -1,8 +1,14 @@
 import MockAdapter from "axios-mock-adapter";
 
 import {createAPI} from "../../api";
-import {reducer, ActionCreator, ActionType, Operation} from "./films";
-
+import {
+  reducer,
+  ActionCreator,
+  ActionType,
+  Operation,
+  DEFAULT_DISPLAYED_FILMS_NUMBER,
+  INCREASE_DISPLAYED_FILMS_NUMBER_STEP,
+} from "./films";
 
 describe(`Action creators work correctly`, () => {
   it(`Loading films correctly`, () => {
@@ -51,18 +57,32 @@ describe(`Action creators work correctly`, () => {
       ],
     });
   });
+
+  it(`Correctly increase displayed films number`, () => {
+    expect(ActionCreator.increaseDisplayedFilmsNumber()).toEqual({
+      type: ActionType.INCREASE_DISPLAYED_FILMS_NUMBER,
+    });
+  });
+
+  it(`Correctly reset displayed films number`, () => {
+    expect(ActionCreator.resetDisplayedFilmsNumber()).toEqual({
+      type: ActionType.RESET_DISPLAYED_FILMS_NUMBER,
+    });
+  });
 });
 
 describe(`Reducer works correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer(undefined, {})).toEqual({
       films: [],
+      displayedFilmsNumber: DEFAULT_DISPLAYED_FILMS_NUMBER,
     });
   });
 
   it(`Reducer should change films by a given array of films`, () => {
     expect(reducer({
       films: [],
+      displayedFilmsNumber: DEFAULT_DISPLAYED_FILMS_NUMBER,
     }, {
       type: ActionType.LOAD_FILMS,
       payload: [
@@ -108,6 +128,31 @@ describe(`Reducer works correctly`, () => {
           previewVideoSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
         },
       ],
+      displayedFilmsNumber: DEFAULT_DISPLAYED_FILMS_NUMBER,
+    });
+  });
+
+  it(`Reducer should increase display films number by a default step`, () => {
+    expect(reducer({
+      films: [],
+      displayedFilmsNumber: DEFAULT_DISPLAYED_FILMS_NUMBER,
+    }, {
+      type: ActionType.INCREASE_DISPLAYED_FILMS_NUMBER,
+    })).toEqual({
+      films: [],
+      displayedFilmsNumber: DEFAULT_DISPLAYED_FILMS_NUMBER + INCREASE_DISPLAYED_FILMS_NUMBER_STEP,
+    });
+  });
+
+  it(`Reducer should reset display films number`, () => {
+    expect(reducer({
+      films: [],
+      displayedFilmsNumber: 60,
+    }, {
+      type: ActionType.RESET_DISPLAYED_FILMS_NUMBER,
+    })).toEqual({
+      films: [],
+      displayedFilmsNumber: DEFAULT_DISPLAYED_FILMS_NUMBER,
     });
   });
 });

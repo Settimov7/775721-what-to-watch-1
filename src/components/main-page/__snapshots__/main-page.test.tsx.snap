@@ -454,6 +454,7 @@ Array [
       >
         <button
           className="catalog__button"
+          onClick={[Function]}
           type="button"
         >
           Show more
@@ -951,6 +952,7 @@ Array [
       >
         <button
           className="catalog__button"
+          onClick={[Function]}
           type="button"
         >
           Show more
