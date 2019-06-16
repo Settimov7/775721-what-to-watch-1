@@ -41,6 +41,7 @@ it(`Main page correctly renders if authorization not required`, () => {
     isAuthorizationRequired: false,
     userAvatarSrc: `img/avatar.jpg`,
     resetDisplayedFilmsNumber: jest.fn(),
+    onPlayButtonClick: jest.fn(),
   };
 
   const mainPage = renderer.create(
@@ -70,6 +71,7 @@ it(`Main page correctly renders if authorization required`, () => {
     isAuthorizationRequired: true,
     userAvatarSrc: `img/avatar.jpg`,
     resetDisplayedFilmsNumber: jest.fn(),
+    onPlayButtonClick: jest.fn(),
   };
 
   const mainPage = renderer.create(

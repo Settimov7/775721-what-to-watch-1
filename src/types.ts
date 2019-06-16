@@ -1,11 +1,4 @@
-export type VideoOptions = {
-  width: number,
-  height: number,
-  isMuted?: boolean,
-  isLoop?: boolean,
-}
-
-export type FilmCardSize = {
+export type Size = {
   width: number,
   height: number,
 }

@@ -131,6 +131,7 @@ it(`Film details correctly renders`, () => {
     isAuthorizationRequired: false,
     userAvatarSrc: `img/avatar.jpg`,
     sameGenreFilms: mock.films,
+    onPlayButtonClick: jest.fn(),
   };
 
   const filmDetails = renderer.create(

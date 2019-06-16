@@ -2,7 +2,7 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-import {getFilmById, getFilmsByGenre} from '../../reducer/films/selectors';
+import {getFilmsByGenre} from '../../reducer/films/selectors';
 import {getIsAuthorizationRequired, getUserAvatarSrc} from '../../reducer/user/selectors';
 import {Film} from '../../types';
 import {Tabs} from '../tabs/tabs';
@@ -17,12 +17,13 @@ interface Props {
   isAuthorizationRequired: boolean,
   userAvatarSrc: string,
   sameGenreFilms: Film[],
+  onPlayButtonClick: () => void,
 }
 
 const WrappedTabs = withActiveItem(Tabs, 0);
 
 export const FilmDetails = (props: Props) => {
-  const {film, isAuthorizationRequired, userAvatarSrc, sameGenreFilms} = props;
+  const {film, isAuthorizationRequired, userAvatarSrc, sameGenreFilms, onPlayButtonClick} = props;
   const {
     name,
     genre,
@@ -144,7 +145,11 @@ export const FilmDetails = (props: Props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button className="btn btn--play movie-card__button" type="button" onClick={(evt) => {
+                  evt.preventDefault();
+
+                  onPlayButtonClick();
+                }}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"/>
                   </svg>
@@ -204,10 +209,9 @@ export const FilmDetails = (props: Props) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const film = getFilmById(state, parseInt(ownProps.match.params.id));
+  const {film} = ownProps;
 
   return {
-    film,
     sameGenreFilms: film ? getFilmsByGenre(state, film.genre) : [],
     isAuthorizationRequired: getIsAuthorizationRequired(state),
     userAvatarSrc: getUserAvatarSrc(state),
