@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 
-import {ActionCreator} from "../../reducer/filter/filter";
+import {ActionCreator as FilterActionCreator} from "../../reducer/filter/filter";
+import {ActionCreator as FilmsActionCreator} from '../../reducer/films/films';
 import {getFilmsGenres} from "../../reducer/films/selectors";
 import {getCurrentFilter} from "../../reducer/filter/selectors";
 
@@ -63,7 +64,8 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 
 const mapDispatchToProps = (dispatch) => ({
   onChange: (genre: string): void => {
-    dispatch(ActionCreator.changeCurrentFilterByFilmGenre(genre));
+    dispatch(FilterActionCreator.changeCurrentFilterByFilmGenre(genre));
+    dispatch(FilmsActionCreator.resetDisplayedFilmsNumber());
   },
 });
 

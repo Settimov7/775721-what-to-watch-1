@@ -1,9 +1,15 @@
+export const DEFAULT_DISPLAYED_FILMS_NUMBER = 20;
+export const INCREASE_DISPLAYED_FILMS_NUMBER_STEP = 20;
+
 const initialAppState = {
   films: [],
+  displayedFilmsNumber: DEFAULT_DISPLAYED_FILMS_NUMBER,
 };
 
 export const ActionType = {
   LOAD_FILMS: `LOAD_FILMS`,
+  INCREASE_DISPLAYED_FILMS_NUMBER: `INCREASE_DISPLAYED_FILMS_NUMBER`,
+  RESET_DISPLAYED_FILMS_NUMBER: `RESET_DISPLAYED_FILMS_NUMBER`,
 };
 
 export const ActionCreator = {
@@ -11,6 +17,14 @@ export const ActionCreator = {
     type: ActionType.LOAD_FILMS,
     payload: transformFilms(films),
   }),
+
+  increaseDisplayedFilmsNumber: () => ({
+    type: ActionType.INCREASE_DISPLAYED_FILMS_NUMBER,
+  }),
+
+  resetDisplayedFilmsNumber: () => ({
+    type: ActionType.RESET_DISPLAYED_FILMS_NUMBER,
+  })
 };
 
 export const Operation = {
@@ -26,6 +40,16 @@ export const reducer = (appState = initialAppState, action) => {
     case ActionType.LOAD_FILMS:
       return Object.assign({}, appState, {
         films: [...payload],
+      });
+
+    case ActionType.INCREASE_DISPLAYED_FILMS_NUMBER:
+      return Object.assign({}, appState, {
+        displayedFilmsNumber: appState.displayedFilmsNumber + INCREASE_DISPLAYED_FILMS_NUMBER_STEP,
+      });
+
+    case ActionType.RESET_DISPLAYED_FILMS_NUMBER:
+      return Object.assign({}, appState, {
+        displayedFilmsNumber: DEFAULT_DISPLAYED_FILMS_NUMBER,
       });
   }
 
