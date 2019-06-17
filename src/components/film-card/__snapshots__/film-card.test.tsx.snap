@@ -10,12 +10,10 @@ exports[`Film card correctly renders 1`] = `
     className="small-movie-card__image"
     onClick={[Function]}
   >
-    <video
+    <img
+      alt="Film-1"
       height={175}
-      loop={true}
-      muted={true}
-      poster="/image.jpg"
-      src="video.mp4"
+      src="/image.jpg"
       width={280}
     />
   </div>

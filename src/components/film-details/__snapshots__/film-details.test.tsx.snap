@@ -218,6 +218,7 @@ Array [
           >
             <button
               className="btn btn--play movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -402,12 +403,10 @@ Array [
               className="small-movie-card__image"
               onClick={[Function]}
             >
-              <video
+              <img
+                alt="Film-1"
                 height={175}
-                loop={true}
-                muted={true}
-                poster="/image.jpg"
-                src="video.mp4"
+                src="/image.jpg"
                 width={280}
               />
             </div>
@@ -432,12 +431,10 @@ Array [
               className="small-movie-card__image"
               onClick={[Function]}
             >
-              <video
+              <img
+                alt="Film-2"
                 height={175}
-                loop={true}
-                muted={true}
-                poster="/image.jpg"
-                src="video.mp4"
+                src="/image.jpg"
                 width={280}
               />
             </div>
@@ -462,12 +459,10 @@ Array [
               className="small-movie-card__image"
               onClick={[Function]}
             >
-              <video
+              <img
+                alt="Film-3"
                 height={175}
-                loop={true}
-                muted={true}
-                poster="/image.jpg"
-                src="video.mp4"
+                src="/image.jpg"
                 width={280}
               />
             </div>
@@ -492,12 +487,10 @@ Array [
               className="small-movie-card__image"
               onClick={[Function]}
             >
-              <video
+              <img
+                alt="Film-4"
                 height={175}
-                loop={true}
-                muted={true}
-                poster="/image.jpg"
-                src="video.mp4"
+                src="/image.jpg"
                 width={280}
               />
             </div>
@@ -522,12 +515,10 @@ Array [
               className="small-movie-card__image"
               onClick={[Function]}
             >
-              <video
+              <img
+                alt="Film-5"
                 height={175}
-                loop={true}
-                muted={true}
-                poster="/image.jpg"
-                src="video.mp4"
+                src="/image.jpg"
                 width={280}
               />
             </div>

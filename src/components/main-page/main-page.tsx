@@ -15,6 +15,7 @@ interface Props {
   isAuthorizationRequired: boolean,
   userAvatarSrc: string,
   resetDisplayedFilmsNumber: () => void,
+  onPlayButtonClick: () => void,
 }
 
 export class MainPage extends React.PureComponent<Props, null> {
@@ -23,7 +24,7 @@ export class MainPage extends React.PureComponent<Props, null> {
   }
 
   render() {
-    const {isAuthorizationRequired, userAvatarSrc} = this.props;
+    const {isAuthorizationRequired, userAvatarSrc, onPlayButtonClick} = this.props;
 
     return (
       <React.Fragment>
@@ -112,7 +113,11 @@ export class MainPage extends React.PureComponent<Props, null> {
                 </p>
 
                 <div className="movie-card__buttons">
-                  <button className="btn btn--play movie-card__button" type="button">
+                  <button className="btn btn--play movie-card__button" type="button" onClick={(evt) => {
+                    evt.preventDefault();
+
+                    onPlayButtonClick();
+                  }}>
                     <svg viewBox="0 0 19 19" width="19" height="19">
                       <use xlinkHref="#play-s"/>
                     </svg>

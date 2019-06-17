@@ -2,17 +2,16 @@ import * as React from 'react';
 import {Link} from 'react-router-dom';
 
 import {VideoPlayer} from '../video-player/video-player';
-import {Film, FilmCardSize} from '../../types';
+import {Film, Size} from '../../types';
 import {history} from '../../history';
 
-const DEFAULT_CARD_SIZE: FilmCardSize = {
+const CARD_SIZE: Size = {
   width: 280,
   height: 175
 };
 
 interface Props {
   film: Film,
-  sizes?: FilmCardSize,
 }
 
 interface State {
@@ -39,10 +38,10 @@ export class FilmCard extends React.PureComponent<Props, State> {
   }
 
   render() {
-    const {film, sizes = DEFAULT_CARD_SIZE} = this.props;
+    const {film} = this.props;
     const {id, name, previewImageSrc, videoSrc} = film;
     const {isPreviewPlaying} = this.state;
-    const {width, height} = sizes;
+    const {width, height} = CARD_SIZE;
 
     return (
       <article
@@ -51,17 +50,14 @@ export class FilmCard extends React.PureComponent<Props, State> {
         onMouseLeave={this._mouseLeaveHandler}
       >
         <div className="small-movie-card__image" onClick={this._clickHandler}>
+          {isPreviewPlaying ?
             <VideoPlayer
               videoSrc={videoSrc}
               posterSrc={previewImageSrc}
-              options={
-                {
-                  width,
-                  height,
-                }
-              }
-              isPlaying={isPreviewPlaying}
-            />
+              size={CARD_SIZE}
+            /> :
+            <img src={previewImageSrc} alt={name} width={width} height={height} />
+          }
         </div>
 
         <h3 className="small-movie-card__title">

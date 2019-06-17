@@ -2,6 +2,7 @@
 
 exports[`Video player correctly renders 1`] = `
 <video
+  autoPlay={true}
   height={100}
   loop={true}
   muted={true}

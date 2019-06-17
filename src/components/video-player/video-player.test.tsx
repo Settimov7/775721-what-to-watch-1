@@ -27,7 +27,7 @@ it(`Video player correctly renders`, () => {
   const props = {
     videoSrc: mockFilm.videoSrc,
     posterSrc: mockFilm.previewImageSrc,
-    options: {
+    size: {
       width: 100,
       height: 100,
     }
