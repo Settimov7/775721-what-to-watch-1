@@ -1,18 +1,17 @@
 import * as React from 'react';
-import {connect} from "react-redux";
-import {Operation} from "../../reducer/user/user";
-import {Redirect, Link} from "react-router-dom";
-import {Location} from "history";
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+
+import {Operation} from '../../reducer/user/user';
+import {history} from '../../history';
 
 interface Props {
-  location: Location,
-  login: Function
+  login: typeof Operation.login,
 }
 
 interface State {
   email: string,
   password: string,
-  isRedirectBack: boolean,
 }
 
 export class SignIn extends React.PureComponent<Props, State> {
@@ -22,7 +21,6 @@ export class SignIn extends React.PureComponent<Props, State> {
     this.state = {
       email: ``,
       password: ``,
-      isRedirectBack: false,
     };
 
     this._inputChangeHandle = this._inputChangeHandle.bind(this);
@@ -30,13 +28,7 @@ export class SignIn extends React.PureComponent<Props, State> {
   }
 
   render() {
-    const {email, password, isRedirectBack} = this.state;
-    const {location} = this.props;
-    const pathFrom = location.state && location.state.from;
-
-    if (isRedirectBack) {
-      return <Redirect to={pathFrom || '/'} />;
-    }
+    const {email, password} = this.state;
 
     return (
       <React.Fragment>
@@ -149,10 +141,7 @@ export class SignIn extends React.PureComponent<Props, State> {
     const {login} = this.props;
 
     login(email, password).then(()=> {
-      this.setState((state: State): State => ({
-        ...state,
-        isRedirectBack: true
-      }));
+      history.goBack();
     });
   }
 }

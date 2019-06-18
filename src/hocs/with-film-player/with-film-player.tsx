@@ -1,8 +1,6 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
 
 import {FilmPlayer} from '../../components/film-player/film-player';
-import {getFilmById} from '../../reducer/films/selectors';
 
 interface State {
   isFilmPlayerActive: boolean,
@@ -28,9 +26,12 @@ export const withFilmPlayer = (Component) => {
 
       if(isFilmPlayerActive) {
         const {film} = this.props;
+        const {name, previewImageSrc, videoSrc} = film;
 
         return <FilmPlayer
-          film={film}
+          name={name}
+          previewImageSrc={previewImageSrc}
+          videoSrc={videoSrc}
           onCloseClick={this._disableFilmPlayer}
         />;
       }
@@ -54,13 +55,5 @@ export const withFilmPlayer = (Component) => {
     }
   }
 
-  const mapStateToProps = (state, ownProps) => {
-    const filmId = parseInt(ownProps.match.params.id);
-
-    return {
-      film: getFilmById(state, filmId),
-    }
-  };
-
-  return connect(mapStateToProps)(WithFilmPlayer);
+  return WithFilmPlayer;
 };
