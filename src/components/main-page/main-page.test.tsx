@@ -55,7 +55,6 @@ it(`Main page correctly renders if authorization not required`, () => {
   expect(mainPage).toMatchSnapshot();
 });
 
-
 it(`Main page correctly renders if authorization required`, () => {
   const initialMockState = {
     FILTER: {

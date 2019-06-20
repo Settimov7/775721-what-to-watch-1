@@ -5,7 +5,7 @@ import {FilmsList} from "./films-list";
 import {BrowserRouter} from 'react-router-dom';
 
 const mock = {
-  films: Array(5).fill(null).map((film, index) => ({
+  films: new Array(5).fill(null).map((film, index) => ({
     id: index + 1,
     name: `Film-${index + 1}`,
     posterImageSrc: `/image.jpg`,

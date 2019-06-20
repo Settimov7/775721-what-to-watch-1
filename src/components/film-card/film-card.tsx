@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Link} from 'react-router-dom';
 
 import {VideoPlayer} from '../video-player/video-player';
-import {Film, Size} from '../../types';
+import {Size} from '../../types';
 import {history} from '../../history';
 
 const CARD_SIZE: Size = {
@@ -11,7 +11,10 @@ const CARD_SIZE: Size = {
 };
 
 interface Props {
-  film: Film,
+  id: number,
+  name: string,
+  previewImageSrc: string,
+  videoSrc: string,
 }
 
 interface State {
@@ -38,8 +41,7 @@ export class FilmCard extends React.PureComponent<Props, State> {
   }
 
   render() {
-    const {film} = this.props;
-    const {id, name, previewImageSrc, videoSrc} = film;
+    const {id, name, previewImageSrc, videoSrc} = this.props;
     const {isPreviewPlaying} = this.state;
     const {width, height} = CARD_SIZE;
 
@@ -94,10 +96,11 @@ export class FilmCard extends React.PureComponent<Props, State> {
   _clickHandler(evt) {
     evt.preventDefault();
 
+    const {id} = this.props;
     const {isPreviewPlaying} = this.state;
 
     if(!isPreviewPlaying) {
-      history.push(`/film/${this.props.film.id}`);
+      history.push(`/film/${id}`);
     }
   }
 }

@@ -25,6 +25,7 @@ const WrappedTabs = withActiveItem(Tabs, 0);
 export const FilmDetails = (props: Props) => {
   const {film, isAuthorizationRequired, userAvatarSrc, sameGenreFilms, onPlayButtonClick} = props;
   const {
+    id,
     name,
     genre,
     releasedYear,
@@ -161,7 +162,7 @@ export const FilmDetails = (props: Props) => {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                {!isAuthorizationRequired && <Link to={`/film/${id}/reviews/add`} className="btn movie-card__button">Add review</Link>}
               </div>
             </div>
           </div>

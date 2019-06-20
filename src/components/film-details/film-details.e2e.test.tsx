@@ -1,6 +1,5 @@
 import * as React from 'react';
-import * as renderer from 'react-test-renderer';
-import {BrowserRouter} from 'react-router-dom';
+import {shallow} from 'enzyme';
 
 import {FilmDetails} from './film-details';
 
@@ -46,38 +45,19 @@ const mock = {
   })),
 };
 
-it(`Film details correctly renders if authorization not required`, () => {
+it(`On click play button trigger play handler`, () => {
+  const onPlayButtonClick = jest.fn();
   const props = {
     film: mock.film,
     isAuthorizationRequired: false,
     userAvatarSrc: `img/avatar.jpg`,
     sameGenreFilms: mock.films,
-    onPlayButtonClick: jest.fn(),
+    onPlayButtonClick,
   };
+  const filmDetails = shallow(<FilmDetails {...props} />);
+  const playButton = filmDetails.find(`.btn--play`);
 
-  const filmDetails = renderer.create(
-    <BrowserRouter>
-      <FilmDetails {...props}/>
-    </BrowserRouter>
-  ).toJSON();
+  playButton.simulate(`click`, {preventDefault() {}});
 
-  expect(filmDetails).toMatchSnapshot();
-});
-
-it(`Film details correctly renders if authorization required`, () => {
-  const props = {
-    film: mock.film,
-    isAuthorizationRequired: true,
-    userAvatarSrc: `img/avatar.jpg`,
-    sameGenreFilms: mock.films,
-    onPlayButtonClick: jest.fn(),
-  };
-
-  const filmDetails = renderer.create(
-    <BrowserRouter>
-      <FilmDetails {...props}/>
-    </BrowserRouter>
-  ).toJSON();
-
-  expect(filmDetails).toMatchSnapshot();
+  expect(onPlayButtonClick).toHaveBeenCalledTimes(1);
 });

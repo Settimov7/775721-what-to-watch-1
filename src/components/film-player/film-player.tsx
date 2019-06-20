@@ -1,10 +1,10 @@
 import * as React from 'react';
 import * as moment from 'moment';
 
-import {Film} from '../../types';
-
 interface Props {
-  film: Film,
+  name: string,
+  previewImageSrc: string,
+  videoSrc: string,
   onCloseClick: () => void,
 }
 
@@ -56,9 +56,8 @@ export class FilmPlayer extends React.PureComponent <Props, State> {
   }
 
   render() {
-    const {film, onCloseClick} = this.props;
+    const {name, previewImageSrc, videoSrc, onCloseClick} = this.props;
     const {isPlaying, progressFilmInPercent} = this.state;
-    const {name, previewImageSrc, videoSrc} = film;
 
     return(
       <React.Fragment>
@@ -188,8 +187,8 @@ export class FilmPlayer extends React.PureComponent <Props, State> {
   _timeUpdateHandler(evt) {
     const currentTime = Math.round(evt.target.currentTime);
     const duration = Math.round(evt.target.duration);
-    const remainingDuration = duration - currentTime;
-    const progressFilmInPercent = (currentTime / duration * 100).toFixed(2);
+    const remainingDuration = FilmPlayer._getRemainingDuration(duration, currentTime);
+    const progressFilmInPercent = FilmPlayer._getProgressFilmInPercent(duration, currentTime);
 
     this.setState({
       currentTime,
@@ -212,5 +211,13 @@ export class FilmPlayer extends React.PureComponent <Props, State> {
     const video = this._videoRef.current;
 
     video.requestFullscreen();
+  }
+
+  static _getRemainingDuration(duration: number, currentTime: number): number {
+    return duration - currentTime;
+  }
+
+  static _getProgressFilmInPercent(duration: number, currentTime: number): string {
+    return (currentTime / duration * 100).toFixed(2);
   }
 }

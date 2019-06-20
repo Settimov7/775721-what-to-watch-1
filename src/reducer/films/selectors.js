@@ -23,6 +23,34 @@ export const getFilteredFilms = createSelector(
 
 export const getFilmById = (state, id) => state[NAME_SPACE].films.find((film) => film.id === id);
 
+export const getCurrentFilmId = (state, props) => parseInt(props.match.params.id, 10);
+
+export const getCurrentFilm = createSelector(
+    getFilms,
+    getCurrentFilmId,
+    (films, id) => films.find((film) => film.id === id)
+);
+
+export const getCurrentFilmName = createSelector(
+    getCurrentFilm,
+    (film) => film.name
+);
+
+export const getCurrentFilmBackgroundImage = createSelector(
+    getCurrentFilm,
+    (film) => film.backgroundImageSrc
+);
+
+export const getCurrentFilmPoster = createSelector(
+    getCurrentFilm,
+    (film) => film.posterImageSrc
+);
+
+export const getCurrentFilmBackgroundColor = createSelector(
+    getCurrentFilm,
+    (film) => film.backgroundColor
+);
+
 export const getFilmsByGenre = (state, genre) =>
   state[NAME_SPACE].films.filter((film) => film.genre === genre);
 

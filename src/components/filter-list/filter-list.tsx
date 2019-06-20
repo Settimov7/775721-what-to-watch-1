@@ -20,7 +20,7 @@ const GenreToFilterTitle = {
 interface Props {
   properties: string[],
   activeItem: string,
-  onChange: (g: string) => void,
+  onChange: (genre: string) => void,
 }
 
 export const FilterList = (props: Props) => {

@@ -17,10 +17,17 @@ export const FilmsList = (props: Props) => {
     <div
       className="catalog__movies-list"
     >
-      {films.map((film) => <FilmCard
-        key={film.id}
-        film={film}
-      />)}
+      {films.map((film) => {
+        const {id, name, previewImageSrc, videoSrc} = film;
+
+        return <FilmCard
+          key={film.id}
+          id={id}
+          name={name}
+          previewImageSrc={previewImageSrc}
+          videoSrc={videoSrc}
+        />
+      })}
     </div>
   );
 };
