@@ -1,10 +1,22 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
-import {BrowserRouter} from 'react-router-dom';
+import configureStore from 'redux-mock-store';
+import {Provider} from 'react-redux';
+import {BrowserRouter} from "react-router-dom";
 
 import {AddReview} from './add-review';
 
-it(`Details correctly renders`, () => {
+it(`Add review correctly renders`, () => {
+  const initialMockState = {
+    USER: {
+      id: 1,
+      name: `name`,
+      email: `email@mail.com`,
+      avatarSrc: `image.src`,
+      isAuthorizationRequired: false,
+    },
+  };
+  const mockStore = configureStore();
   const props = {
     filmId: 1,
     filmName: `Film-1`,
@@ -16,9 +28,11 @@ it(`Details correctly renders`, () => {
   };
 
   const addReview = renderer.create(
-    <BrowserRouter>
-      <AddReview {...props}/>
-    </BrowserRouter>
+    <Provider store={mockStore(initialMockState)}>
+      <BrowserRouter>
+        <AddReview {...props}/>
+      </BrowserRouter>
+    </Provider>
   ).toJSON();
 
   expect(addReview).toMatchSnapshot();

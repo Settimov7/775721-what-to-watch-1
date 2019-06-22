@@ -6,16 +6,20 @@ import {compose} from 'recompose';
 import thunk from 'redux-thunk';
 import {Router} from 'react-router-dom';
 
-import {createAPI} from './api';
+import {App} from './components/app/app';
+
 import {reducer} from './reducer/index';
 import {Operation} from './reducer/films/films';
-import {App} from './components/app/app';
+
+import {createAPI} from './api';
 import {history} from './history';
 
 declare const __REDUX_DEVTOOLS_EXTENSION__: () => any;
 
 const initApp = () => {
-  const onLoginFail = () => history.push(`/login`);
+  const onLoginFail = () => {
+    history.push(`/login`);
+  };
   const api = createAPI(onLoginFail);
   const appStore = createStore(
       reducer,
@@ -26,6 +30,7 @@ const initApp = () => {
   );
 
   appStore.dispatch(Operation.loadFilms());
+  appStore.dispatch(Operation.loadPromoFilm());
 
   render((
     <Provider store={appStore}>

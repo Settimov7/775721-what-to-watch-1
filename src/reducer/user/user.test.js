@@ -4,13 +4,6 @@ import {createAPI} from "../../api";
 import {ActionCreator, ActionType, reducer, Operation} from "./user";
 
 describe(`Action creators work correctly`, () => {
-  it(`Action creator for require authorization returns correct action`, () => {
-    expect(ActionCreator.requireAuthorization(false)).toEqual({
-      type: ActionType.REQUIRED_AUTHORIZATION,
-      payload: false,
-    });
-  });
-
   it(`Action creator for login returns correct action`, () => {
     expect(ActionCreator.login({
       id: 1,
@@ -37,25 +30,6 @@ describe(`Reducer works correctly`, () => {
       email: null,
       avatarSrc: null,
       isAuthorizationRequired: true
-    });
-  });
-
-  it(`Reducer should change status by a given value`, () => {
-    expect(reducer({
-      isAuthorizationRequired: false,
-    }, {
-      type: ActionType.REQUIRED_AUTHORIZATION,
-      payload: true,
-    })).toEqual({
-      isAuthorizationRequired: true,
-    });
-    expect(reducer({
-      isAuthorizationRequired: true,
-    }, {
-      type: ActionType.REQUIRED_AUTHORIZATION,
-      payload: false,
-    })).toEqual({
-      isAuthorizationRequired: false,
     });
   });
 

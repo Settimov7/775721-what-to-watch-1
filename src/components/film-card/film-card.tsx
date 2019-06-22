@@ -1,106 +1,85 @@
 import * as React from 'react';
-import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 
-import {VideoPlayer} from '../video-player/video-player';
-import {Size} from '../../types';
-import {history} from '../../history';
+import {SvgSprite} from '../svg-sprite/svg-sprite';
+import {Logo} from '../logo/logo';
+import UserBlock from '../user-block/user-block';
 
-const CARD_SIZE: Size = {
-  width: 280,
-  height: 175
-};
+import {Operation} from '../../reducer/films/films';
+
+import {Film} from '../../types';
 
 interface Props {
-  id: number,
-  name: string,
-  previewImageSrc: string,
-  videoSrc: string,
+  film: Film;
+  onPlayButtonClick: () => void;
 }
 
-interface State {
-  timerId: number,
-  isPreviewPlaying: boolean,
-}
+export const FilmCard: React.FunctionComponent<Props> = (props) => {
+  const {film, onPlayButtonClick} = props;
+  const {name, backgroundImageSrc, genre, releasedYear, posterImageSrc} = film;
 
-export class FilmCard extends React.PureComponent<Props, State> {
-  constructor(props) {
-    super(props);
+  return (
+    <React.Fragment>
+      <SvgSprite />
 
-    this.state = {
-      timerId: null,
-      isPreviewPlaying: false,
-    };
-
-    this._mouseEnterHandler = this._mouseEnterHandler.bind(this);
-    this._mouseLeaveHandler = this._mouseLeaveHandler.bind(this);
-    this._clickHandler = this._clickHandler.bind(this);
-  }
-
-  componentWillUnmount(): void {
-    clearTimeout(this.state.timerId);
-  }
-
-  render() {
-    const {id, name, previewImageSrc, videoSrc} = this.props;
-    const {isPreviewPlaying} = this.state;
-    const {width, height} = CARD_SIZE;
-
-    return (
-      <article
-        className="small-movie-card catalog__movies-card"
-        onMouseEnter={this._mouseEnterHandler}
-        onMouseLeave={this._mouseLeaveHandler}
-      >
-        <div className="small-movie-card__image" onClick={this._clickHandler}>
-          {isPreviewPlaying ?
-            <VideoPlayer
-              videoSrc={videoSrc}
-              posterSrc={previewImageSrc}
-              size={CARD_SIZE}
-            /> :
-            <img src={previewImageSrc} alt={name} width={width} height={height} />
-          }
+      <section className="movie-card">
+        <div className="movie-card__bg">
+          <img src={backgroundImageSrc} alt={name}/>
         </div>
 
-        <h3 className="small-movie-card__title">
-          <Link to={`/film/${id}`} className="small-movie-card__link">
-            {name}
-          </Link>
-        </h3>
-      </article>
-    );
+        <h1 className="visually-hidden">WTW</h1>
+
+        <header className="page-header movie-card__head">
+          <Logo />
+
+          <UserBlock />
+        </header>
+
+        <div className="movie-card__wrap">
+          <div className="movie-card__info">
+            <div className="movie-card__poster">
+              <img src={posterImageSrc} alt={name} width="218"
+                   height="327"/>
+            </div>
+
+            <div className="movie-card__desc">
+              <h2 className="movie-card__title">{name}</h2>
+              <p className="movie-card__meta">
+                <span className="movie-card__genre">{genre}</span>
+                <span className="movie-card__year">{releasedYear}</span>
+              </p>
+
+              <div className="movie-card__buttons">
+                <button className="btn btn--play movie-card__button" type="button" onClick={(evt) => {
+                  evt.preventDefault();
+
+                  onPlayButtonClick();
+                }}>
+                  <svg viewBox="0 0 19 19" width="19" height="19">
+                    <use xlinkHref="#play-s"/>
+                  </svg>
+                  <span>Play</span>
+                </button>
+
+                <button className="btn btn--list movie-card__button" type="button">
+                  <svg viewBox="0 0 19 20" width="19" height="20">
+                    <use xlinkHref="#add"/>
+                  </svg>
+                  <span>My list</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </React.Fragment>
+  );
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  onAddFilmToFavorites: (filmId): void => {
+    dispatch(Operation.changeFilmFavoriteStatus(filmId, true))
   }
+});
 
-  _mouseEnterHandler() {
-    const timerId = window.setTimeout(() => {
-      this.setState({
-        isPreviewPlaying: true,
-      });
-    }, 1000);
-
-    this.setState((state: State): State => ({
-      ...state,
-      timerId
-    }));
-  }
-
-  _mouseLeaveHandler() {
-    clearTimeout(this.state.timerId);
-
-    this.setState({
-      isPreviewPlaying: false,
-      timerId: null,
-    });
-  }
-
-  _clickHandler(evt) {
-    evt.preventDefault();
-
-    const {id} = this.props;
-    const {isPreviewPlaying} = this.state;
-
-    if(!isPreviewPlaying) {
-      history.push(`/film/${id}`);
-    }
-  }
-}
+export default connect(null, mapDispatchToProps)(FilmCard);

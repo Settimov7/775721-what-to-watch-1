@@ -35,13 +35,37 @@ it(`Main page correctly renders if authorization not required`, () => {
       films: mockFilms,
       displayedFilmsNumber: 5
     },
+    USER: {
+      id: 1,
+      name: `name`,
+      email: `email@mail.com`,
+      avatarSrc: `image.src`,
+      isAuthorizationRequired: false,
+    },
   };
   const mockStore = configureStore();
   const props = {
-    isAuthorizationRequired: false,
-    userAvatarSrc: `img/avatar.jpg`,
     resetDisplayedFilmsNumber: jest.fn(),
     onPlayButtonClick: jest.fn(),
+    film: {
+      id: 5,
+      name: `Film-5`,
+      posterImageSrc: `/image.jpg`,
+      previewImageSrc: `/image.jpg`,
+      backgroundImageSrc: `/image.jpg`,
+      backgroundColor: `#123456`,
+      description: `description`,
+      rating: 5,
+      scores: 123456,
+      director: `director`,
+      starring: [`person-1`, `person-2`, `person-3`],
+      runTime: 99,
+      genre: `Genre`,
+      releasedYear: 2019,
+      isFavorite: false,
+      videoSrc: `video.mp4`,
+      previewVideoSrc: `video.mp4`,
+    },
   };
 
   const mainPage = renderer.create(
@@ -64,13 +88,37 @@ it(`Main page correctly renders if authorization required`, () => {
       films: mockFilms,
       displayedFilmsNumber: 5
     },
+    USER: {
+      id: null,
+      name: null,
+      email: null,
+      avatarSrc: null,
+      isAuthorizationRequired: true,
+    },
   };
   const mockStore = configureStore();
   const props = {
-    isAuthorizationRequired: true,
-    userAvatarSrc: `img/avatar.jpg`,
     resetDisplayedFilmsNumber: jest.fn(),
     onPlayButtonClick: jest.fn(),
+    film: {
+      id: 5,
+      name: `Film-5`,
+      posterImageSrc: `/image.jpg`,
+      previewImageSrc: `/image.jpg`,
+      backgroundImageSrc: `/image.jpg`,
+      backgroundColor: `#123456`,
+      description: `description`,
+      rating: 5,
+      scores: 123456,
+      director: `director`,
+      starring: [`person-1`, `person-2`, `person-3`],
+      runTime: 99,
+      genre: `Genre`,
+      releasedYear: 2019,
+      isFavorite: false,
+      videoSrc: `video.mp4`,
+      previewVideoSrc: `video.mp4`,
+    },
   };
 
   const mainPage = renderer.create(

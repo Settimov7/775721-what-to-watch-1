@@ -8,18 +8,10 @@ const initialState = {
 
 
 export const ActionType = {
-  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   LOGIN: `LOGIN`,
 };
 
 export const ActionCreator = {
-  requireAuthorization: (status) => {
-    return {
-      type: ActionType.REQUIRED_AUTHORIZATION,
-      payload: status,
-    };
-  },
-
   login: (userData) => {
     return {
       type: ActionType.LOGIN,
@@ -42,11 +34,6 @@ export const Operation = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.REQUIRED_AUTHORIZATION:
-      return Object.assign({}, state, {
-        isAuthorizationRequired: action.payload,
-      });
-
     case ActionType.LOGIN:
       return Object.assign({}, state, {
         id: action.payload.id,

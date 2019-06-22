@@ -51,8 +51,15 @@ export const getCurrentFilmBackgroundColor = createSelector(
     (film) => film.backgroundColor
 );
 
-export const getFilmsByGenre = (state, genre) =>
-  state[NAME_SPACE].films.filter((film) => film.genre === genre);
+export const getSameFilmsByGenre = (state, originalFilm, maxCount) => {
+  const sameFilms = state[NAME_SPACE].films.filter((film) => film.genre === originalFilm.genre);
+  const originalFilmIndex = sameFilms.indexOf(originalFilm);
+
+  sameFilms.splice(originalFilmIndex, 1);
+
+  return sameFilms.slice(0, maxCount);
+};
+
 
 const getDisplayedFilmsNumber = (state) => state[NAME_SPACE].displayedFilmsNumber;
 
@@ -72,3 +79,5 @@ export const getIsVisibleShowMoreButton = createSelector(
     getDisplayedFilmsNumber,
     (filteredFilmsLength, displayedFilmsNumber) => filteredFilmsLength > displayedFilmsNumber
 );
+
+export const getPromoFilm = (state) => state[NAME_SPACE].promoFilm;

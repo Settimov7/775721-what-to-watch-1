@@ -9,7 +9,7 @@ interface Props {
   isVisible: boolean;
 }
 
-export const ShowMoreButton = (props: Props) => {
+export const ShowMoreButton: React.FunctionComponent<Props> = (props) => {
   const {onClick, isVisible} = props;
 
   if(!isVisible) {

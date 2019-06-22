@@ -8,11 +8,21 @@ import MainPage from '../main-page/main-page';
 import SignIn from '../sign-in/sign-in';
 import FilmDetails from '../film-details/film-details';
 import AddReview from '../add-review/add-review';
+
 import {withFilmPlayer} from '../../hocs/with-film-player/with-film-player';
 import {withRouteGuard} from '../../hocs/with-route-guard/with-route-guard';
-import {getFilmById} from '../../reducer/films/selectors'
+
+import {getFilmById, getPromoFilm} from '../../reducer/films/selectors'
 
 const PrivateRoute = withRouteGuard(Route);
+
+const WrappedMainPage = compose(
+  connect((state) => ({
+    film: getPromoFilm(state),
+  })),
+  withFilmPlayer
+)(MainPage);
+
 const WrappedFilmDetails = compose(
   connect((state, ownProps) => {
     const filmId = parseInt(ownProps.match.params.id);
@@ -23,10 +33,10 @@ const WrappedFilmDetails = compose(
   withFilmPlayer,
 )(FilmDetails);
 
-export const App = () => {
+export const App: React.FunctionComponent = () => {
   return (
     <Switch>
-      <Route path="/" exact component={withFilmPlayer(MainPage)}/>
+      <Route path="/" exact component={WrappedMainPage}/>
 
       <Route path="/login" component={SignIn}/>
 

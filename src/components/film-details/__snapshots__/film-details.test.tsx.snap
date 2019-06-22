@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Film details correctly renders if authorization not required 1`] = `
+exports[`Film details correctly renders Correctly renders if authorization not required 1`] = `
 Array [
   <div
     className="visually-hidden"
@@ -182,7 +182,7 @@ Array [
             <img
               alt="User avatar"
               height="63"
-              src="img/avatar.jpg"
+              src="image.src"
               width="63"
             />
           </div>
@@ -578,7 +578,7 @@ Array [
 ]
 `;
 
-exports[`Film details correctly renders if authorization required 1`] = `
+exports[`Film details correctly renders Correctly renders if authorization required 1`] = `
 Array [
   <div
     className="visually-hidden"

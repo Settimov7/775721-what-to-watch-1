@@ -3,7 +3,7 @@ import {shallow} from 'enzyme';
 
 import {AddReview} from "./add-review";
 
-it(`On rating click correctly change state`, () => {
+it(`On input comment change correctly change state`, () => {
   const postReview = jest.fn();
   const props = {
     filmId: 1,
@@ -14,21 +14,13 @@ it(`On rating click correctly change state`, () => {
     userAvatarSrc: `/image.jpg`,
     postReview,
   };
-  const RATING_NUMBER = 2;
+  const RATING  = 5;
   const addReview = shallow(<AddReview {...props} />);
-  const ratingElements = addReview.find(`.rating__input`);
-  const secondRatingElement = ratingElements.at(RATING_NUMBER);
 
-  secondRatingElement.simulate(`click`, {
-    target: {
-      value: RATING_NUMBER,
-    }
-  });
-
-  addReview.update();
+  addReview.instance()._ratingChangeHandler(RATING);
 
   expect(addReview.state()).toEqual({
-    rating: RATING_NUMBER,
+    rating: RATING,
     comment: ``,
   });
 });
