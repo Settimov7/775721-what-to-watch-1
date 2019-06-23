@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
-import {BrowserRouter} from 'react-router-dom';
+import configureStore from 'redux-mock-store';
+import {BrowserRouter} from "react-router-dom";
+import {Provider} from 'react-redux';
 
 import {FilmDetails} from './film-details';
 
@@ -46,38 +48,60 @@ const mock = {
   })),
 };
 
-it(`Film details correctly renders if authorization not required`, () => {
-  const props = {
-    film: mock.film,
-    isAuthorizationRequired: false,
-    userAvatarSrc: `img/avatar.jpg`,
-    sameGenreFilms: mock.films,
-    onPlayButtonClick: jest.fn(),
-  };
+describe(`Film details correctly renders`, () => {
+  it(`Correctly renders if authorization not required`, () => {
+    const initialMockState = {
+      USER: {
+        id: 1,
+        name: `name`,
+        email: `email@mail.com`,
+        avatarSrc: `image.src`,
+        isAuthorizationRequired: false,
+      },
+    };
+    const mockStore = configureStore();
+    const props = {
+      film: mock.film,
+      onPlayButtonClick: jest.fn(),
+      sameGenreFilms: mock.films,
+    };
 
-  const filmDetails = renderer.create(
-    <BrowserRouter>
-      <FilmDetails {...props}/>
-    </BrowserRouter>
-  ).toJSON();
+    const filmDetails = renderer.create(
+      <Provider store={mockStore(initialMockState)}>
+        <BrowserRouter>
+          <FilmDetails {...props}/>
+        </BrowserRouter>
+      </Provider>
+    ).toJSON();
 
-  expect(filmDetails).toMatchSnapshot();
-});
+    expect(filmDetails).toMatchSnapshot();
+  });
 
-it(`Film details correctly renders if authorization required`, () => {
-  const props = {
-    film: mock.film,
-    isAuthorizationRequired: true,
-    userAvatarSrc: `img/avatar.jpg`,
-    sameGenreFilms: mock.films,
-    onPlayButtonClick: jest.fn(),
-  };
+  it(`Correctly renders if authorization required`, () => {
+    const initialMockState = {
+      USER: {
+        id: null,
+        name: null,
+        email: null,
+        avatarSrc: null,
+        isAuthorizationRequired: true,
+      },
+    };
+    const mockStore = configureStore();
+    const props = {
+      film: mock.film,
+      onPlayButtonClick: jest.fn(),
+      sameGenreFilms: mock.films,
+    };
 
-  const filmDetails = renderer.create(
-    <BrowserRouter>
-      <FilmDetails {...props}/>
-    </BrowserRouter>
-  ).toJSON();
+    const filmDetails = renderer.create(
+      <Provider store={mockStore(initialMockState)}>
+        <BrowserRouter>
+          <FilmDetails {...props}/>
+        </BrowserRouter>
+      </Provider>
+    ).toJSON();
 
-  expect(filmDetails).toMatchSnapshot();
+    expect(filmDetails).toMatchSnapshot();
+  });
 });

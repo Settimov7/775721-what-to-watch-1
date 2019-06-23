@@ -6,7 +6,8 @@ const API_CONFIG = {
   withCredentials: true,
 };
 
-const HTTP_STATUS = {
+export const HTTP_STATUS = {
+  OK: 200,
   FORBIDDEN: 403,
 };
 

@@ -1,6 +1,14 @@
 import * as React from 'react';
 
-export const Details = (props) => {
+interface Props {
+  director: string;
+  starring: string[];
+  runTime: number;
+  genre: string;
+  releasedYear: number;
+}
+
+export const Details: React.FunctionComponent<Props> = (props) => {
   const {director, starring, runTime, genre, releasedYear} = props;
 
   return(

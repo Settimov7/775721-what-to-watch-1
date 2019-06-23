@@ -7,7 +7,7 @@ interface Props {
   starring: string[],
 }
 
-export const Overview = (props: Props) => {
+export const Overview: React.FunctionComponent<Props> = (props) => {
   const {rating, director, description, starring} = props;
 
   return(

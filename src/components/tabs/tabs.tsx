@@ -11,7 +11,7 @@ interface Props {
   onChange: (index: number) => void;
 }
 
-export const Tabs = (props: Props) => {
+export const Tabs: React.FunctionComponent<Props> = (props) => {
   const {tabs, activeItem, onChange} = props;
 
   const activeComponent = tabs[activeItem].component;

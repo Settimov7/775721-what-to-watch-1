@@ -22,10 +22,14 @@ export const withFilmPlayer = (Component) => {
     }
 
     render() {
+      const {film} = this.props;
       const {isFilmPlayerActive} = this.state;
 
+      if(!film) {
+        return null;
+      }
+
       if(isFilmPlayerActive) {
-        const {film} = this.props;
         const {name, previewImageSrc, videoSrc} = film;
 
         return <FilmPlayer

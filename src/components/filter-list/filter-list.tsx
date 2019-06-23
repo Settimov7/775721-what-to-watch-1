@@ -23,7 +23,7 @@ interface Props {
   onChange: (genre: string) => void,
 }
 
-export const FilterList = (props: Props) => {
+export const FilterList: React.FunctionComponent<Props> = (props) => {
   const {properties, activeItem, onChange} = props;
   const filters = [`all`, ...new Set(properties)];
 

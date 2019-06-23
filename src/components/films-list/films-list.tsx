@@ -1,8 +1,10 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 
-import {FilmCard} from '../film-card/film-card';
+import {SmallFilmCard} from '../small-film-card/small-film-card';
+
 import {getDisplayedFilms} from '../../reducer/films/selectors';
+
 import {Film} from '../../types';
 
 interface Props {
@@ -10,7 +12,7 @@ interface Props {
   displayedFilmsNumber?: number,
 }
 
-export const FilmsList = (props: Props) => {
+export const FilmsList: React.FunctionComponent<Props> = (props) => {
   const {films} = props;
 
   return (
@@ -20,7 +22,7 @@ export const FilmsList = (props: Props) => {
       {films.map((film) => {
         const {id, name, previewImageSrc, videoSrc} = film;
 
-        return <FilmCard
+        return <SmallFilmCard
           key={film.id}
           id={id}
           name={name}

@@ -8,7 +8,7 @@ interface Props {
   size: Size,
 }
 
-export const VideoPlayer = (props: Props) => {
+export const VideoPlayer: React.FunctionComponent<Props> = (props) => {
   const {videoSrc, posterSrc, size} = props;
   const {width, height} = size;
 

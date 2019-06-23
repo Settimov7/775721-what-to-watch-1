@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
+import {BrowserRouter} from 'react-router-dom';
 
 import {FilmsList} from "./films-list";
-import {BrowserRouter} from 'react-router-dom';
 
 const mock = {
   films: new Array(5).fill(null).map((film, index) => ({

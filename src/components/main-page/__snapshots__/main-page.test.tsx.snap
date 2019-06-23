@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Main page correctly renders if authorization not required 1`] = `
+exports[`Main page correctly renders Correctly renders if authorization not required 1`] = `
 Array [
   <div
     className="visually-hidden"
@@ -128,8 +128,8 @@ Array [
       className="movie-card__bg"
     >
       <img
-        alt="The Grand Budapest Hotel"
-        src="img/bg-the-grand-budapest-hotel.jpg"
+        alt="Film-5"
+        src="/image.jpg"
       />
     </div>
     <h1
@@ -174,7 +174,7 @@ Array [
           <img
             alt="User avatar"
             height="63"
-            src="img/avatar.jpg"
+            src="image.src"
             width="63"
           />
         </div>
@@ -190,9 +190,9 @@ Array [
           className="movie-card__poster"
         >
           <img
-            alt="The Grand Budapest Hotel poster"
+            alt="Film-5"
             height="327"
-            src="img/the-grand-budapest-hotel-poster.jpg"
+            src="/image.jpg"
             width="218"
           />
         </div>
@@ -202,7 +202,7 @@ Array [
           <h2
             className="movie-card__title"
           >
-            The Grand Budapest Hotel
+            Film-5
           </h2>
           <p
             className="movie-card__meta"
@@ -210,12 +210,12 @@ Array [
             <span
               className="movie-card__genre"
             >
-              Drama
+              Genre
             </span>
             <span
               className="movie-card__year"
             >
-              2014
+              2019
             </span>
           </p>
           <div
@@ -241,6 +241,7 @@ Array [
             </button>
             <button
               className="btn btn--list movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -492,7 +493,7 @@ Array [
 ]
 `;
 
-exports[`Main page correctly renders if authorization required 1`] = `
+exports[`Main page correctly renders Correctly renders if authorization required 1`] = `
 Array [
   <div
     className="visually-hidden"
@@ -620,8 +621,8 @@ Array [
       className="movie-card__bg"
     >
       <img
-        alt="The Grand Budapest Hotel"
-        src="img/bg-the-grand-budapest-hotel.jpg"
+        alt="Film-5"
+        src="/image.jpg"
       />
     </div>
     <h1
@@ -679,9 +680,9 @@ Array [
           className="movie-card__poster"
         >
           <img
-            alt="The Grand Budapest Hotel poster"
+            alt="Film-5"
             height="327"
-            src="img/the-grand-budapest-hotel-poster.jpg"
+            src="/image.jpg"
             width="218"
           />
         </div>
@@ -691,7 +692,7 @@ Array [
           <h2
             className="movie-card__title"
           >
-            The Grand Budapest Hotel
+            Film-5
           </h2>
           <p
             className="movie-card__meta"
@@ -699,12 +700,12 @@ Array [
             <span
               className="movie-card__genre"
             >
-              Drama
+              Genre
             </span>
             <span
               className="movie-card__year"
             >
-              2014
+              2019
             </span>
           </p>
           <div
@@ -730,6 +731,7 @@ Array [
             </button>
             <button
               className="btn btn--list movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
