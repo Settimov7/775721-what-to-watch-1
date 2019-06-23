@@ -40,6 +40,7 @@ describe(`Film card correctly renders`, () => {
       },
       onPlayButtonClick: jest.fn(),
       changeFilmFavoriteStatus: jest.fn(),
+      isAuthorizationRequired: false,
     };
     const filmCard = renderer.create(
       <Provider store={mockStore(initialMockState)}>
@@ -85,6 +86,7 @@ describe(`Film card correctly renders`, () => {
       },
       onPlayButtonClick: jest.fn(),
       changeFilmFavoriteStatus: jest.fn(),
+      isAuthorizationRequired: true,
     };
     const filmCard = renderer.create(
       <Provider store={mockStore(initialMockState)}>

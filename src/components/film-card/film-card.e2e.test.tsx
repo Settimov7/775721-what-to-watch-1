@@ -30,6 +30,7 @@ it(`On play button click correctly trigger play button handler`, () => {
     onPlayButtonClick,
     changeFilmFavoriteStatus,
     film: mockFilm,
+    isAuthorizationRequired: false,
   };
 
   const filmCard = shallow(<FilmCard {...props} />);
@@ -47,6 +48,7 @@ it(`On my list button click correctly trigger play button handler`, () => {
     onPlayButtonClick,
     changeFilmFavoriteStatus,
     film: mockFilm,
+    isAuthorizationRequired: false,
   };
 
   const filmCard = shallow(<FilmCard {...props} />);
@@ -55,4 +57,22 @@ it(`On my list button click correctly trigger play button handler`, () => {
   myListButton.simulate(`click`, {preventDefault() {}});
 
   expect(changeFilmFavoriteStatus).toHaveBeenCalledTimes(1);
+});
+
+it(`On my list button click dnt trigger play button handler if authorization required`, () => {
+  const onPlayButtonClick = jest.fn();
+  const changeFilmFavoriteStatus = jest.fn();
+  const props = {
+    onPlayButtonClick,
+    changeFilmFavoriteStatus,
+    film: mockFilm,
+    isAuthorizationRequired: true,
+  };
+
+  const filmCard = shallow(<FilmCard {...props} />);
+  const myListButton = filmCard.find(`.btn--list`);
+
+  myListButton.simulate(`click`, {preventDefault() {}});
+
+  expect(changeFilmFavoriteStatus).toHaveBeenCalledTimes(0);
 });

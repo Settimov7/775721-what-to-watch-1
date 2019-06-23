@@ -46,6 +46,29 @@ const mock = {
     videoSrc: `video.mp4`,
     previewVideoSrc: `video.mp4`,
   })),
+
+  reviews: [
+    {
+      id: 1,
+      rating: 7,
+      user: {
+        id: 1,
+        name: `name`,
+      },
+      comment: `comment`,
+      date: "2019-06-18T11:52:42.143Z"
+    },
+    {
+      id: 2,
+      rating: 9,
+      user: {
+        id: 2,
+        name: `name`,
+      },
+      comment: `comment`,
+      date: "2019-07-18T11:52:42.143Z"
+    }
+  ],
 };
 
 describe(`Film details correctly renders`, () => {
@@ -57,6 +80,9 @@ describe(`Film details correctly renders`, () => {
         email: `email@mail.com`,
         avatarSrc: `image.src`,
         isAuthorizationRequired: false,
+      },
+      REVIEWS: {
+        reviews: mock.reviews,
       },
     };
     const mockStore = configureStore();
@@ -85,6 +111,9 @@ describe(`Film details correctly renders`, () => {
         email: null,
         avatarSrc: null,
         isAuthorizationRequired: true,
+      },
+      REVIEWS: {
+        reviews: mock.reviews,
       },
     };
     const mockStore = configureStore();

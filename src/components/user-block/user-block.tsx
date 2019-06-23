@@ -17,9 +17,11 @@ export const UserBlock: React.FunctionComponent<Props> = (props) => {
       {isAuthorizationRequired ? (
         <Link to="/login" className="logo__link">Sign in</Link>
       ) : (
-        <div className="user-block__avatar">
-          <img src={userAvatarSrc} alt="User avatar" width="63" height="63"/>
-        </div>
+        <Link to="/mylist">
+          <div className="user-block__avatar">
+            <img src={userAvatarSrc} alt="User avatar" width="63" height="63"/>
+          </div>
+        </Link>
       )}
     </div>
   );

@@ -81,3 +81,5 @@ export const getIsVisibleShowMoreButton = createSelector(
 );
 
 export const getPromoFilm = (state) => state[NAME_SPACE].promoFilm;
+
+export const getFavoriteFilms = (state) => state[NAME_SPACE].favoriteFilms;

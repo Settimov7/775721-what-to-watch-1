@@ -5,9 +5,16 @@ import {ActionCreator, ActionType, reducer, Operation} from "./reviews";
 
 describe(`Action creators work correctly`, () => {
   it(`Action creator for post review returns correct action`, () => {
-    expect(ActionCreator.postReview([`mock`, `mock`])).toEqual({
+    expect(ActionCreator.postReview([`review`, `review`])).toEqual({
       type: ActionType.POST_REVIEW,
-      payload: [`mock`, `mock`],
+      payload: [`review`, `review`],
+    });
+  });
+
+  it(`Action creator for load review returns correct action`, () => {
+    expect(ActionCreator.loadReviews([`review`, `review`])).toEqual({
+      type: ActionType.LOAD_REVIEWS,
+      payload: [`review`, `review`],
     });
   });
 });
@@ -19,20 +26,31 @@ describe(`Reducer works correctly`, () => {
     });
   });
 
-  it(`Reducer should change status by a given value`, () => {
+  it(`On POST_REVIEW action reducer should change reviews by a given value`, () => {
     expect(reducer({
       reviews: [],
     }, {
       type: ActionType.POST_REVIEW,
-      payload: [`mock`, `mock`],
+      payload: [`review`, `review`],
     })).toEqual({
-      reviews: [`mock`, `mock`],
+      reviews: [`review`, `review`],
+    });
+  });
+
+  it(`On LOAD_REVIEW action reducer should change reviews by a given value`, () => {
+    expect(reducer({
+      reviews: [],
+    }, {
+      type: ActionType.LOAD_REVIEWS,
+      payload: [`review`, `review`],
+    })).toEqual({
+      reviews: [`review`, `review`],
     });
   });
 });
 
 describe(`Operations works correctly`, () => {
-  it(`Should make a correct API call to /comments/:filmId`, function () {
+  it(`Should make a correct API post call to /comments/:filmId`, function () {
     const dispatch = jest.fn();
     const api = createAPI(dispatch);
     const apiMock = new MockAdapter(api);
@@ -43,14 +61,35 @@ describe(`Operations works correctly`, () => {
 
     apiMock
       .onPost(`/comments/${filmId}`)
-      .reply(200, [`mock`, `mock`]);
+      .reply(200, [`review`, `review`]);
 
     return postReview(dispatch, jest.fn(), api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.POST_REVIEW,
-          payload: [`mock`, `mock`],
+          payload: [`review`, `review`],
+        });
+      });
+  });
+
+  it(`Should make a correct API get call to /comments/:filmId`, function () {
+    const dispatch = jest.fn();
+    const api = createAPI(dispatch);
+    const apiMock = new MockAdapter(api);
+    const filmId = 1;
+    const postReview = Operation.loadReviews(filmId);
+
+    apiMock
+      .onGet(`/comments/${filmId}`)
+      .reply(200, [`review`, `review`]);
+
+    return postReview(dispatch, jest.fn(), api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_REVIEWS,
+          payload: [`review`, `review`],
         });
       });
   });

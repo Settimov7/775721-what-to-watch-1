@@ -1,15 +1,18 @@
-export const DEFAULT_DISPLAYED_FILMS_NUMBER = 20;
-export const INCREASE_DISPLAYED_FILMS_NUMBER_STEP = 20;
+import {DEFAULT_DISPLAYED_FILMS_NUMBER, INCREASE_DISPLAYED_FILMS_NUMBER_STEP} from "./constants";
 
-const initialAppState = {
+import {transformFilm} from "./utils";
+
+const initialState = {
   films: [],
   promoFilm: null,
+  favoriteFilms: [],
   displayedFilmsNumber: DEFAULT_DISPLAYED_FILMS_NUMBER,
 };
 
 export const ActionType = {
   LOAD_FILMS: `LOAD_FILMS`,
   LOAD_PROMO_FILM: `LOAD_PROMO_FILM`,
+  LOAD_FAVORITE_FILMS: `LOAD_FAVORITE_FILMS`,
   INCREASE_DISPLAYED_FILMS_NUMBER: `INCREASE_DISPLAYED_FILMS_NUMBER`,
   RESET_DISPLAYED_FILMS_NUMBER: `RESET_DISPLAYED_FILMS_NUMBER`,
   CHANGE_FILM_FAVORITE_STATUS: `CHANGE_FILM_FAVORITE_STATUS`,
@@ -18,12 +21,17 @@ export const ActionType = {
 export const ActionCreator = {
   loadFilms: (films) => ({
     type: ActionType.LOAD_FILMS,
-    payload: films.map((film) => transformFilm(film)),
+    payload: films,
   }),
 
   loadPromoFilm: (film) => ({
     type: ActionType.LOAD_PROMO_FILM,
-    payload: transformFilm(film),
+    payload: film,
+  }),
+
+  loadFavoriteFilms: (films) => ({
+    type: ActionType.LOAD_FAVORITE_FILMS,
+    payload: films,
   }),
 
   increaseDisplayedFilmsNumber: () => ({
@@ -36,53 +44,65 @@ export const ActionCreator = {
 
   changeFilmFavoriteStatus: (film) => ({
     type: ActionType.CHANGE_FILM_FAVORITE_STATUS,
-    payload: transformFilm(film),
+    payload: film,
   })
 };
 
 export const Operation = {
   loadFilms: () => (dispatch, _getState, api) =>
-    api.get(`/films`)
-      .then((response) => dispatch(ActionCreator.loadFilms(response.data))),
+    api
+      .get(`/films`)
+      .then((response) => dispatch(ActionCreator.loadFilms(response.data.map((film) => transformFilm(film))))),
 
   loadPromoFilm: () => (dispatch, _getState, api) =>
-    api.get(`/films/promo`)
-      .then((response) => dispatch(ActionCreator.loadPromoFilm(response.data))),
+    api
+      .get(`/films/promo`)
+      .then((response) => dispatch(ActionCreator.loadPromoFilm(transformFilm(response.data)))),
+
+  loadFavoriteFilms: () => (dispatch, _getState, api) =>
+    api
+      .get(`/favorite`)
+      .then((response) => dispatch(ActionCreator.loadFavoriteFilms(response.data.map((film) => transformFilm(film))))),
 
   changeFilmFavoriteStatus: (filmId, newStatus) => (dispatch, _getState, api) => {
     const intNewStatus = newStatus ? 1 : 0;
 
     return api.post(`/favorite/${filmId}/${intNewStatus}`)
-      .then((response) => dispatch(ActionCreator.changeFilmFavoriteStatus(response.data)));
+      .then((response) => dispatch(ActionCreator.changeFilmFavoriteStatus(transformFilm(response.data))));
   },
 };
 
-export const reducer = (appState = initialAppState, action) => {
+export const reducer = (state = initialState, action) => {
   const {type, payload} = action;
 
   switch (type) {
     case ActionType.LOAD_FILMS:
-      return Object.assign({}, appState, {
+      return Object.assign({}, state, {
         films: [...payload],
       });
 
     case (ActionType.LOAD_PROMO_FILM):
-      return Object.assign({}, appState, {
+      return Object.assign({}, state, {
         promoFilm: payload,
       });
 
+    case (ActionType.LOAD_FAVORITE_FILMS):
+      return Object.assign({}, state, {
+        favoriteFilms: [...payload],
+      });
+
     case ActionType.INCREASE_DISPLAYED_FILMS_NUMBER:
-      return Object.assign({}, appState, {
-        displayedFilmsNumber: appState.displayedFilmsNumber + INCREASE_DISPLAYED_FILMS_NUMBER_STEP,
+      return Object.assign({}, state, {
+        displayedFilmsNumber: state.displayedFilmsNumber + INCREASE_DISPLAYED_FILMS_NUMBER_STEP,
       });
 
     case ActionType.RESET_DISPLAYED_FILMS_NUMBER:
-      return Object.assign({}, appState, {
+      return Object.assign({}, state, {
         displayedFilmsNumber: DEFAULT_DISPLAYED_FILMS_NUMBER,
       });
 
     case ActionType.CHANGE_FILM_FAVORITE_STATUS: {
-      const films = appState.films.map((film) => {
+      const films = state.films.map((film) => {
         if (film.id === payload.id) {
           return payload;
         }
@@ -90,42 +110,21 @@ export const reducer = (appState = initialAppState, action) => {
         return film;
       });
 
-      let promoFilm = appState.promoFilm;
+      const favoriteFilms = films.filter(({isFavorite}) => isFavorite);
 
-      if (appState.promoFilm.id === payload.id) {
-        promoFilm = Object.assign({}, appState.promoFilm, payload);
+      let promoFilm = state.promoFilm;
+
+      if (state.promoFilm.id === payload.id) {
+        promoFilm = Object.assign({}, state.promoFilm, payload);
       }
 
-      return Object.assign({}, appState, {
+      return Object.assign({}, state, {
         films,
+        favoriteFilms,
         promoFilm,
       });
     }
   }
 
-  return appState;
-};
-
-const transformFilm = (rawFilm) => {
-  const {id, name, description, rating, director, genre, released, starring} = rawFilm;
-
-  return {
-    id,
-    name,
-    posterImageSrc: rawFilm[`poster_image`],
-    previewImageSrc: rawFilm[`preview_image`],
-    backgroundImageSrc: rawFilm[`background_image`],
-    backgroundColor: rawFilm[`background_color`],
-    description,
-    rating,
-    scores: rawFilm[`scores_count`],
-    director,
-    starring,
-    runTime: rawFilm[`run_time`],
-    genre,
-    releasedYear: released,
-    isFavorite: rawFilm[`is_favorite`],
-    videoSrc: rawFilm[`video_link`],
-    previewVideoSrc: rawFilm[`preview_video_link`],
-  };
+  return state;
 };

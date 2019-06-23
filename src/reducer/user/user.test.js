@@ -35,7 +35,7 @@ describe(`Reducer works correctly`, () => {
       name: null,
       email: null,
       avatarSrc: null,
-      isAuthorizationRequired: true
+      isAuthorizationRequired: null,
     });
   });
 
@@ -45,7 +45,7 @@ describe(`Reducer works correctly`, () => {
       name: null,
       email: null,
       avatarSrc: null,
-      isAuthorizationRequired: true,
+      isAuthorizationRequired: null,
     }, {
       type: ActionType.LOGIN,
       payload: {
@@ -93,7 +93,7 @@ describe(`Operations works correctly`, () => {
       .onPost(`/login`)
       .reply(200, {fake: true});
 
-    return login(dispatch, jest.fn(), api)
+    login(dispatch, jest.fn(), api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
@@ -113,7 +113,7 @@ describe(`Operations works correctly`, () => {
       .onGet(`/login`)
       .reply(200, {fake: true});
 
-    return login(dispatch, jest.fn(), api)
+    login(dispatch, jest.fn(), api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {

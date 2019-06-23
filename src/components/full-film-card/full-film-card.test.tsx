@@ -38,9 +38,32 @@ describe(`Full film card correctly renders`, () => {
         videoSrc: `video.mp4`,
         previewVideoSrc: `video.mp4`,
       },
+      reviews: [
+        {
+          id: 1,
+          user: {
+            id: 1,
+            name: `name`,
+          },
+          rating: 7,
+          comment: `comment`,
+          date: "2019-06-18T11:52:42.143Z"
+        },
+        {
+          id: 2,
+          user: {
+            id: 2,
+            name: `name`,
+          },
+          rating: 9,
+          comment: `comment`,
+          date: "2019-07-18T11:52:42.143Z"
+        },
+      ],
       onPlayButtonClick: jest.fn(),
       changeFilmFavoriteStatus: jest.fn(),
       isAuthorizationRequired: true,
+      loadReviews: jest.fn(),
     };
     const fullFilmCard = renderer.create(
       <Provider store={mockStore(initialMockState)}>
@@ -84,9 +107,32 @@ describe(`Full film card correctly renders`, () => {
         videoSrc: `video.mp4`,
         previewVideoSrc: `video.mp4`,
       },
+      reviews: [
+        {
+          id: 1,
+          user: {
+            id: 1,
+            name: `name`,
+          },
+          rating: 7,
+          comment: `comment`,
+          date: "2019-06-18T11:52:42.143Z"
+        },
+        {
+          id: 2,
+          user: {
+            id: 2,
+            name: `name`,
+          },
+          rating: 9,
+          comment: `comment`,
+          date: "2019-07-18T11:52:42.143Z"
+        },
+      ],
       onPlayButtonClick: jest.fn(),
       changeFilmFavoriteStatus: jest.fn(),
       isAuthorizationRequired: true,
+      loadReviews: jest.fn(),
     };
     const fullFilmCard = renderer.create(
       <Provider store={mockStore(initialMockState)}>

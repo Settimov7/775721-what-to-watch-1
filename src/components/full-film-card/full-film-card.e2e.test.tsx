@@ -23,16 +23,41 @@ const mock = {
     videoSrc: `video.mp4`,
     previewVideoSrc: `video.mp4`,
   },
+  reviews: [
+    {
+      id: 1,
+      user: {
+        id: 1,
+        name: `name`,
+      },
+      rating: 7,
+      comment: `comment`,
+      date: "2019-06-18T11:52:42.143Z"
+    },
+    {
+      id: 2,
+      user: {
+        id: 2,
+        name: `name`,
+      },
+      rating: 9,
+      comment: `comment`,
+      date: "2019-07-18T11:52:42.143Z"
+    },
+  ],
 };
 
 it(`On click play button trigger play handler`, () => {
   const onPlayButtonClick = jest.fn();
   const changeFilmFavoriteStatus = jest.fn();
+  const loadReviews = jest.fn();
   const props = {
     film: mock.film,
+    reviews: mock.reviews,
     isAuthorizationRequired: false,
     onPlayButtonClick,
     changeFilmFavoriteStatus,
+    loadReviews,
   };
   const fullFilmCard = shallow(<FullFilmCard {...props} />);
   const playButton = fullFilmCard.find(`.btn--play`);
@@ -45,11 +70,14 @@ it(`On click play button trigger play handler`, () => {
 it(`On my list button click trigger play handler`, () => {
   const onPlayButtonClick = jest.fn();
   const changeFilmFavoriteStatus = jest.fn();
+  const loadReviews = jest.fn();
   const props = {
     film: mock.film,
+    reviews: mock.reviews,
     isAuthorizationRequired: false,
     onPlayButtonClick,
     changeFilmFavoriteStatus,
+    loadReviews,
   };
   const fullFilmCard = shallow(<FullFilmCard {...props} />);
   const myListButton = fullFilmCard.find(`.btn--list`);
@@ -57,4 +85,23 @@ it(`On my list button click trigger play handler`, () => {
   myListButton.simulate(`click`, {preventDefault() {}});
 
   expect(changeFilmFavoriteStatus).toHaveBeenCalledTimes(1);
+});
+
+it(`On component update trigger loadReviews`, () => {
+  const onPlayButtonClick = jest.fn();
+  const changeFilmFavoriteStatus = jest.fn();
+  const loadReviews = jest.fn();
+  const props = {
+    film: mock.film,
+    reviews: mock.reviews,
+    isAuthorizationRequired: false,
+    onPlayButtonClick,
+    changeFilmFavoriteStatus,
+    loadReviews,
+  };
+  const fullFilmCard = shallow(<FullFilmCard {...props} />);
+
+  fullFilmCard.instance().componentDidUpdate();
+
+  expect(loadReviews).toHaveBeenCalledTimes(1);
 });
