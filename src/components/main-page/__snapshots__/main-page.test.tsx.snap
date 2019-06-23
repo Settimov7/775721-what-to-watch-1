@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Main page correctly renders if authorization not required 1`] = `
+exports[`Main page correctly renders Correctly renders if authorization not required 1`] = `
 Array [
   <div
     className="visually-hidden"
@@ -241,6 +241,7 @@ Array [
             </button>
             <button
               className="btn btn--list movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -492,7 +493,7 @@ Array [
 ]
 `;
 
-exports[`Main page correctly renders if authorization required 1`] = `
+exports[`Main page correctly renders Correctly renders if authorization required 1`] = `
 Array [
   <div
     className="visually-hidden"
@@ -730,6 +731,7 @@ Array [
             </button>
             <button
               className="btn btn--list movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg

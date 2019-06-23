@@ -17,7 +17,7 @@ export const RatingStar: React.FunctionComponent<Props> = (props) => {
         type="radio"
         name="rating"
         value={value}
-        checked={isChecked}
+        defaultChecked={isChecked}
         onClick={onClick}
       />
       <label

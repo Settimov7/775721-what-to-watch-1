@@ -25,8 +25,10 @@ const mockFilm = {
 
 it(`On play button click correctly trigger play button handler`, () => {
   const onPlayButtonClick = jest.fn();
+  const changeFilmFavoriteStatus = jest.fn();
   const props = {
     onPlayButtonClick,
+    changeFilmFavoriteStatus,
     film: mockFilm,
   };
 
@@ -36,4 +38,21 @@ it(`On play button click correctly trigger play button handler`, () => {
   playButton.simulate(`click`, {preventDefault() {}});
 
   expect(onPlayButtonClick).toHaveBeenCalledTimes(1);
+});
+
+it(`On my list button click correctly trigger play button handler`, () => {
+  const onPlayButtonClick = jest.fn();
+  const changeFilmFavoriteStatus = jest.fn();
+  const props = {
+    onPlayButtonClick,
+    changeFilmFavoriteStatus,
+    film: mockFilm,
+  };
+
+  const filmCard = shallow(<FilmCard {...props} />);
+  const myListButton = filmCard.find(`.btn--list`);
+
+  myListButton.simulate(`click`, {preventDefault() {}});
+
+  expect(changeFilmFavoriteStatus).toHaveBeenCalledTimes(1);
 });

@@ -39,6 +39,7 @@ describe(`Full film card correctly renders`, () => {
         previewVideoSrc: `video.mp4`,
       },
       onPlayButtonClick: jest.fn(),
+      changeFilmFavoriteStatus: jest.fn(),
       isAuthorizationRequired: true,
     };
     const fullFilmCard = renderer.create(
@@ -51,7 +52,6 @@ describe(`Full film card correctly renders`, () => {
 
     expect(fullFilmCard).toMatchSnapshot();
   });
-
 
   it(`Correctly renders if authorization required`, () => {
     const initialMockState = {
@@ -85,6 +85,7 @@ describe(`Full film card correctly renders`, () => {
         previewVideoSrc: `video.mp4`,
       },
       onPlayButtonClick: jest.fn(),
+      changeFilmFavoriteStatus: jest.fn(),
       isAuthorizationRequired: true,
     };
     const fullFilmCard = renderer.create(

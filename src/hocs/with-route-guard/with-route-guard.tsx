@@ -10,7 +10,7 @@ export const withRouteGuard = (Route) => {
   const WithRouteGuard = (props: Props) => {
     const {isAuthorizationRequired, location} = props;
 
-    if (isAuthorizationRequired) {
+    if (isAuthorizationRequired === true) {
       return <Redirect push to={{
         pathname: `/login`,
         state: {

@@ -52,7 +52,7 @@ export const Operation = {
   changeFilmFavoriteStatus: (filmId, newStatus) => (dispatch, _getState, api) => {
     const intNewStatus = newStatus ? 1 : 0;
 
-    api.post(`/films/${filmId}/${intNewStatus}`)
+    return api.post(`/favorite/${filmId}/${intNewStatus}`)
       .then((response) => dispatch(ActionCreator.changeFilmFavoriteStatus(response.data)));
   },
 };
@@ -81,16 +81,26 @@ export const reducer = (appState = initialAppState, action) => {
         displayedFilmsNumber: DEFAULT_DISPLAYED_FILMS_NUMBER,
       });
 
-    case ActionType.CHANGE_FILM_FAVORITE_STATUS:
-      return Object.assign({}, appState, {
-        films: appState.films.map((film) => {
-          if (film.id === payload.id) {
-            return payload;
-          }
+    case ActionType.CHANGE_FILM_FAVORITE_STATUS: {
+      const films = appState.films.map((film) => {
+        if (film.id === payload.id) {
+          return payload;
+        }
 
-          return film;
-        })
+        return film;
       });
+
+      let promoFilm = appState.promoFilm;
+
+      if (appState.promoFilm.id === payload.id) {
+        promoFilm = Object.assign({}, appState.promoFilm, payload);
+      }
+
+      return Object.assign({}, appState, {
+        films,
+        promoFilm,
+      });
+    }
   }
 
   return appState;

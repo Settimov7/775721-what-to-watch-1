@@ -122,8 +122,8 @@ exports[`Add review correctly renders 1`] = `
           className="rating__stars"
         >
           <input
-            checked={false}
             className="rating__input"
+            defaultChecked={false}
             id="star-1"
             name="rating"
             onClick={[Function]}
@@ -138,8 +138,8 @@ exports[`Add review correctly renders 1`] = `
             1
           </label>
           <input
-            checked={false}
             className="rating__input"
+            defaultChecked={false}
             id="star-2"
             name="rating"
             onClick={[Function]}
@@ -154,8 +154,8 @@ exports[`Add review correctly renders 1`] = `
             2
           </label>
           <input
-            checked={true}
             className="rating__input"
+            defaultChecked={true}
             id="star-3"
             name="rating"
             onClick={[Function]}
@@ -170,8 +170,8 @@ exports[`Add review correctly renders 1`] = `
             3
           </label>
           <input
-            checked={false}
             className="rating__input"
+            defaultChecked={false}
             id="star-4"
             name="rating"
             onClick={[Function]}
@@ -186,8 +186,8 @@ exports[`Add review correctly renders 1`] = `
             4
           </label>
           <input
-            checked={false}
             className="rating__input"
+            defaultChecked={false}
             id="star-5"
             name="rating"
             onClick={[Function]}

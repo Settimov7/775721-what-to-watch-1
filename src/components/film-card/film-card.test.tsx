@@ -39,6 +39,7 @@ describe(`Film card correctly renders`, () => {
         previewVideoSrc: `video.mp4`,
       },
       onPlayButtonClick: jest.fn(),
+      changeFilmFavoriteStatus: jest.fn(),
     };
     const filmCard = renderer.create(
       <Provider store={mockStore(initialMockState)}>
@@ -83,6 +84,7 @@ describe(`Film card correctly renders`, () => {
         previewVideoSrc: `video.mp4`,
       },
       onPlayButtonClick: jest.fn(),
+      changeFilmFavoriteStatus: jest.fn(),
     };
     const filmCard = renderer.create(
       <Provider store={mockStore(initialMockState)}>

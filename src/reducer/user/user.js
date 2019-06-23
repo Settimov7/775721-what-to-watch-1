@@ -1,3 +1,5 @@
+import {HTTP_STATUS} from "../../api";
+
 const initialState = {
   id: null,
   name: null,
@@ -9,6 +11,7 @@ const initialState = {
 
 export const ActionType = {
   LOGIN: `LOGIN`,
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
 };
 
 export const ActionCreator = {
@@ -18,18 +21,31 @@ export const ActionCreator = {
       payload: userData,
     };
   },
+
+  requireAuthorization: () => {
+    return {
+      type: ActionType.REQUIRED_AUTHORIZATION,
+    };
+  },
 };
 
 export const Operation = {
-  login: (email, password) => (dispatch, _getState, api) => {
-    return api.post(`/login`, {
+  login: (email, password) => (dispatch, _getState, api) => api
+    .post(`/login`, {
       email,
       password,
     })
-      .then((response) => {
+    .then((response) => {
+      dispatch(ActionCreator.login(response.data));
+    }),
+
+  checkAuthorization: () => (dispatch, _getState, api) => api
+    .get(`/login`)
+    .then((response) => {
+      if (response.status === HTTP_STATUS.OK) {
         dispatch(ActionCreator.login(response.data));
-      });
-  },
+      }
+    }),
 };
 
 export const reducer = (state = initialState, action) => {
@@ -41,6 +57,15 @@ export const reducer = (state = initialState, action) => {
         email: action.payload.email,
         avatarSrc: action.payload[`avatar_url`],
         isAuthorizationRequired: false,
+      });
+
+    case ActionType.REQUIRED_AUTHORIZATION:
+      return Object.assign({}, state, {
+        id: null,
+        name: null,
+        email: null,
+        avatarSrc: null,
+        isAuthorizationRequired: true,
       });
   }
 

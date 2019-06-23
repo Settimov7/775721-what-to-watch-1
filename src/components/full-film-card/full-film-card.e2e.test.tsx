@@ -27,10 +27,12 @@ const mock = {
 
 it(`On click play button trigger play handler`, () => {
   const onPlayButtonClick = jest.fn();
+  const changeFilmFavoriteStatus = jest.fn();
   const props = {
     film: mock.film,
     isAuthorizationRequired: false,
     onPlayButtonClick,
+    changeFilmFavoriteStatus,
   };
   const fullFilmCard = shallow(<FullFilmCard {...props} />);
   const playButton = fullFilmCard.find(`.btn--play`);
@@ -38,4 +40,21 @@ it(`On click play button trigger play handler`, () => {
   playButton.simulate(`click`, {preventDefault() {}});
 
   expect(onPlayButtonClick).toHaveBeenCalledTimes(1);
+});
+
+it(`On my list button click trigger play handler`, () => {
+  const onPlayButtonClick = jest.fn();
+  const changeFilmFavoriteStatus = jest.fn();
+  const props = {
+    film: mock.film,
+    isAuthorizationRequired: false,
+    onPlayButtonClick,
+    changeFilmFavoriteStatus,
+  };
+  const fullFilmCard = shallow(<FullFilmCard {...props} />);
+  const myListButton = fullFilmCard.find(`.btn--list`);
+
+  myListButton.simulate(`click`, {preventDefault() {}});
+
+  expect(changeFilmFavoriteStatus).toHaveBeenCalledTimes(1);
 });

@@ -13,6 +13,7 @@ import {Tabs} from '../tabs/tabs';
 import {withActiveItem} from '../../hocs/with-active-item/with-active-item';
 
 import {getIsAuthorizationRequired} from '../../reducer/user/selectors';
+import {Operation} from '../../reducer/films/films';
 
 import {Film} from '../../types';
 
@@ -20,12 +21,13 @@ interface Props {
   film: Film;
   onPlayButtonClick: () => void;
   isAuthorizationRequired: boolean;
+  changeFilmFavoriteStatus: (id: number, isFavorite: boolean) => void;
 }
 
 const WrappedTabs = withActiveItem(Tabs, 0);
 
 export const FullFilmCard = (props: Props): JSX.Element => {
-  const {film, onPlayButtonClick, isAuthorizationRequired} = props;
+  const {film, onPlayButtonClick, isAuthorizationRequired, changeFilmFavoriteStatus} = props;
   const {
     id,
     name,
@@ -39,6 +41,7 @@ export const FullFilmCard = (props: Props): JSX.Element => {
     description,
     starring,
     runTime,
+    isFavorite,
   } = film;
   const TABS = [
     {
@@ -104,9 +107,17 @@ export const FullFilmCard = (props: Props): JSX.Element => {
                   <span>Play</span>
                 </button>
 
-                <button className="btn btn--list movie-card__button" type="button">
+                <button
+                  className="btn btn--list movie-card__button"
+                  type="button"
+                  onClick={(evt) => {
+                    evt.preventDefault();
+
+                    changeFilmFavoriteStatus(id, isFavorite);
+                  }}
+                >
                   <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"/>
+                    <use xlinkHref={isFavorite ? `#in-list` : `#add`}/>
                   </svg>
                   <span>My list</span>
                 </button>
@@ -138,4 +149,9 @@ const mapStateToProps = (state) => ({
   isAuthorizationRequired: getIsAuthorizationRequired(state),
 });
 
-export default connect(mapStateToProps)(FullFilmCard);
+const mapDispatchToProps = (dispatch) => ({
+  changeFilmFavoriteStatus: (filmId, isFavorite): void =>
+    dispatch(Operation.changeFilmFavoriteStatus(filmId, !isFavorite)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FullFilmCard);

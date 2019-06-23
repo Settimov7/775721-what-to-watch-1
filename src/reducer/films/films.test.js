@@ -112,6 +112,49 @@ describe(`Action creators work correctly`, () => {
       type: ActionType.RESET_DISPLAYED_FILMS_NUMBER,
     });
   });
+
+  it(`Correctly change film favorite status`, () => {
+    expect(ActionCreator.changeFilmFavoriteStatus({
+      id: 1,
+      name: `Bronson`,
+      [`poster_image`]: `https://es31-server.appspot.com/wtw/static/film/poster/bronson.jpg`,
+      [`preview_image`]: `https://es31-server.appspot.com/wtw/static/film/preview/bronson.jpg`,
+      [`background_image`]: `https://es31-server.appspot.com/wtw/static/film/background/bronson.jpg`,
+      [`background_color`]: `#73B39A`,
+      description: `A young man who was sentenced to seven years in prison for robbing a post office ends up spending three decades in solitary confinement. During this time, his own personality is supplanted by his alter-ego, Charles Bronson.`,
+      rating: 7.1,
+      [`scores_count`]: 109661,
+      director: `Nicolas Winding Refn`,
+      starring: [`Tom Hardy`, `Kelly Adams`, `Luing Andrews`],
+      [`run_time`]: 92,
+      genre: `Action`,
+      released: 2008,
+      [`is_favorite`]: false,
+      [`video_link`]: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`,
+      [`preview_video_link`]: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    })).toEqual({
+      type: ActionType.CHANGE_FILM_FAVORITE_STATUS,
+      payload: {
+        id: 1,
+        name: `Bronson`,
+        posterImageSrc: `https://es31-server.appspot.com/wtw/static/film/poster/bronson.jpg`,
+        previewImageSrc: `https://es31-server.appspot.com/wtw/static/film/preview/bronson.jpg`,
+        backgroundImageSrc: `https://es31-server.appspot.com/wtw/static/film/background/bronson.jpg`,
+        backgroundColor: `#73B39A`,
+        description: `A young man who was sentenced to seven years in prison for robbing a post office ends up spending three decades in solitary confinement. During this time, his own personality is supplanted by his alter-ego, Charles Bronson.`,
+        rating: 7.1,
+        scores: 109661,
+        director: `Nicolas Winding Refn`,
+        starring: [`Tom Hardy`, `Kelly Adams`, `Luing Andrews`],
+        runTime: 92,
+        genre: `Action`,
+        releasedYear: 2008,
+        isFavorite: false,
+        videoSrc: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`,
+        previewVideoSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+      },
+    });
+  });
 });
 
 describe(`Reducer works correctly`, () => {
@@ -256,10 +299,106 @@ describe(`Reducer works correctly`, () => {
       displayedFilmsNumber: DEFAULT_DISPLAYED_FILMS_NUMBER,
     });
   });
+
+  it(`Reducer should change films and promo film by a given film with new favorite status`, () => {
+    expect(reducer({
+      films: [
+        {
+          id: 1,
+          name: `Film-1`,
+          isFavorite: false,
+        },
+        {
+          id: 2,
+          name: `Film-2`,
+          isFavorite: false,
+        },
+      ],
+      promoFilm: {
+        id: 2,
+        name: `Film-2`,
+        isFavorite: false,
+      },
+      displayedFilmsNumber: DEFAULT_DISPLAYED_FILMS_NUMBER,
+    }, {
+      type: ActionType.CHANGE_FILM_FAVORITE_STATUS,
+      payload: {
+        id: 1,
+        name: `Film-1`,
+        isFavorite: true,
+      },
+    })).toEqual({
+      films: [
+        {
+          id: 1,
+          name: `Film-1`,
+          isFavorite: true,
+        },
+        {
+          id: 2,
+          name: `Film-2`,
+          isFavorite: false,
+        },
+      ],
+      promoFilm: {
+        id: 2,
+        name: `Film-2`,
+        isFavorite: false,
+      },
+      displayedFilmsNumber: DEFAULT_DISPLAYED_FILMS_NUMBER,
+    });
+
+    expect(reducer({
+      films: [
+        {
+          id: 1,
+          name: `Film-1`,
+          isFavorite: false,
+        },
+        {
+          id: 2,
+          name: `Film-2`,
+          isFavorite: false,
+        },
+      ],
+      promoFilm: {
+        id: 2,
+        name: `Film-2`,
+        isFavorite: false,
+      },
+      displayedFilmsNumber: DEFAULT_DISPLAYED_FILMS_NUMBER,
+    }, {
+      type: ActionType.CHANGE_FILM_FAVORITE_STATUS,
+      payload: {
+        id: 2,
+        name: `Film-2`,
+        isFavorite: true,
+      },
+    })).toEqual({
+      films: [
+        {
+          id: 1,
+          name: `Film-1`,
+          isFavorite: false,
+        },
+        {
+          id: 2,
+          name: `Film-2`,
+          isFavorite: true,
+        },
+      ],
+      promoFilm: {
+        id: 2,
+        name: `Film-2`,
+        isFavorite: true,
+      },
+      displayedFilmsNumber: DEFAULT_DISPLAYED_FILMS_NUMBER,
+    });
+  });
 });
 
 describe(`Operations works correctly`, () => {
-  it(`Should make a correct API call to /films`, function () {
+  it(`Should make a correct API call to /films`, () => {
     const dispatch = jest.fn();
     const api = createAPI(dispatch);
     const apiMock = new MockAdapter(api);
@@ -315,7 +454,7 @@ describe(`Operations works correctly`, () => {
       });
   });
 
-  it(`Should make a correct API call to /films/promo`, function () {
+  it(`Should make a correct API call to /films/promo`, () => {
     const dispatch = jest.fn();
     const api = createAPI(dispatch);
     const apiMock = new MockAdapter(api);
@@ -364,6 +503,62 @@ describe(`Operations works correctly`, () => {
             genre: `Action`,
             releasedYear: 2008,
             isFavorite: false,
+            videoSrc: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`,
+            previewVideoSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+          },
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /favorite/:id/:status`, () => {
+    const dispatch = jest.fn();
+    const api = createAPI(dispatch);
+    const apiMock = new MockAdapter(api);
+    const changeFilmFavoriteStatus = Operation.changeFilmFavoriteStatus(1, true);
+
+    apiMock
+      .onPost(`/favorite/1/1`)
+      .reply(200, {
+        id: 1,
+        name: `Bronson`,
+        [`poster_image`]: `https://es31-server.appspot.com/wtw/static/film/poster/bronson.jpg`,
+        [`preview_image`]: `https://es31-server.appspot.com/wtw/static/film/preview/bronson.jpg`,
+        [`background_image`]: `https://es31-server.appspot.com/wtw/static/film/background/bronson.jpg`,
+        [`background_color`]: `#73B39A`,
+        description: `A young man who was sentenced to seven years in prison for robbing a post office ends up spending three decades in solitary confinement. During this time, his own personality is supplanted by his alter-ego, Charles Bronson.`,
+        rating: 7.1,
+        [`scores_count`]: 109661,
+        director: `Nicolas Winding Refn`,
+        starring: [`Tom Hardy`, `Kelly Adams`, `Luing Andrews`],
+        [`run_time`]: 92,
+        genre: `Action`,
+        released: 2008,
+        [`is_favorite`]: true,
+        [`video_link`]: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`,
+        [`preview_video_link`]: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+      });
+
+    return changeFilmFavoriteStatus(dispatch, jest.fn(), api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.CHANGE_FILM_FAVORITE_STATUS,
+          payload: {
+            id: 1,
+            name: `Bronson`,
+            posterImageSrc: `https://es31-server.appspot.com/wtw/static/film/poster/bronson.jpg`,
+            previewImageSrc: `https://es31-server.appspot.com/wtw/static/film/preview/bronson.jpg`,
+            backgroundImageSrc: `https://es31-server.appspot.com/wtw/static/film/background/bronson.jpg`,
+            backgroundColor: `#73B39A`,
+            description: `A young man who was sentenced to seven years in prison for robbing a post office ends up spending three decades in solitary confinement. During this time, his own personality is supplanted by his alter-ego, Charles Bronson.`,
+            rating: 7.1,
+            scores: 109661,
+            director: `Nicolas Winding Refn`,
+            starring: [`Tom Hardy`, `Kelly Adams`, `Luing Andrews`],
+            runTime: 92,
+            genre: `Action`,
+            releasedYear: 2008,
+            isFavorite: true,
             videoSrc: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`,
             previewVideoSrc: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
           },
