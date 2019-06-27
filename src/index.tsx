@@ -30,9 +30,9 @@ const initApp = () => {
       )
   );
 
+  appStore.dispatch(UserOperation.checkAuthorization());
   appStore.dispatch(FilmsOperation.loadFilms());
   appStore.dispatch(FilmsOperation.loadPromoFilm());
-  appStore.dispatch(UserOperation.checkAuthorization());
 
   render((
     <Provider store={appStore}>

@@ -5,7 +5,7 @@ const initialState = {
   name: null,
   email: null,
   avatarSrc: null,
-  isAuthorizationRequired: true,
+  isAuthorizationRequired: null,
 };
 
 
@@ -30,22 +30,24 @@ export const ActionCreator = {
 };
 
 export const Operation = {
-  login: (email, password) => (dispatch, _getState, api) => api
-    .post(`/login`, {
-      email,
-      password,
-    })
-    .then((response) => {
-      dispatch(ActionCreator.login(response.data));
-    }),
-
-  checkAuthorization: () => (dispatch, _getState, api) => api
-    .get(`/login`)
-    .then((response) => {
-      if (response.status === HTTP_STATUS.OK) {
+  login: (email, password) => (dispatch, _getState, api) =>
+    api
+      .post(`/login`, {
+        email,
+        password,
+      })
+      .then((response) => {
         dispatch(ActionCreator.login(response.data));
-      }
-    }),
+      }),
+
+  checkAuthorization: () => (dispatch, _getState, api) =>
+    api
+      .get(`/login`)
+      .then((response) => {
+        if (response.status === HTTP_STATUS.OK) {
+          dispatch(ActionCreator.login(response.data));
+        }
+      }),
 };
 
 export const reducer = (state = initialState, action) => {

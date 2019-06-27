@@ -3,7 +3,7 @@ import {Switch, Route} from 'react-router-dom';
 import {compose} from 'recompose';
 import {connect} from 'react-redux';
 
-import {Favorites} from '../favorites/favorites';
+import MyList from '../my-list/my-list';
 import MainPage from '../main-page/main-page';
 import SignIn from '../sign-in/sign-in';
 import FilmDetails from '../film-details/film-details';
@@ -42,7 +42,7 @@ export const App: React.FunctionComponent = () => {
 
       <Route path="/film/:id" exact component={WrappedFilmDetails} />
 
-      <PrivateRoute path="/favorites" component={Favorites} />
+      <PrivateRoute path="/mylist" component={MyList} />
 
       <PrivateRoute path="/film/:id/reviews/add" component={AddReview} />
     </Switch>

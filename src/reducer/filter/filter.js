@@ -1,4 +1,4 @@
-const initialAppState = {
+const initialState = {
   currentFilterByFilmGenre: `all`,
 };
 
@@ -13,15 +13,15 @@ export const ActionCreator = {
   }),
 };
 
-export const reducer = (appState = initialAppState, action) => {
+export const reducer = (state = initialState, action) => {
   const {type, payload} = action;
 
   switch (type) {
     case ActionType.CHANGE_CURRENT_FILTER_BY_FILM_GENRE:
-      return Object.assign({}, appState, {
+      return Object.assign({}, state, {
         currentFilterByFilmGenre: payload,
       });
   }
 
-  return appState;
+  return state;
 };

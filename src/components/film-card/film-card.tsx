@@ -5,7 +5,10 @@ import {SvgSprite} from '../svg-sprite/svg-sprite';
 import {Logo} from '../logo/logo';
 import UserBlock from '../user-block/user-block';
 
+import {getIsAuthorizationRequired} from '../../reducer/user/selectors';
 import {Operation} from '../../reducer/films/films';
+
+import {history} from '../../history';
 
 import {Film} from '../../types';
 
@@ -13,10 +16,11 @@ interface Props {
   film: Film;
   onPlayButtonClick: () => void;
   changeFilmFavoriteStatus: (id: number, isFavorite: boolean) => void;
+  isAuthorizationRequired: boolean;
 }
 
 export const FilmCard: React.FunctionComponent<Props> = (props) => {
-  const {film, onPlayButtonClick, changeFilmFavoriteStatus} = props;
+  const {film, onPlayButtonClick, changeFilmFavoriteStatus, isAuthorizationRequired} = props;
   const {id, name, backgroundImageSrc, genre, releasedYear, posterImageSrc, isFavorite} = film;
 
   return (
@@ -72,7 +76,11 @@ export const FilmCard: React.FunctionComponent<Props> = (props) => {
                   onClick={(evt) => {
                     evt.preventDefault();
 
-                    changeFilmFavoriteStatus(id, isFavorite);
+                    if(isAuthorizationRequired) {
+                      history.push(`/login`)
+                    } else {
+                      changeFilmFavoriteStatus(id, isFavorite);
+                    }
                   }}
                 >
                   <svg viewBox="0 0 19 20" width="19" height="20">
@@ -89,9 +97,13 @@ export const FilmCard: React.FunctionComponent<Props> = (props) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  isAuthorizationRequired: getIsAuthorizationRequired(state),
+});
+
 const mapDispatchToProps = (dispatch) => ({
   changeFilmFavoriteStatus: (filmId, isFavorite): void =>
     dispatch(Operation.changeFilmFavoriteStatus(filmId, !isFavorite)),
 });
 
-export default connect(null, mapDispatchToProps)(FilmCard);
+export default connect(mapStateToProps, mapDispatchToProps)(FilmCard);
