@@ -168,7 +168,7 @@ it(`On full screen button correctly trigger click handler`, () => {
   };
 
   FilmPlayer.prototype.componentDidUpdate = jest.fn();
-  FilmPlayer.prototype._fullScreenClickHandler = fullScreenClickHandler;
+  FilmPlayer.prototype._handleFullScreenClick = fullScreenClickHandler;
 
   const filmPlayer = shallow(<FilmPlayer {...props} />);
   const fullScreenButton = filmPlayer.find(`.player__full-screen`);

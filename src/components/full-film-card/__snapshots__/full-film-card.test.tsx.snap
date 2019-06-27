@@ -332,7 +332,7 @@ Array [
             <div
               className="movie-rating__score"
             >
-              5
+              5.0
             </div>
             <p
               className="movie-rating__meta"
@@ -340,12 +340,13 @@ Array [
               <span
                 className="movie-rating__level"
               >
-                Very good
+                Good
               </span>
               <span
                 className="movie-rating__count"
               >
-                240 ratings
+                123456
+                 ratings
               </span>
             </p>
           </div>
@@ -704,7 +705,7 @@ Array [
             <div
               className="movie-rating__score"
             >
-              5
+              5.0
             </div>
             <p
               className="movie-rating__meta"
@@ -712,12 +713,13 @@ Array [
               <span
                 className="movie-rating__level"
               >
-                Very good
+                Good
               </span>
               <span
                 className="movie-rating__count"
               >
-                240 ratings
+                123456
+                 ratings
               </span>
             </p>
           </div>

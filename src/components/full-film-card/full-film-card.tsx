@@ -55,6 +55,7 @@ export class FullFilmCard extends React.PureComponent<Props> {
       starring,
       runTime,
       isFavorite,
+      scores,
     } = film;
     const TABS = [
       {
@@ -64,6 +65,7 @@ export class FullFilmCard extends React.PureComponent<Props> {
           director={director}
           description={description}
           starring={starring}
+          scores={scores}
         />,
       },
       {

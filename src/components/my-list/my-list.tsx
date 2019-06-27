@@ -4,12 +4,12 @@ import {connect} from 'react-redux';
 import {Logo} from "../logo/logo";
 import UserBlock from "../user-block/user-block";
 import {Footer} from "../footer/footer";
+import {FilmsList} from "../films-list/films-list";
 
 import {getFavoriteFilms} from '../../reducer/films/selectors';
 import {Operation} from "../../reducer/films/films";
 
 import {Film} from "../../types";
-import {FilmsList} from "../films-list/films-list";
 
 interface Props {
   favoriteFilms: Film[];

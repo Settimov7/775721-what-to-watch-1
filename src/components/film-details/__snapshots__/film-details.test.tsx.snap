@@ -339,7 +339,7 @@ Array [
             <div
               className="movie-rating__score"
             >
-              5
+              5.0
             </div>
             <p
               className="movie-rating__meta"
@@ -347,12 +347,13 @@ Array [
               <span
                 className="movie-rating__level"
               >
-                Very good
+                Good
               </span>
               <span
                 className="movie-rating__count"
               >
-                240 ratings
+                123456
+                 ratings
               </span>
             </p>
           </div>
@@ -398,150 +399,146 @@ Array [
       <div
         className="catalog__movies-list"
       >
-        <div
-          className="catalog__movies-list"
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <article
-            className="small-movie-card catalog__movies-card"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
           >
-            <div
-              className="small-movie-card__image"
+            <img
+              alt="Film-1"
+              height={175}
+              src="/image.jpg"
+              width={280}
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="/film/1"
               onClick={[Function]}
             >
-              <img
-                alt="Film-1"
-                height={175}
-                src="/image.jpg"
-                width={280}
-              />
-            </div>
-            <h3
-              className="small-movie-card__title"
-            >
-              <a
-                className="small-movie-card__link"
-                href="/film/1"
-                onClick={[Function]}
-              >
-                Film-1
-              </a>
-            </h3>
-          </article>
-          <article
-            className="small-movie-card catalog__movies-card"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
+              Film-1
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
           >
-            <div
-              className="small-movie-card__image"
+            <img
+              alt="Film-2"
+              height={175}
+              src="/image.jpg"
+              width={280}
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="/film/2"
               onClick={[Function]}
             >
-              <img
-                alt="Film-2"
-                height={175}
-                src="/image.jpg"
-                width={280}
-              />
-            </div>
-            <h3
-              className="small-movie-card__title"
-            >
-              <a
-                className="small-movie-card__link"
-                href="/film/2"
-                onClick={[Function]}
-              >
-                Film-2
-              </a>
-            </h3>
-          </article>
-          <article
-            className="small-movie-card catalog__movies-card"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
+              Film-2
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
           >
-            <div
-              className="small-movie-card__image"
+            <img
+              alt="Film-3"
+              height={175}
+              src="/image.jpg"
+              width={280}
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="/film/3"
               onClick={[Function]}
             >
-              <img
-                alt="Film-3"
-                height={175}
-                src="/image.jpg"
-                width={280}
-              />
-            </div>
-            <h3
-              className="small-movie-card__title"
-            >
-              <a
-                className="small-movie-card__link"
-                href="/film/3"
-                onClick={[Function]}
-              >
-                Film-3
-              </a>
-            </h3>
-          </article>
-          <article
-            className="small-movie-card catalog__movies-card"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
+              Film-3
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
           >
-            <div
-              className="small-movie-card__image"
+            <img
+              alt="Film-4"
+              height={175}
+              src="/image.jpg"
+              width={280}
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="/film/4"
               onClick={[Function]}
             >
-              <img
-                alt="Film-4"
-                height={175}
-                src="/image.jpg"
-                width={280}
-              />
-            </div>
-            <h3
-              className="small-movie-card__title"
-            >
-              <a
-                className="small-movie-card__link"
-                href="/film/4"
-                onClick={[Function]}
-              >
-                Film-4
-              </a>
-            </h3>
-          </article>
-          <article
-            className="small-movie-card catalog__movies-card"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
+              Film-4
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
           >
-            <div
-              className="small-movie-card__image"
+            <img
+              alt="Film-5"
+              height={175}
+              src="/image.jpg"
+              width={280}
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="/film/5"
               onClick={[Function]}
             >
-              <img
-                alt="Film-5"
-                height={175}
-                src="/image.jpg"
-                width={280}
-              />
-            </div>
-            <h3
-              className="small-movie-card__title"
-            >
-              <a
-                className="small-movie-card__link"
-                href="/film/5"
-                onClick={[Function]}
-              >
-                Film-5
-              </a>
-            </h3>
-          </article>
-        </div>
+              Film-5
+            </a>
+          </h3>
+        </article>
       </div>
     </section>
     <footer
@@ -908,7 +905,7 @@ Array [
             <div
               className="movie-rating__score"
             >
-              5
+              5.0
             </div>
             <p
               className="movie-rating__meta"
@@ -916,12 +913,13 @@ Array [
               <span
                 className="movie-rating__level"
               >
-                Very good
+                Good
               </span>
               <span
                 className="movie-rating__count"
               >
-                240 ratings
+                123456
+                 ratings
               </span>
             </p>
           </div>
@@ -967,150 +965,146 @@ Array [
       <div
         className="catalog__movies-list"
       >
-        <div
-          className="catalog__movies-list"
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <article
-            className="small-movie-card catalog__movies-card"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
           >
-            <div
-              className="small-movie-card__image"
+            <img
+              alt="Film-1"
+              height={175}
+              src="/image.jpg"
+              width={280}
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="/film/1"
               onClick={[Function]}
             >
-              <img
-                alt="Film-1"
-                height={175}
-                src="/image.jpg"
-                width={280}
-              />
-            </div>
-            <h3
-              className="small-movie-card__title"
-            >
-              <a
-                className="small-movie-card__link"
-                href="/film/1"
-                onClick={[Function]}
-              >
-                Film-1
-              </a>
-            </h3>
-          </article>
-          <article
-            className="small-movie-card catalog__movies-card"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
+              Film-1
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
           >
-            <div
-              className="small-movie-card__image"
+            <img
+              alt="Film-2"
+              height={175}
+              src="/image.jpg"
+              width={280}
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="/film/2"
               onClick={[Function]}
             >
-              <img
-                alt="Film-2"
-                height={175}
-                src="/image.jpg"
-                width={280}
-              />
-            </div>
-            <h3
-              className="small-movie-card__title"
-            >
-              <a
-                className="small-movie-card__link"
-                href="/film/2"
-                onClick={[Function]}
-              >
-                Film-2
-              </a>
-            </h3>
-          </article>
-          <article
-            className="small-movie-card catalog__movies-card"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
+              Film-2
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
           >
-            <div
-              className="small-movie-card__image"
+            <img
+              alt="Film-3"
+              height={175}
+              src="/image.jpg"
+              width={280}
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="/film/3"
               onClick={[Function]}
             >
-              <img
-                alt="Film-3"
-                height={175}
-                src="/image.jpg"
-                width={280}
-              />
-            </div>
-            <h3
-              className="small-movie-card__title"
-            >
-              <a
-                className="small-movie-card__link"
-                href="/film/3"
-                onClick={[Function]}
-              >
-                Film-3
-              </a>
-            </h3>
-          </article>
-          <article
-            className="small-movie-card catalog__movies-card"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
+              Film-3
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
           >
-            <div
-              className="small-movie-card__image"
+            <img
+              alt="Film-4"
+              height={175}
+              src="/image.jpg"
+              width={280}
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="/film/4"
               onClick={[Function]}
             >
-              <img
-                alt="Film-4"
-                height={175}
-                src="/image.jpg"
-                width={280}
-              />
-            </div>
-            <h3
-              className="small-movie-card__title"
-            >
-              <a
-                className="small-movie-card__link"
-                href="/film/4"
-                onClick={[Function]}
-              >
-                Film-4
-              </a>
-            </h3>
-          </article>
-          <article
-            className="small-movie-card catalog__movies-card"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
+              Film-4
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
           >
-            <div
-              className="small-movie-card__image"
+            <img
+              alt="Film-5"
+              height={175}
+              src="/image.jpg"
+              width={280}
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="/film/5"
               onClick={[Function]}
             >
-              <img
-                alt="Film-5"
-                height={175}
-                src="/image.jpg"
-                width={280}
-              />
-            </div>
-            <h3
-              className="small-movie-card__title"
-            >
-              <a
-                className="small-movie-card__link"
-                href="/film/5"
-                onClick={[Function]}
-              >
-                Film-5
-              </a>
-            </h3>
-          </article>
-        </div>
+              Film-5
+            </a>
+          </h3>
+        </article>
       </div>
     </section>
     <footer

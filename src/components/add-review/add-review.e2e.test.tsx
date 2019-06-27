@@ -17,11 +17,12 @@ it(`On input comment change correctly change state`, () => {
   const RATING  = 5;
   const addReview = shallow(<AddReview {...props} />);
 
-  addReview.instance()._ratingChangeHandler(RATING);
+  addReview.instance()._handleRatingChange(RATING);
 
   expect(addReview.state()).toEqual({
     rating: RATING,
     comment: ``,
+    isFormBlocked: false,
   });
 });
 
@@ -49,30 +50,8 @@ it(`On input comment change correctly change state`, () => {
   addReview.update();
 
   expect(addReview.state()).toEqual({
-    rating: 3,
+    rating: null,
     comment: COMMENT_TEXT,
+    isFormBlocked: false,
   });
-});
-
-it(`On submit function trigger handler with prevent default`, () => {
-  const postReview = jest.fn();
-  const props = {
-    filmId: 1,
-    filmName: `Film-1`,
-    backgroundImage: `/image.jpg`,
-    poster: `/image.jpg`,
-    backgroundColor: `#123456`,
-    userAvatarSrc: `/image.jpg`,
-    postReview,
-  };
-  const formSendPrevention = jest.fn();
-  const addReview = shallow(<AddReview {...props} />);
-  const form = addReview.find(`.add-review__form`);
-
-  form.simulate(`submit`, {
-    preventDefault: formSendPrevention,
-  });
-
-  expect(formSendPrevention).toHaveBeenCalledTimes(1);
-  expect(postReview).toHaveBeenCalledTimes(1);
 });

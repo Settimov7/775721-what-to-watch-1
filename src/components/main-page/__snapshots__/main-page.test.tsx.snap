@@ -299,7 +299,9 @@ Array [
             className="catalog__genres-link"
             href="#"
             onClick={[Function]}
-          />
+          >
+            Genre
+          </a>
         </li>
       </ul>
       <div
@@ -789,7 +791,9 @@ Array [
             className="catalog__genres-link"
             href="#"
             onClick={[Function]}
-          />
+          >
+            Genre
+          </a>
         </li>
       </ul>
       <div

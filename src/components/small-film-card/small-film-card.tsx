@@ -2,13 +2,10 @@ import * as React from 'react';
 import {Link} from 'react-router-dom';
 
 import {VideoPlayer} from '../video-player/video-player';
-import {Size} from '../../types';
-import {history} from '../../history';
 
-const CARD_SIZE: Size = {
-  width: 280,
-  height: 175
-};
+import {CARD_SIZE} from './constants';
+
+import {history} from '../../history';
 
 interface Props {
   id: number,
@@ -31,9 +28,9 @@ export class SmallFilmCard extends React.PureComponent<Props, State> {
       isPreviewPlaying: false,
     };
 
-    this._mouseEnterHandler = this._mouseEnterHandler.bind(this);
-    this._mouseLeaveHandler = this._mouseLeaveHandler.bind(this);
-    this._clickHandler = this._clickHandler.bind(this);
+    this._handleMouseEnter = this._handleMouseEnter.bind(this);
+    this._handleMouseLeave = this._handleMouseLeave.bind(this);
+    this._handleClick = this._handleClick.bind(this);
   }
 
   componentWillUnmount(): void {
@@ -48,10 +45,10 @@ export class SmallFilmCard extends React.PureComponent<Props, State> {
     return (
       <article
         className="small-movie-card catalog__movies-card"
-        onMouseEnter={this._mouseEnterHandler}
-        onMouseLeave={this._mouseLeaveHandler}
+        onMouseEnter={this._handleMouseEnter}
+        onMouseLeave={this._handleMouseLeave}
       >
-        <div className="small-movie-card__image" onClick={this._clickHandler}>
+        <div className="small-movie-card__image" onClick={this._handleClick}>
           {isPreviewPlaying ?
             <VideoPlayer
               videoSrc={videoSrc}
@@ -71,7 +68,7 @@ export class SmallFilmCard extends React.PureComponent<Props, State> {
     );
   }
 
-  _mouseEnterHandler() {
+  _handleMouseEnter() {
     const timerId = window.setTimeout(() => {
       this.setState({
         isPreviewPlaying: true,
@@ -84,7 +81,7 @@ export class SmallFilmCard extends React.PureComponent<Props, State> {
     }));
   }
 
-  _mouseLeaveHandler() {
+  _handleMouseLeave() {
     clearTimeout(this.state.timerId);
 
     this.setState({
@@ -93,7 +90,7 @@ export class SmallFilmCard extends React.PureComponent<Props, State> {
     });
   }
 
-  _clickHandler(evt) {
+  _handleClick(evt) {
     evt.preventDefault();
 
     const {id} = this.props;
