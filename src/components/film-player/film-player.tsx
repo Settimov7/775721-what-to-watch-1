@@ -34,10 +34,10 @@ export class FilmPlayer extends React.PureComponent <Props, State> {
       progressFilmInPercent: `0`,
     };
 
-    this._playButtonClickHandler = this._playButtonClickHandler.bind(this);
-    this._timeUpdateHandler = this._timeUpdateHandler.bind(this);
-    this._setFilmDuration = this._setFilmDuration.bind(this);
-    this._fullScreenClickHandler = this._fullScreenClickHandler.bind(this);
+    this._handlePlayButtonClick = this._handlePlayButtonClick.bind(this);
+    this._handleTimeUpdate = this._handleTimeUpdate.bind(this);
+    this._handleCanPlayThrough = this._handleCanPlayThrough.bind(this);
+    this._handleFullScreenClick = this._handleFullScreenClick.bind(this);
   }
 
   get formattedDuration() {
@@ -71,8 +71,8 @@ export class FilmPlayer extends React.PureComponent <Props, State> {
             className="player__video"
             src={videoSrc}
             poster={previewImageSrc}
-            onCanPlayThrough={this._setFilmDuration}
-            onTimeUpdate={this._timeUpdateHandler}
+            onCanPlayThrough={this._handleCanPlayThrough}
+            onTimeUpdate={this._handleTimeUpdate}
           />
 
           <button
@@ -110,7 +110,7 @@ export class FilmPlayer extends React.PureComponent <Props, State> {
               <button
                 className="player__play"
                 type="button"
-                onClick={this._playButtonClickHandler}
+                onClick={this._handlePlayButtonClick}
               >
                 <svg viewBox="0 0 14 21" width="14" height="21">
                   <use xlinkHref={isPlaying ? '#pause' : '#play-s'}/>
@@ -123,7 +123,7 @@ export class FilmPlayer extends React.PureComponent <Props, State> {
               <button
                 className="player__full-screen"
                 type="button"
-                onClick={this._fullScreenClickHandler}
+                onClick={this._handleFullScreenClick}
               >
                 <svg viewBox="0 0 27 27" width="27" height="27">
                   <use xlinkHref="#full-screen" />
@@ -137,7 +137,7 @@ export class FilmPlayer extends React.PureComponent <Props, State> {
     );
   }
 
-  _playButtonClickHandler(evt) {
+  _handlePlayButtonClick(evt) {
     evt.preventDefault();
 
     this.setState((onwState) => ({
@@ -145,7 +145,7 @@ export class FilmPlayer extends React.PureComponent <Props, State> {
     }))
   }
 
-  _timeUpdateHandler(evt) {
+  _handleTimeUpdate(evt) {
     const currentTime = Math.round(evt.target.currentTime);
     const duration = Math.round(evt.target.duration);
     const remainingDuration = FilmPlayer._getRemainingDuration(duration, currentTime);
@@ -158,7 +158,7 @@ export class FilmPlayer extends React.PureComponent <Props, State> {
     });
   }
 
-  _setFilmDuration(evt) {
+  _handleCanPlayThrough(evt) {
     const duration = Math.round(evt.target.duration);
 
     this.setState({
@@ -166,7 +166,7 @@ export class FilmPlayer extends React.PureComponent <Props, State> {
     })
   };
 
-  _fullScreenClickHandler(evt) {
+  _handleFullScreenClick(evt) {
     evt.preventDefault();
 
     const video = this._videoRef.current;

@@ -7,6 +7,7 @@ import {SignIn} from "./sign-in";
 it(`Sign in screen correctly renders`, () => {
   const props = {
     login: jest.fn(),
+    isAuthorizationRequired: false,
   };
   const signIn = renderer.create(
     <BrowserRouter>

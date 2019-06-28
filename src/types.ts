@@ -23,12 +23,14 @@ export type Film = {
   previewVideoSrc: string;
 };
 
+export type User = {
+  id: number;
+  name: string;
+}
+
 export type Review = {
   id: number;
-  user: {
-    id: number;
-    name: string;
-  };
+  user: User;
   rating: number;
   comment: string;
   date: string;

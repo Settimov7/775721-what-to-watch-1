@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import {RatingStar} from '../rating-star/rating-star';
 
 interface Props {
@@ -18,7 +19,7 @@ export class Rating extends React.PureComponent <Props, State> {
       value: 3,
     };
 
-    this._ratingElementClickHandler = this._ratingElementClickHandler.bind(this);
+    this._handleRatingElementClick = this._handleRatingElementClick.bind(this);
   }
 
   render() {
@@ -36,7 +37,7 @@ export class Rating extends React.PureComponent <Props, State> {
                 key={value}
                 value={value}
                 isChecked={isChecked}
-                onClick={this._ratingElementClickHandler}
+                onClick={this._handleRatingElementClick}
               />
             );
           })}
@@ -45,7 +46,7 @@ export class Rating extends React.PureComponent <Props, State> {
     )
   }
 
-  _ratingElementClickHandler(evt) {
+  _handleRatingElementClick(evt) {
     const {onChange} = this.props;
     const value = parseInt(evt.target.value);
 

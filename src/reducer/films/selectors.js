@@ -33,22 +33,22 @@ export const getCurrentFilm = createSelector(
 
 export const getCurrentFilmName = createSelector(
     getCurrentFilm,
-    (film) => film.name
+    (film) => film && film.name
 );
 
 export const getCurrentFilmBackgroundImage = createSelector(
     getCurrentFilm,
-    (film) => film.backgroundImageSrc
+    (film) => film && film.backgroundImageSrc
 );
 
 export const getCurrentFilmPoster = createSelector(
     getCurrentFilm,
-    (film) => film.posterImageSrc
+    (film) => film && film.posterImageSrc
 );
 
 export const getCurrentFilmBackgroundColor = createSelector(
     getCurrentFilm,
-    (film) => film.backgroundColor
+    (film) => film && film.backgroundColor
 );
 
 export const getSameFilmsByGenre = (state, originalFilm, maxCount) => {

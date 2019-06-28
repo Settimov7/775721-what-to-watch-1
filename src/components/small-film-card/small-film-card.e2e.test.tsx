@@ -12,7 +12,7 @@ it(`On mouse enter on film card correctly triggered mouse enter handler`, () => 
     videoSrc: `video.mp4`,
   };
 
-  SmallFilmCard.prototype._mouseEnterHandler = onMouseEnter;
+  SmallFilmCard.prototype._handleMouseEnter = onMouseEnter;
 
   const card = shallow(<SmallFilmCard {...props}/>);
 
@@ -30,7 +30,7 @@ it(`On mouse leave from film card correctly clean timer id`, () => {
     videoSrc: `video.mp4`,
   };
 
-  SmallFilmCard.prototype._mouseLeaveHandler = onMouseLeave;
+  SmallFilmCard.prototype._handleMouseLeave = onMouseLeave;
 
   const card = shallow(<SmallFilmCard {...props}/>);
 
@@ -52,7 +52,7 @@ it(`On click correctly trigger click handler`, () => {
     videoSrc: `video.mp4`,
   };
 
-  SmallFilmCard.prototype._clickHandler = clickHandler;
+  SmallFilmCard.prototype._handleClick = clickHandler;
 
   const card = shallow(<SmallFilmCard {...props}/>);
   const image = card.find(`.small-movie-card__image`);

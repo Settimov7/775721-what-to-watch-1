@@ -2,19 +2,20 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 
 import {FilmsList} from '../films-list/films-list';
-import {Film} from '../../types';
 import {Footer} from '../footer/footer';
 import FullFilmCard from '../full-film-card/full-film-card';
 
 import {getSameFilmsByGenre} from '../../reducer/films/selectors';
+
+import {MAX_SAME_FILMS} from './constants';
+
+import {Film} from '../../types';
 
 interface Props {
   film: Film,
   onPlayButtonClick: () => void,
   sameGenreFilms: Film[],
 }
-
-const MAX_SAME_FILMS = 4;
 
 export const FilmDetails = (props: Props) => {
   const {film, onPlayButtonClick, sameGenreFilms} = props;
@@ -27,9 +28,7 @@ export const FilmDetails = (props: Props) => {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <div className="catalog__movies-list">
-            <FilmsList films={sameGenreFilms} displayedFilmsNumber={MAX_SAME_FILMS}/>
-          </div>
+          <FilmsList films={sameGenreFilms} displayedFilmsNumber={MAX_SAME_FILMS}/>
         </section>
 
         <Footer />

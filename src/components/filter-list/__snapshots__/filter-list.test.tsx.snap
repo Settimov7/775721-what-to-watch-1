@@ -23,7 +23,7 @@ exports[`Filters list correctly renders 1`] = `
       href="#"
       onClick={[Function]}
     >
-      Drama
+      Filter-1
     </a>
   </li>
   <li
@@ -34,7 +34,7 @@ exports[`Filters list correctly renders 1`] = `
       href="#"
       onClick={[Function]}
     >
-      Fantasy
+      Filter-2
     </a>
   </li>
   <li
@@ -45,7 +45,73 @@ exports[`Filters list correctly renders 1`] = `
       href="#"
       onClick={[Function]}
     >
-      Comedies
+      Filter-3
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item false"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+      onClick={[Function]}
+    >
+      Filter-4
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item false"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+      onClick={[Function]}
+    >
+      Filter-5
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item false"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+      onClick={[Function]}
+    >
+      Filter-6
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item false"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+      onClick={[Function]}
+    >
+      Filter-7
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item false"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+      onClick={[Function]}
+    >
+      Filter-8
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item false"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+      onClick={[Function]}
+    >
+      Filter-9
     </a>
   </li>
 </ul>

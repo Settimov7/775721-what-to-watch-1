@@ -12,7 +12,7 @@ it(`On change rating correctly change state`, () => {
   const newValue = 5;
   const rating = shallow(<Rating {...props} />);
 
-  rating.instance()._ratingElementClickHandler({
+  rating.instance()._handleRatingElementClick({
     target: {
       value: newValue,
     }
@@ -30,7 +30,7 @@ it(`On change rating trigger handler`, () => {
 
   const rating = shallow(<Rating {...props} />);
 
-  rating.instance()._ratingElementClickHandler({
+  rating.instance()._handleRatingElementClick({
     target: {
       value: 5,
     }

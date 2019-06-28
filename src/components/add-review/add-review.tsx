@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 
 import UserBlock from '../user-block/user-block';
 import {Logo} from '../logo/logo';
+import {Rating} from '../rating/rating';
 
 import {
   getCurrentFilmId,
@@ -13,7 +14,10 @@ import {
   getCurrentFilmBackgroundColor,
 } from '../../reducer/films/selectors';
 import {Operation} from '../../reducer/reviews/reviews';
-import {Rating} from '../rating/rating';
+
+import {COMMENT_MAX_LENGTH, COMMENT_MIN_LENGTH, MAX_RATING} from './constants';
+
+import {history} from '../../history';
 
 interface Props {
   filmId: number,
@@ -27,24 +31,22 @@ interface Props {
 interface State {
   rating: number,
   comment: string,
+  isFormBlocked: boolean,
 }
-
-const COMMENT_MIN_LENGTH = 50;
-const COMMENT_MAX_LENGTH = 400;
-const MAX_RATING = 5;
 
 export class AddReview extends React.PureComponent <Props, State> {
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      rating: 3,
+      rating: null,
       comment: ``,
+      isFormBlocked: false,
     };
 
-    this._ratingChangeHandler = this._ratingChangeHandler.bind(this);
-    this._commentInputHandler = this._commentInputHandler.bind(this);
-    this._submitHandler = this._submitHandler.bind(this);
+    this._handleRatingChange = this._handleRatingChange.bind(this);
+    this._handleCommentInput = this._handleCommentInput.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
   }
 
   render() {
@@ -55,6 +57,8 @@ export class AddReview extends React.PureComponent <Props, State> {
       poster,
       backgroundColor,
     } = this.props;
+    const {rating, comment} = this.state;
+    const isButtonActive = rating && comment;
 
     return (
       <section className="movie-card movie-card--full" style={{backgroundColor}}>
@@ -89,8 +93,8 @@ export class AddReview extends React.PureComponent <Props, State> {
         </div>
 
         <div className="add-review">
-          <form action="#" className="add-review__form" onSubmit={this._submitHandler}>
-            <Rating max={MAX_RATING} onChange={this._ratingChangeHandler}/>
+          <form action="#" className="add-review__form" onSubmit={this._handleSubmit}>
+            <Rating max={MAX_RATING} onChange={this._handleRatingChange}/>
 
             <div className="add-review__text">
               <textarea
@@ -100,10 +104,10 @@ export class AddReview extends React.PureComponent <Props, State> {
                 placeholder="Review text"
                 minLength={COMMENT_MIN_LENGTH}
                 maxLength={COMMENT_MAX_LENGTH}
-                onInput={this._commentInputHandler}
+                onInput={this._handleCommentInput}
               />
               <div className="add-review__submit">
-                <button className="add-review__btn" type="submit">Post</button>
+                <button className="add-review__btn" type="submit" disabled={!isButtonActive}>Post</button>
               </div>
             </div>
           </form>
@@ -112,13 +116,13 @@ export class AddReview extends React.PureComponent <Props, State> {
     );
   }
 
-  _ratingChangeHandler(value) {
+  _handleRatingChange(value) {
     this.setState({
       rating: value,
     })
   }
 
-  _commentInputHandler(evt) {
+  _handleCommentInput(evt) {
     const value = evt.target.value;
 
     this.setState({
@@ -126,13 +130,25 @@ export class AddReview extends React.PureComponent <Props, State> {
     })
   }
 
-  _submitHandler(evt) {
+  _handleSubmit(evt) {
     evt.preventDefault();
 
     const {filmId, postReview} = this.props;
     const {rating, comment} = this.state;
 
-    postReview(filmId, rating, comment);
+    this.setState({
+      isFormBlocked: true,
+    });
+
+    postReview(filmId, rating, comment)
+      .then(() => {
+        history.push(`/film/${filmId}`);
+      })
+      .catch(() => {
+        this.setState({
+          isFormBlocked: false,
+        });
+      });
   }
 }
 

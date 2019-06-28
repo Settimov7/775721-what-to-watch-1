@@ -6,16 +6,7 @@ import {ActionCreator as FilmsActionCreator} from '../../reducer/films/films';
 import {getFilmsGenres} from "../../reducer/films/selectors";
 import {getCurrentFilter} from "../../reducer/filter/selectors";
 
-const GenreToFilterTitle = {
-  all: `All genres`,
-  Crime: `Crime`,
-  Action: `Action`,
-  Drama: `Drama`,
-  Comedy: `Comedies`,
-  Adventure: `Adventure`,
-  Fantasy: `Fantasy`,
-  Thriller: `Thriller`,
-};
+import {GenreToFilterTitle, MAX_FILTERS} from './constants';
 
 interface Props {
   properties: string[],
@@ -25,7 +16,7 @@ interface Props {
 
 export const FilterList: React.FunctionComponent<Props> = (props) => {
   const {properties, activeItem, onChange} = props;
-  const filters = [`all`, ...new Set(properties)];
+  const filters = [`all`, ...new Set(properties)].slice(0, MAX_FILTERS);
 
   return (
     <ul className="catalog__genres-list">
@@ -48,7 +39,7 @@ export const FilterList: React.FunctionComponent<Props> = (props) => {
                 }
               }}
             >
-              {GenreToFilterTitle[filter]}
+              {GenreToFilterTitle[filter] || filter}
             </a>
           </li>
         );

@@ -225,6 +225,7 @@ exports[`Add review correctly renders 1`] = `
         >
           <button
             className="add-review__btn"
+            disabled={true}
             type="submit"
           >
             Post
